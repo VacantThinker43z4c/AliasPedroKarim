@@ -5,6 +5,8 @@
  */
 package com.karimandco.cv;
 
+import com.karimandco.connexion.ConnexionDB;
+
 /**
  *
  * @author Sarah
@@ -30,31 +32,70 @@ public class JFrameCreationCv extends javax.swing.JFrame {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jPopupMenu2 = new javax.swing.JPopupMenu();
         jLabel1 = new javax.swing.JLabel();
+<<<<<<< HEAD:src/main/java/com/karimandco/cv/JFrameCreationCv.java
         creationDuCV1 = new com.karimandco.cv.CreationDuCV();
+=======
+        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+>>>>>>> 4cb62ae05ca94493af55d4091ac88c4490809e07:src/main/java/com/karimandco/cv/CreationCvTest.java
 
         jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+<<<<<<< HEAD:src/main/java/com/karimandco/cv/JFrameCreationCv.java
+=======
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel2.setText("Création de votre CV ");
+
+        jButton1.setText("jButton1");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+
+>>>>>>> 4cb62ae05ca94493af55d4091ac88c4490809e07:src/main/java/com/karimandco/cv/CreationCvTest.java
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+<<<<<<< HEAD:src/main/java/com/karimandco/cv/JFrameCreationCv.java
                 .addContainerGap()
                 .addComponent(creationDuCV1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(35, Short.MAX_VALUE))
+=======
+                .addGap(170, 170, 170)
+                .addComponent(jLabel2)
+                .addContainerGap(169, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
+>>>>>>> 4cb62ae05ca94493af55d4091ac88c4490809e07:src/main/java/com/karimandco/cv/CreationCvTest.java
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+<<<<<<< HEAD:src/main/java/com/karimandco/cv/JFrameCreationCv.java
                 .addComponent(creationDuCV1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(38, Short.MAX_VALUE))
+=======
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 615, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
+>>>>>>> 4cb62ae05ca94493af55d4091ac88c4490809e07:src/main/java/com/karimandco/cv/CreationCvTest.java
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        ConnexionDB test = new ConnexionDB();
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -95,7 +136,11 @@ public class JFrameCreationCv extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+<<<<<<< HEAD:src/main/java/com/karimandco/cv/JFrameCreationCv.java
     private com.karimandco.cv.CreationDuCV creationDuCV1;
+=======
+    private javax.swing.JButton jButton1;
+>>>>>>> 4cb62ae05ca94493af55d4091ac88c4490809e07:src/main/java/com/karimandco/cv/CreationCvTest.java
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
