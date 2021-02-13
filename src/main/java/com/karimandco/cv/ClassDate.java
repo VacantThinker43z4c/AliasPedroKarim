@@ -60,13 +60,17 @@ public class ClassDate extends JTextField {
         String ip = this.getText();
         String[] tabDate = ip.split("[/]");
         Boolean dateOK = m.matches();
-        if (Integer.parseInt(tabDate[0]) < 1 || Integer.parseInt(tabDate[0]) > 31) {
-            dateOK = false;
-        } else if (Integer.parseInt(tabDate[1]) < 1 || Integer.parseInt(tabDate[1]) > 12) {
+        if (Integer.parseInt(tabDate[1]) < 1 || Integer.parseInt(tabDate[1]) > 12) {
             dateOK = false;
         } else if (Integer.parseInt(tabDate[2]) < 1 || Integer.parseInt(tabDate[2]) > 9999) {
             dateOK = false;
+        } else if (Integer.parseInt(tabDate[0]) < 1 || Integer.parseInt(tabDate[0]) > 31) {
+            dateOK = false;
+            if ((Integer.parseInt(tabDate[1]) == 2 || Integer.parseInt(tabDate[1]) == 4 || Integer.parseInt(tabDate[1]) == 6 || Integer.parseInt(tabDate[1]) == 9 || Integer.parseInt(tabDate[1]) == 11) && Integer.parseInt(tabDate[0]) >30 ) {
+            dateOK = false;
         }
+        }
+        
 
         return dateOK;
     }
