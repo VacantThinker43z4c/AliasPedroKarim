@@ -66,13 +66,31 @@ public class ClassDate extends JTextField {
             dateOK = false;
         } else if (Integer.parseInt(tabDate[0]) < 1 || Integer.parseInt(tabDate[0]) > 31) {
             dateOK = false;
-            if ((Integer.parseInt(tabDate[1]) == 2 || Integer.parseInt(tabDate[1]) == 4 || Integer.parseInt(tabDate[1]) == 6 || Integer.parseInt(tabDate[1]) == 9 || Integer.parseInt(tabDate[1]) == 11) && Integer.parseInt(tabDate[0]) >30 ) {
-            dateOK = false;
+        } else if (Integer.parseInt(tabDate[1]) == 2 || Integer.parseInt(tabDate[1]) == 4 || Integer.parseInt(tabDate[1]) == 6 || Integer.parseInt(tabDate[1]) == 9 || Integer.parseInt(tabDate[1]) == 11) {
+            if (Integer.parseInt(tabDate[0]) > 30) {
+                dateOK = false;
+            }
+        }else if(Integer.parseInt(tabDate[1]) == 2){
+            Integer an = Integer.parseInt(tabDate[1]);
+            if( verifAnBisextile(an)){
+                if(Integer.parseInt(tabDate[0])>29){
+                    dateOK = false;
+                }
+            }else{
+               if(Integer.parseInt(tabDate[0])>28){
+                    dateOK = false;
+                } 
+            }
         }
-        }
-        
 
         return dateOK;
+    }
+
+    Boolean verifAnBisextile(Integer an) {
+        if ((an % 4 == 0 && an % 100 != 0) || an % 400 == 0) {
+            return true;
+        }
+        return false;
     }
 
     public String[] GetDate() {
