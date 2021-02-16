@@ -5,6 +5,8 @@
  */
 package com.karimandco.cv;
 
+import com.karimandco.connexion.ConnexionDB;
+
 /**
  *
  * @author l.desmalades
@@ -27,7 +29,17 @@ public class CreationCvTest extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+<<<<<<< HEAD
         classDate1 = new com.karimandco.cv.ClassDate();
+=======
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jPopupMenu2 = new javax.swing.JPopupMenu();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+
+        jLabel1.setText("jLabel1");
+>>>>>>> 4cb62ae05ca94493af55d4091ac88c4490809e07
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -37,29 +49,60 @@ public class CreationCvTest extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("jButton1");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+<<<<<<< HEAD
                 .addGap(141, 141, 141)
                 .addComponent(classDate1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(136, Short.MAX_VALUE))
+=======
+                .addGap(170, 170, 170)
+                .addComponent(jLabel2)
+                .addContainerGap(169, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
+>>>>>>> 4cb62ae05ca94493af55d4091ac88c4490809e07
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+<<<<<<< HEAD
                 .addGap(120, 120, 120)
                 .addComponent(classDate1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(117, Short.MAX_VALUE))
+=======
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 615, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
+>>>>>>> 4cb62ae05ca94493af55d4091ac88c4490809e07
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+<<<<<<< HEAD
     private void classDate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_classDate1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_classDate1ActionPerformed
+=======
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        ConnexionDB test = new ConnexionDB();
+    }//GEN-LAST:event_jButton1MouseClicked
+>>>>>>> 4cb62ae05ca94493af55d4091ac88c4490809e07
 
     /**
      * @param args the command line arguments
@@ -97,6 +140,14 @@ public class CreationCvTest extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+<<<<<<< HEAD
     private com.karimandco.cv.ClassDate classDate1;
+=======
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JPopupMenu jPopupMenu2;
+>>>>>>> 4cb62ae05ca94493af55d4091ac88c4490809e07
     // End of variables declaration//GEN-END:variables
 }
