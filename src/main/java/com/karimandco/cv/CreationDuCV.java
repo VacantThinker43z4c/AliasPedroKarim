@@ -27,12 +27,8 @@ public class CreationDuCV extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-<<<<<<< HEAD
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jPopupMenu2 = new javax.swing.JPopupMenu();
-=======
-        jButton1 = new javax.swing.JButton();
->>>>>>> 4cb62ae05ca94493af55d4091ac88c4490809e07
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -49,14 +45,7 @@ public class CreationDuCV extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
 
-<<<<<<< HEAD
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-=======
-        jButton1.setText("jButton1");
-
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
->>>>>>> 4cb62ae05ca94493af55d4091ac88c4490809e07
         jLabel1.setText("Création de votre CV");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -91,7 +80,6 @@ public class CreationDuCV extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-<<<<<<< HEAD
                 .addGap(82, 82, 82)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -123,16 +111,10 @@ public class CreationDuCV extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(350, 350, 350))
-=======
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
-                .addContainerGap())
->>>>>>> 4cb62ae05ca94493af55d4091ac88c4490809e07
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-<<<<<<< HEAD
                 .addGap(15, 15, 15)
                 .addComponent(jLabel1)
                 .addGap(30, 30, 30)
@@ -157,22 +139,13 @@ public class CreationDuCV extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(12, Short.MAX_VALUE))
-=======
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(604, Short.MAX_VALUE))
->>>>>>> 4cb62ae05ca94493af55d4091ac88c4490809e07
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-<<<<<<< HEAD
     private com.karimandco.cv.ExperiencePro experiencePro1;
     private com.karimandco.cv.Formation formation1;
-=======
-    private javax.swing.JButton jButton1;
->>>>>>> 4cb62ae05ca94493af55d4091ac88c4490809e07
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
