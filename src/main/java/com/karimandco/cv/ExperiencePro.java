@@ -53,7 +53,7 @@ public class ExperiencePro extends javax.swing.JPanel {
         jLabel2.setText("Nom de l'entreprise");
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel3.setText("Adresse de l'entreprsies");
+        jLabel3.setText("Adresse de l'entreprise");
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setText("Date");

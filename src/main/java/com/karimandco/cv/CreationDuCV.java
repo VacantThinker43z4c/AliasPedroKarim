@@ -34,10 +34,10 @@ public class CreationDuCV extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        formation1 = new com.karimandco.cv.Formation();
+        formation2 = new com.karimandco.cv.Formation();
         jLabel4 = new javax.swing.JLabel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
-        experiencePro2 = new com.karimandco.cv.ExperiencePro();
+        experiencePro1 = new com.karimandco.cv.ExperiencePro();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -55,12 +55,12 @@ public class CreationDuCV extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setText("Vos formations :");
 
-        jTabbedPane1.addTab("Formation 1", formation1);
+        jTabbedPane1.addTab("Formation 1", formation2);
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setText("Vos exprérience professionnel :");
 
-        jTabbedPane2.addTab("Experience 1", experiencePro2);
+        jTabbedPane2.addTab("Experience 1", experiencePro1);
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel5.setText("Description CV :");
@@ -102,7 +102,7 @@ public class CreationDuCV extends javax.swing.JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 915, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(110, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -159,8 +159,8 @@ public class CreationDuCV extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.karimandco.cv.ExperiencePro experiencePro2;
-    private com.karimandco.cv.Formation formation1;
+    private com.karimandco.cv.ExperiencePro experiencePro1;
+    private com.karimandco.cv.Formation formation2;
     private javax.swing.JButton jButtonValidationCV;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
