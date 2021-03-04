@@ -20,7 +20,7 @@ public class ClassDate extends JTextField {
 
     public ClassDate() {
         super();
-        this.setText("01/01/2019");
+        this.setText("2019-01-01");
         if (this.verifDate()) {
             setForeground(Color.green);
         } else {
@@ -55,28 +55,28 @@ public class ClassDate extends JTextField {
     }
 
     Boolean verifDate() {
-        Pattern p = Pattern.compile("\\d{1,2}[/]\\d{1,2}[/]\\d{1,4}");
+        Pattern p = Pattern.compile("\\d{1,4}[-]\\d{1,2}[-]\\d{1,2}");
         Matcher m = p.matcher(getText());
         String ip = this.getText();
-        String[] tabDate = ip.split("[/]");
+        String[] tabDate = ip.split("[-]");
         Boolean dateOK = m.matches();
         if (Integer.parseInt(tabDate[1]) < 1 || Integer.parseInt(tabDate[1]) > 12) {
             dateOK = false;
-        } else if (Integer.parseInt(tabDate[2]) < 1 || Integer.parseInt(tabDate[2]) > 9999) {
+        } else if (Integer.parseInt(tabDate[0]) < 1 || Integer.parseInt(tabDate[0]) > 9999) {
             dateOK = false;
-        } else if (Integer.parseInt(tabDate[0]) < 1 || Integer.parseInt(tabDate[0]) > 31) {
+        } else if (Integer.parseInt(tabDate[2]) < 1 || Integer.parseInt(tabDate[2]) > 31) {
             dateOK = false;
         } else if (Integer.parseInt(tabDate[1]) == 2 || Integer.parseInt(tabDate[1]) == 4 || Integer.parseInt(tabDate[1]) == 6 || Integer.parseInt(tabDate[1]) == 9 || Integer.parseInt(tabDate[1]) == 11) {
-            if (Integer.parseInt(tabDate[0]) > 30) {
+            if (Integer.parseInt(tabDate[2]) > 30) {
                 dateOK = false;
             }else if(Integer.parseInt(tabDate[1]) == 2){
-            Integer an = Integer.parseInt(tabDate[2]);
+            Integer an = Integer.parseInt(tabDate[0]);
             if( verifAnBisextile(an)== true){
-                if(Integer.parseInt(tabDate[0])>29){
+                if(Integer.parseInt(tabDate[2])>29){
                     dateOK = false;
                 }
             }else{
-               if(Integer.parseInt(tabDate[0])>28){
+               if(Integer.parseInt(tabDate[2])>28){
                     dateOK = false;
                 } 
             }
@@ -94,7 +94,7 @@ public class ClassDate extends JTextField {
 
     public String[] GetDate() {
         String date = this.getText();
-        String[] tabDate = date.split("[/]");
+        String[] tabDate = date.split("[-]");
         return tabDate;
     }
 }
