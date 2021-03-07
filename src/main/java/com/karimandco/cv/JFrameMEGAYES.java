@@ -32,6 +32,7 @@ public class JFrameMEGAYES extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        classDate1.setText("2019-02-28");
         jScrollPane1.setViewportView(classDate1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

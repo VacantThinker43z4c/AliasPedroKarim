@@ -45,6 +45,9 @@
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
         <Component class="com.karimandco.cv.ClassDate" name="classDate1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="2019-02-28"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
