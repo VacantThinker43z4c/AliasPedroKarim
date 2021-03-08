@@ -28,39 +28,21 @@ public class ConnexionDB {
     
     private String connexionURI = "jdbc:mysql://";
     private Connection connexion;
-    private Properties properties;
     
-    private String hostname;
-    private Integer port;
-    private String database;
-    private String username;
-    private String password;
-
+    private String hostname = "www.cnadal.fr";
+    private Integer port = 3306;
+    private String database = "sio2_cv";
+    private String username = "sio2_cv";
+    private String password = "formation2020";
+    
     public ConnexionDB() {
-        FileInputStream config = null;
-        File f = new File("src/main/java/com/karimandco/config/config.properties"); 
-        
-        try {
-            
-            config = new FileInputStream(f.getAbsolutePath());
-            this.properties = new Properties();
-            this.properties.load(config);
-            
-            hostname = this.properties.getProperty("hostname");
-            port = Integer.parseInt(this.properties.getProperty("port")) > 0 ? Integer.parseInt(this.properties.getProperty("port")) : 3306;
-            database = this.properties.getProperty("database");
-            username = this.properties.getProperty("username");
-            password = this.properties.getProperty("password");
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(ConnexionDB.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(ConnexionDB.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        initConnexion();
     }
     
     public void initConnexion(){
         this.connexionURI += hostname + ":" + port + "/" + database;
         try {
+            System.out.println(this.connexionURI + " - " + username + " - " + password);
             this.connexion = (Connection)DriverManager.getConnection(this.connexionURI, username, password);
         } catch (SQLException ex) {
             Logger.getLogger(ConnexionDB.class.getName()).log(Level.SEVERE, null, ex);

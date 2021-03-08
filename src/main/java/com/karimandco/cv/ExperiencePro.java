@@ -5,17 +5,29 @@
  */
 package com.karimandco.cv;
 
+import com.mysql.jdbc.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Sarah
  */
 public class ExperiencePro extends javax.swing.JPanel {
+    
+    private Connection connexion;
 
     /**
      * Creates new form experiencePro
      */
     public ExperiencePro() {
         initComponents();
+        
+        connexion = new ConnexionDB().getConnnexion();
     }
 
     /**
@@ -43,6 +55,7 @@ public class ExperiencePro extends javax.swing.JPanel {
         jButtonExpPro = new javax.swing.JButton();
         classDate1ExpPro = new com.karimandco.cv.ClassDate();
         classDate2ExpPro = new com.karimandco.cv.ClassDate();
+        jButton1 = new javax.swing.JButton();
 
         jTextField5.setText("jTextField5");
 
@@ -67,26 +80,25 @@ public class ExperiencePro extends javax.swing.JPanel {
         jTextAreaDescriptionExpPro.setRows(5);
         jScrollPane1.setViewportView(jTextAreaDescriptionExpPro);
 
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Debut");
 
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Fin");
 
         jButtonExpPro.setText("Valider");
+
+        jButton1.setText("Test enregistrer");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(107, 107, 107)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(125, 125, 125))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addGap(97, 97, 97))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -104,17 +116,30 @@ public class ExperiencePro extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(82, 82, 82)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(classDate1ExpPro, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(classDate2ExpPro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
                             .addComponent(jTextFieldNomEntpExpPro)
                             .addComponent(jTextFieldAdresseExpPro)
-                            .addComponent(jButtonExpPro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jButtonExpPro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(classDate1ExpPro, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(classDate2ExpPro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                 .addContainerGap(71, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(97, 97, 97))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,14 +172,62 @@ public class ExperiencePro extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonExpPro)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        setEnvoieExperiencePro();
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    public void setEnvoieExperiencePro(){
+        Statement req;
+        Integer res;
+        
+        String entreprise = jTextFieldNomEntpExpPro.getText();
+        
+        if(!entreprise.equals("")){
+            String adresse = jTextFieldAdresseExpPro.getText();
+            
+            if(!adresse.equals("")){
+                
+                String date_debut = classDate1ExpPro.getText();
+                String date_fin = classDate2ExpPro.getText();
+                if(classDate1ExpPro.verifDate() && classDate2ExpPro.verifDate()){
+                    
+                    date_debut = date_debut.replaceAll("/", "-");
+                    date_fin = date_fin.replaceAll("/", "-");
+                    
+                    String description = jTextAreaDescriptionExpPro.getText();
+                    
+                    if(this.connexion != null){
+                        try {
+                            req = this.connexion.createStatement();
+                            res = req.executeUpdate("INSERT INTO `experience_pro` (`id`, `entreprise`, `adresse`, `description`, `annee_debut`, `annee_fin`) "
+                                    + "VALUES (NULL, '" + entreprise + "', '" + adresse + "', '" + description + "', '" + date_debut + "', '" + date_fin + "');");
+                            
+                            System.out.println("Resultat : " + res);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(ExperiencePro.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(this, "L'un de vos dates de période d'expérience pro n'est pas valide.");
+                }
+            }else{
+                JOptionPane.showMessageDialog(this, "Veuillez saisir une adresse valide.");
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Veuillez saisir un nom de l'entreprise.");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.karimandco.cv.ClassDate classDate1ExpPro;
     private com.karimandco.cv.ClassDate classDate2ExpPro;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonExpPro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
