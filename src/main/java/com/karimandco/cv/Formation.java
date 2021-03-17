@@ -5,17 +5,25 @@
  */
 package com.karimandco.cv;
 
+import com.mysql.jdbc.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Sarah
  */
 public class Formation extends javax.swing.JPanel {
-
+private Connection connexion;
     /**
      * Creates new form formation
      */
     public Formation() {
         initComponents();
+        connexion = new ConnexionDB().getConnnexion();
     }
 
     /**
@@ -163,7 +171,47 @@ public class Formation extends javax.swing.JPanel {
     private void jButtonValiderFormationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValiderFormationActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonValiderFormationActionPerformed
-
+ public void setEnvoieFormation(){
+        Statement req;
+        Integer res;
+        
+        String formation = jTextFieldNomFormation.getText();
+        
+        if(!formation.equals("")){
+            String lieu = jTextFieldAdresseFormation.getText();
+            
+            if(!lieu.equals("")){
+                
+                String date_debut = classDate1.getText();
+                String date_fin = classDate2.getText();
+                if(classDate1.verifDate() && classDate2.verifDate()){
+                    
+                    date_debut = date_debut.replaceAll("/", "-");
+                    date_fin = date_fin.replaceAll("/", "-");
+                    
+                    String description = jTextAreaDescriptionFormation.getText();
+                    
+                    if(this.connexion != null){
+                        try {
+                            req = this.connexion.createStatement();
+                            res = req.executeUpdate("INSERT INTO `formation` (`id`, `nom`, `lieu`, `description`, `annee_debut`, `annee_fin`) "
+                                    + "VALUES (NULL, '" + formation + "', '" + lieu + "', '" + description + "', '" + date_debut + "', '" + date_fin + "');");
+                            
+                            System.out.println("Resultat : " + res);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(ExperiencePro.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(this, "L'un de vos dates de période de formation n'est pas valide.");
+                }
+            }else{
+                JOptionPane.showMessageDialog(this, "Veuillez saisir un lieu valide.");
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Veuillez saisir un nom de formation.");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.karimandco.cv.ClassDate classDate1;
