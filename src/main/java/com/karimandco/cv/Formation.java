@@ -6,6 +6,7 @@
 package com.karimandco.cv;
 
 import com.mysql.jdbc.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
@@ -169,9 +170,9 @@ private Connection connexion;
     private void jButtonValiderFormationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValiderFormationActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonValiderFormationActionPerformed
- public void setEnvoieFormation(){
+ public Integer setEnvoieFormation(){
         Statement req;
-        Integer res;
+        Integer res, lastKey = null;
         
         String formation = jTextFieldNomFormation.getText();
         
@@ -195,9 +196,13 @@ private Connection connexion;
                             res = req.executeUpdate("INSERT INTO `formation` (`id`, `nom`, `lieu`, `description`, `annee_debut`, `annee_fin`) "
                                     + "VALUES (NULL, '" + formation + "', '" + lieu + "', '" + description + "', '" + date_debut + "', '" + date_fin + "');");
                             
-                            System.out.println("Resultat : " + res);
+                            ResultSet rs = req.getGeneratedKeys();
+                            if (rs.next()){ lastKey =rs.getInt(1); }
+                            
+                            System.out.println("Resultat : " + lastKey);
                         } catch (SQLException ex) {
                             Logger.getLogger(ExperiencePro.class.getName()).log(Level.SEVERE, null, ex);
+                            this.connexion = null;
                         }
                     }
                 }else{
@@ -209,6 +214,7 @@ private Connection connexion;
         }else{
             JOptionPane.showMessageDialog(this, "Veuillez saisir un nom de formation.");
         }
+        return lastKey;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
