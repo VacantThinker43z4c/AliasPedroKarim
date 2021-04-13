@@ -315,15 +315,13 @@ public class CreationDuCV extends javax.swing.JPanel {
                 
                 if(description.equals("")){
                 
-                    String maitrise = jTextAreaMatrise.getText();
+                    int maitrise = jProgressBar1.getValue();
                     
-                    if(maitrise.equals("")){
-                
-                        
-
-                    }else{
-                        JOptionPane.showMessageDialog(this, "Veuillez saisir une metrise à votre Curriculum Vitae.");
-                    }
+//                    if(maitrise ){
+//
+//                    }else{
+//                        JOptionPane.showMessageDialog(this, "Veuillez saisir une metrise à votre Curriculum Vitae.");
+//                    }
 
                 }else{
                     JOptionPane.showMessageDialog(this, "Veuillez saisir une description à votre Curriculum Vitae.");
