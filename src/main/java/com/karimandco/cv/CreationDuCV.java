@@ -7,8 +7,15 @@ package com.karimandco.cv;
 
 import com.mysql.jdbc.Connection;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -276,7 +283,14 @@ public class CreationDuCV extends javax.swing.JPanel {
     private void jButtonValidationCVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonValidationCVMouseClicked
         
         int reply = JOptionPane.showConfirmDialog(null, "Etes-vous sûr de vouloir enregistrer votre Curriculum Vitae.", "Comfimez l'engistrer", JOptionPane.YES_NO_OPTION);
-            createCV();
+            
+            try {
+                verifUtilisateur(1);
+            } catch (SQLException ex) {
+                Logger.getLogger(CreationDuCV.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+            // createCV();
         if (reply == JOptionPane.YES_OPTION) {
           JOptionPane.showMessageDialog(null, "Bravo");
         }
@@ -301,15 +315,13 @@ public class CreationDuCV extends javax.swing.JPanel {
                 
                 if(description.equals("")){
                 
-                    String maitrise = jTextAreaMatrise.getText();
+                    int maitrise = jProgressBar1.getValue();
                     
-                    if(maitrise.equals("")){
-                
-                        
-
-                    }else{
-                        JOptionPane.showMessageDialog(this, "Veuillez saisir une metrise à votre Curriculum Vitae.");
-                    }
+//                    if(maitrise ){
+//
+//                    }else{
+//                        JOptionPane.showMessageDialog(this, "Veuillez saisir une metrise à votre Curriculum Vitae.");
+//                    }
 
                 }else{
                     JOptionPane.showMessageDialog(this, "Veuillez saisir une description à votre Curriculum Vitae.");
@@ -326,13 +338,33 @@ public class CreationDuCV extends javax.swing.JPanel {
     
     public boolean verifUtilisateur(Integer id) throws SQLException{
         Statement req = this.connexion.createStatement();
-        ResultSet res = req.executeQuery("SELECT * FROM utilisateur WHRERE id = " + id);
+        ResultSet res = req.executeQuery("SELECT * FROM utilisateurs WHRERE id = " + id);
         
         if(res.isBeforeFirst()){
-            
+            System.out.println(resultSetToList(res).toArray());
         }
         return false;
     }
+    
+    /**
+    * Convert the ResultSet to a List of Maps, where each Map represents a row with columnNames and columValues
+    * @param rs
+    * @return
+    * @throws SQLException
+    */
+   private List<Map<String, Object>> resultSetToList(ResultSet rs) throws SQLException {
+       ResultSetMetaData md = rs.getMetaData();
+       int columns = md.getColumnCount();
+       List<Map<String, Object>> rows = new ArrayList<Map<String, Object>>();
+       while (rs.next()){
+           Map<String, Object> row = new HashMap<String, Object>(columns);
+           for(int i = 1; i <= columns; ++i){
+               row.put(md.getColumnName(i), rs.getObject(i));
+           }
+           rows.add(row);
+       }
+       return rows;
+   }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.karimandco.cv.ExperiencePro experiencePro1;
