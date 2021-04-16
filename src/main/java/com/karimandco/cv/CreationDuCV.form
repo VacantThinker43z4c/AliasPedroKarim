@@ -195,7 +195,6 @@
                       <Component id="jTabbedPaneFormation" min="-2" pref="593" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jButtonValidationCV" min="-2" pref="52" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
           </Group>

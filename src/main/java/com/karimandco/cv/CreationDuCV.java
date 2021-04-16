@@ -25,7 +25,7 @@ import javax.swing.JOptionPane;
 public class CreationDuCV extends javax.swing.JPanel {
 
     private Connection connexion;
-    
+
     /**
      * Creates new form CreationDuCV
      */
@@ -281,91 +281,108 @@ public class CreationDuCV extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonValidationCVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonValidationCVMouseClicked
-        
+
         int reply = JOptionPane.showConfirmDialog(null, "Etes-vous sûr de vouloir enregistrer votre Curriculum Vitae.", "Comfimez l'engistrer", JOptionPane.YES_NO_OPTION);
-            
-            try {
-                verifUtilisateur(1);
-            } catch (SQLException ex) {
-                Logger.getLogger(CreationDuCV.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        
-            // createCV();
         if (reply == JOptionPane.YES_OPTION) {
-          JOptionPane.showMessageDialog(null, "Bravo");
+            JOptionPane.showMessageDialog(null, "Bravo");
+            
+            createCV();
+        } else {
+            // Message si NON
         }
-        else {
-           // Message si NON
-        }
-        
+
     }//GEN-LAST:event_jButtonValidationCVMouseClicked
 
-    public void createCV(){
-        Integer idExperiencePro = null, idFormation = null;
+    public void createCV() {
+        Statement req;
+        Integer idExperiencePro = null, idFormation = null, res;
         // Ici, on récupère les id des dernières occurences insérer dans les tables formation et experience pro
         idExperiencePro = experiencePro1.setEnvoieExperiencePro();
-        // idFormation = formation1.methode(); // Il manquant une methode ici
-        
-        if(idExperiencePro != null && idFormation != null){
-            
-            String titre = jTextFieldTitre.getText();
-            if(titre.equals("")){
-                
-                String description = jTextAreaDescription.getText();
-                
-                if(description.equals("")){
-                
-                    int maitrise = jProgressBar1.getValue();
-                    
-//                    if(maitrise ){
-//
-//                    }else{
-//                        JOptionPane.showMessageDialog(this, "Veuillez saisir une metrise à votre Curriculum Vitae.");
-//                    }
+        idFormation = formation1.setEnvoieFormation(); // Il manquant une methode ici
 
-                }else{
-                    JOptionPane.showMessageDialog(this, "Veuillez saisir une description à votre Curriculum Vitae.");
-                }
-                
-            }else{
-                JOptionPane.showMessageDialog(this, "Il faut impérativement un titre à votre Curriculum Vitae.");
-            }
+        try {
+            // Ici mettre l'id de l'uilisateur
+            List<Map<String, Object>> utilisateur = verifUtilisateur(1);
             
-        }else{
-            JOptionPane.showMessageDialog(this, "Atention ! Soit formation ou éxpérience professionnel est mal rempli ou incorrect.");
+            if (utilisateur.size() > 0) {
+                if (idExperiencePro != null && idFormation != null) {
+
+                    String titre = jTextFieldTitre.getText();
+                    if (!titre.equals("")) {
+
+                        String description = jTextAreaDescription.getText();
+
+                        if (!description.equals("")) {
+
+                            int maitrise = jProgressBar1.getValue();
+                            
+                            Integer idUtilisateur = (Integer)utilisateur.get(0).get("id");
+                            String signature = utilisateur.get(0).get("nom").toString().toUpperCase() + " " + utilisateur.get(0).get("nom").toString();
+                            
+                            req = this.connexion.createStatement();
+                            res = req.executeUpdate("INSERT INTO `cv` (`id`, `titre`, `description`, `signature`, `maitrise`, `id_utilisateur`, `id_formation`, `id_experience_pro`) "
+                                    + "VALUES (NULL, '" + titre + "', '" + description + "', '" + signature + "', '" + maitrise + "', '" + idUtilisateur + "', '" + idFormation + "', '" + idExperiencePro + "');");
+                            if (res != null) { 
+                                JOptionPane.showMessageDialog(this, "Curriculum Vitae a été créé avec succès.", "Curriculum Vitae Réussi", JOptionPane.INFORMATION_MESSAGE);
+                            }else{
+                                JOptionPane.showMessageDialog(this, "Une erreur a été détecté lors de la création de votre CV veuillez réessayer.\n"
+                                        + "Si le problème persistent veuillez réessayer ultérieurement", "Curriculum Vitae non créé", JOptionPane.WARNING_MESSAGE);
+                            }
+
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Veuillez saisir une description à votre Curriculum Vitae.");
+                        }
+
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Il faut impérativement un titre à votre Curriculum Vitae.");
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "Atention ! Soit formation ou éxpérience professionnel est mal rempli ou incorrect.");
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Veuillez saisir une description à votre Curriculum Vitae.");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CreationDuCV.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public boolean verifUtilisateur(Integer id) throws SQLException{
+
+    public List<Map<String, Object>> verifUtilisateur(Integer id) throws SQLException {
         Statement req = this.connexion.createStatement();
-        ResultSet res = req.executeQuery("SELECT * FROM utilisateurs WHRERE id = " + id);
-        
-        if(res.isBeforeFirst()){
-            System.out.println(resultSetToList(res).toArray());
+        ResultSet res = req.executeQuery("SELECT * FROM utilisateurs WHERE id = " + id);
+
+        String[] data = new String[]{};
+
+        if (res.isBeforeFirst()) {
+            return resultSetToList(res);
         }
-        return false;
+        return null;
     }
-    
+
     /**
-    * Convert the ResultSet to a List of Maps, where each Map represents a row with columnNames and columValues
-    * @param rs
-    * @return
-    * @throws SQLException
-    */
-   private List<Map<String, Object>> resultSetToList(ResultSet rs) throws SQLException {
-       ResultSetMetaData md = rs.getMetaData();
-       int columns = md.getColumnCount();
-       List<Map<String, Object>> rows = new ArrayList<Map<String, Object>>();
-       while (rs.next()){
-           Map<String, Object> row = new HashMap<String, Object>(columns);
-           for(int i = 1; i <= columns; ++i){
-               row.put(md.getColumnName(i), rs.getObject(i));
-           }
-           rows.add(row);
-       }
-       return rows;
-   }
-    
+     * Convert the ResultSet to a List of Maps, where each Map represents a row
+     * with columnNames and columValues
+     *
+     * @param rs
+     * @return
+     * @throws SQLException
+     */
+    private List<Map<String, Object>> resultSetToList(ResultSet rs) throws SQLException {
+        ResultSetMetaData md = rs.getMetaData();
+        int columns = md.getColumnCount();
+        List<Map<String, Object>> rows = new ArrayList<Map<String, Object>>();
+        while (rs.next()) {
+            Map<String, Object> row = new HashMap<String, Object>(columns);
+            for (int i = 1; i <= columns; ++i) {
+                row.put(md.getColumnName(i), rs.getObject(i));
+            }
+            rows.add(row);
+        }
+        return rows;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.karimandco.cv.ExperiencePro experiencePro1;
     private com.karimandco.cv.Formation formation1;

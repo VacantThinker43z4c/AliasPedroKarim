@@ -194,7 +194,7 @@ private Connection connexion;
                         try {
                             req = this.connexion.createStatement();
                             res = req.executeUpdate("INSERT INTO `formation` (`id`, `nom`, `lieu`, `description`, `annee_debut`, `annee_fin`) "
-                                    + "VALUES (NULL, '" + formation + "', '" + lieu + "', '" + description + "', '" + date_debut + "', '" + date_fin + "');");
+                                    + "VALUES (NULL, '" + formation + "', '" + lieu + "', '" + description + "', '" + date_debut + "', '" + date_fin + "');", Statement.RETURN_GENERATED_KEYS);
                             
                             ResultSet rs = req.getGeneratedKeys();
                             if (rs.next()){ lastKey =rs.getInt(1); }
