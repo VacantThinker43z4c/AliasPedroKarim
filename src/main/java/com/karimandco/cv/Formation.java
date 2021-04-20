@@ -12,19 +12,24 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 /**
  *
  * @author Sarah
  */
 public class Formation extends javax.swing.JPanel {
-private Connection connexion;
+
+    private ConnexionDB connexionDb = new ConnexionDB();
+    private Connection connexion;
+
     /**
      * Creates new form formation
      */
     public Formation() {
         initComponents();
-        connexion = new ConnexionDB().getConnnexion();
+        connexion = connexionDb.getConnnexion();
     }
 
     /**
@@ -36,10 +41,6 @@ private Connection connexion;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jPopupMenu1 = new javax.swing.JPopupMenu();
-        jPopupMenu2 = new javax.swing.JPopupMenu();
         jTextFieldAdresseFormation = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -55,10 +56,6 @@ private Connection connexion;
         jButtonValiderFormation = new javax.swing.JButton();
         classDate1 = new com.karimandco.cv.ClassDate();
         classDate2 = new com.karimandco.cv.ClassDate();
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -170,53 +167,87 @@ private Connection connexion;
     private void jButtonValiderFormationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValiderFormationActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonValiderFormationActionPerformed
- public Integer setEnvoieFormation(){
+    public Integer setEnvoieFormation(Object...args) {
+        this.connexion = this.connexionDb.reconnect();
         Statement req;
         Integer res, lastKey = null;
         
+        Boolean update = (Boolean) args[0];
+
         String formation = jTextFieldNomFormation.getText();
-        
-        if(!formation.equals("")){
+
+        if (!formation.equals("")) {
             String lieu = jTextFieldAdresseFormation.getText();
-            
-            if(!lieu.equals("")){
-                
+
+            if (!lieu.equals("")) {
+
                 String date_debut = classDate1.getText();
                 String date_fin = classDate2.getText();
-                if(classDate1.verifDate() && classDate2.verifDate()){
-                    
+                if (classDate1.verifDate() && classDate2.verifDate()) {
+
                     date_debut = date_debut.replaceAll("/", "-");
                     date_fin = date_fin.replaceAll("/", "-");
-                    
+
                     String description = jTextAreaDescriptionFormation.getText();
-                    
-                    if(this.connexion != null){
+
+                    if (this.connexion != null) {
                         try {
                             req = this.connexion.createStatement();
-                            res = req.executeUpdate("INSERT INTO `formation` (`id`, `nom`, `lieu`, `description`, `annee_debut`, `annee_fin`) "
-                                    + "VALUES (NULL, '" + formation + "', '" + lieu + "', '" + description + "', '" + date_debut + "', '" + date_fin + "');", Statement.RETURN_GENERATED_KEYS);
                             
-                            ResultSet rs = req.getGeneratedKeys();
-                            if (rs.next()){ lastKey =rs.getInt(1); }
-                            
-                            System.out.println("Resultat : " + lastKey);
+                            if(update){
+                                Integer idFormation = (Integer) args[1];
+                                res = req.executeUpdate("UPDATE `formation` "
+                                        + "SET `nom` = '" + formation + "', `lieu` = '" + lieu + "', `description` = '" + description + "', `annee_debut` = '" + date_debut + "', `annee_fin` = '" + date_fin + "' "
+                                        + "WHERE id = " + idFormation);
+                                lastKey = idFormation;
+                            }else{
+                                res = req.executeUpdate("INSERT INTO `formation` (`id`, `nom`, `lieu`, `description`, `annee_debut`, `annee_fin`) "
+                                        + "VALUES (NULL, '" + formation + "', '" + lieu + "', '" + description + "', '" + date_debut + "', '" + date_fin + "');", Statement.RETURN_GENERATED_KEYS);
+
+                                ResultSet rs = req.getGeneratedKeys();
+                                if (rs.next()) {
+                                    lastKey = rs.getInt(1);
+                                }
+                            }
+
+                            System.out.println("Dernière id pour Formation : " + lastKey);
                         } catch (SQLException ex) {
                             Logger.getLogger(ExperiencePro.class.getName()).log(Level.SEVERE, null, ex);
                             this.connexion = null;
                         }
                     }
-                }else{
+                } else {
                     JOptionPane.showMessageDialog(this, "L'un de vos dates de période de formation n'est pas valide.");
                 }
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(this, "Veuillez saisir un lieu valide.");
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "Veuillez saisir un nom de formation.");
         }
         return lastKey;
     }
 
+    public ClassDate getClassDate1() {
+        return classDate1;
+    }
+
+    public ClassDate getClassDate2() {
+        return classDate2;
+    }
+
+    public JTextArea getjTextAreaDescriptionFormation() {
+        return jTextAreaDescriptionFormation;
+    }
+
+    public JTextField getjTextFieldAdresseFormation() {
+        return jTextFieldAdresseFormation;
+    }
+
+    public JTextField getjTextFieldNomFormation() {
+        return jTextFieldNomFormation;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.karimandco.cv.ClassDate classDate1;
     private com.karimandco.cv.ClassDate classDate2;
@@ -229,11 +260,7 @@ private Connection connexion;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabelTitre;
-    private javax.swing.JPopupMenu jPopupMenu1;
-    private javax.swing.JPopupMenu jPopupMenu2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextAreaDescriptionFormation;
     private javax.swing.JTextField jTextFieldAdresseFormation;
     private javax.swing.JTextField jTextFieldNomFormation;

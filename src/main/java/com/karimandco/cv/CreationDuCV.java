@@ -23,15 +23,23 @@ import javax.swing.JOptionPane;
  * @author Sarah
  */
 public class CreationDuCV extends javax.swing.JPanel {
-
+    private ConnexionDB connexionDb = new ConnexionDB();
     private Connection connexion;
+    
+    public Integer idUtilisateur;
 
     /**
      * Creates new form CreationDuCV
      */
     public CreationDuCV() {
         initComponents();
-        connexion = new ConnexionDB().getConnnexion();
+        connexion = connexionDb.getConnnexion();
+        idUtilisateur = 1;
+        try {
+            chargerCV();
+        } catch (SQLException ex) {
+            Logger.getLogger(CreationDuCV.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -75,7 +83,7 @@ public class CreationDuCV extends javax.swing.JPanel {
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        jTextFieldMaitrise1 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
@@ -151,7 +159,12 @@ public class CreationDuCV extends javax.swing.JPanel {
 
         jTextField4.setText("Titre de la maitrise");
 
-        jTextField5.setText("Niveau de matrise");
+        jTextFieldMaitrise1.setText("Niveau de matrise");
+        jTextFieldMaitrise1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldMaitrise1KeyReleased(evt);
+            }
+        });
 
         jTextField6.setText("Niveau de maitrise");
 
@@ -201,7 +214,7 @@ public class CreationDuCV extends javax.swing.JPanel {
                                 .addGap(15, 15, 15)
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextFieldMaitrise1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
@@ -229,7 +242,7 @@ public class CreationDuCV extends javax.swing.JPanel {
                 .addComponent(jLabelTitre)
                 .addGap(18, 18, 18)
                 .addComponent(jTextFieldTitre, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 68, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -245,7 +258,7 @@ public class CreationDuCV extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldMaitrise1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -274,7 +287,6 @@ public class CreationDuCV extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jTabbedPaneExperiencePro, javax.swing.GroupLayout.PREFERRED_SIZE, 593, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jTabbedPaneFormation, javax.swing.GroupLayout.PREFERRED_SIZE, 593, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonValidationCV, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(7, 7, 7))
         );
@@ -284,27 +296,44 @@ public class CreationDuCV extends javax.swing.JPanel {
 
         int reply = JOptionPane.showConfirmDialog(null, "Etes-vous sûr de vouloir enregistrer votre Curriculum Vitae.", "Comfimez l'engistrer", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
-            JOptionPane.showMessageDialog(null, "Bravo");
-            
+            this.connexion = this.connexionDb.reconnect();
             createCV();
+            
         } else {
             // Message si NON
         }
 
     }//GEN-LAST:event_jButtonValidationCVMouseClicked
 
-    public void createCV() {
-        Statement req;
-        Integer idExperiencePro = null, idFormation = null, res;
-        // Ici, on récupère les id des dernières occurences insérer dans les tables formation et experience pro
-        idExperiencePro = experiencePro1.setEnvoieExperiencePro();
-        idFormation = formation1.setEnvoieFormation(); // Il manquant une methode ici
+    private void jTextFieldMaitrise1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldMaitrise1KeyReleased
+        String value = jTextFieldMaitrise1.getText();
+        if(!value.equals("") && Integer.parseInt(value) >= 0 && Integer.parseInt(value) <= 100){
+            jProgressBar1.setValue(Integer.parseInt(value));
+        }
+        System.out.println(jProgressBar1.getValue());
+    }//GEN-LAST:event_jTextFieldMaitrise1KeyReleased
 
+    public void createCV() {
+        
+        boolean update = false;
+        
+        List<Map<String, Object>> cv = null;
+        try {
+            cv = getCV(idUtilisateur);
+            if (cv != null && cv.size() > 0) { update = true; }
+        } catch (SQLException ex) { }
+        
+        Statement req;
+        Integer idExperiencePro = null, idFormation = null, res = null;
+        // Ici, on récupère les id des dernières occurences insérer dans les tables formation et experience pro
+        idExperiencePro = experiencePro1.setEnvoieExperiencePro(update, (update ? (Integer) cv.get(0).get("id_experience_pro") : 0));
+        idFormation = formation1.setEnvoieFormation(update, (update ? (Integer) cv.get(0).get("id_formation") : 0)); // Il manquant une methode ici
+        
         try {
             // Ici mettre l'id de l'uilisateur
-            List<Map<String, Object>> utilisateur = verifUtilisateur(1);
+            List<Map<String, Object>> utilisateur = getUtilisateur(idUtilisateur);
             
-            if (utilisateur.size() > 0) {
+            if (utilisateur != null && utilisateur.size() > 0) {
                 if (idExperiencePro != null && idFormation != null) {
 
                     String titre = jTextFieldTitre.getText();
@@ -320,8 +349,14 @@ public class CreationDuCV extends javax.swing.JPanel {
                             String signature = utilisateur.get(0).get("nom").toString().toUpperCase() + " " + utilisateur.get(0).get("nom").toString();
                             
                             req = this.connexion.createStatement();
-                            res = req.executeUpdate("INSERT INTO `cv` (`id`, `titre`, `description`, `signature`, `maitrise`, `id_utilisateur`, `id_formation`, `id_experience_pro`) "
+                            
+                            if(update){
+                                res = req.executeUpdate("UPDATE `cv` SET `titre` = '" + titre + "', `description` = '" + description + "', `maitrise` = '" + maitrise + "' WHERE id = " + cv.get(0).get("id"));
+                            }else{
+                                res = req.executeUpdate("INSERT INTO `cv` (`id`, `titre`, `description`, `signature`, `maitrise`, `id_utilisateur`, `id_formation`, `id_experience_pro`) "
                                     + "VALUES (NULL, '" + titre + "', '" + description + "', '" + signature + "', '" + maitrise + "', '" + idUtilisateur + "', '" + idFormation + "', '" + idExperiencePro + "');");
+                            
+                            }
                             if (res != null) { 
                                 JOptionPane.showMessageDialog(this, "Curriculum Vitae a été créé avec succès.", "Curriculum Vitae Réussi", JOptionPane.INFORMATION_MESSAGE);
                             }else{
@@ -349,34 +384,107 @@ public class CreationDuCV extends javax.swing.JPanel {
         }
     }
 
-    public List<Map<String, Object>> verifUtilisateur(Integer id) throws SQLException {
-        Statement req = this.connexion.createStatement();
-        ResultSet res = req.executeQuery("SELECT * FROM utilisateurs WHERE id = " + id);
+    public void chargerCV() throws SQLException{
+        List<Map<String, Object>> cv = getCV(idUtilisateur);
+        if(cv != null){
+            if (cv.size() > 0) {
+                jTextFieldTitre.setText((String) cv.get(0).get("titre"));
+                jTextAreaDescription.setText((String) cv.get(0).get("description"));
+                jProgressBar1.setValue(Integer.parseInt((String) cv.get(0).get("maitrise")));
 
-        String[] data = new String[]{};
+                List<Map<String, Object>> formation = getFormation(idUtilisateur);
+                if (formation.size() > 0) {
+                    Map<String, Object> formationData = formation.get(0);
+                    formation1.getjTextFieldNomFormation().setText((String) formationData.get("nom"));
+                    formation1.getjTextFieldAdresseFormation().setText((String) formationData.get("lieu"));
+                    formation1.getjTextAreaDescriptionFormation().setText((String) formationData.get("description"));
+                    formation1.getClassDate1().setText((String) formationData.get("annee_debut").toString());
+                    formation1.getClassDate2().setText((String) formationData.get("annee_fin").toString());
+                }
 
-        if (res.isBeforeFirst()) {
-            return resultSetToList(res);
+                List<Map<String, Object>> experiencePro = getExperiencePro(idUtilisateur);
+                if (experiencePro.size() > 0) {
+                    Map<String, Object> experienceProData = experiencePro.get(0);
+                    experiencePro1.getjTextFieldNomEntpExpPro().setText((String) experienceProData.get("entreprise"));
+                    experiencePro1.getjTextFieldAdresseExpPro().setText((String) experienceProData.get("adresse"));
+                    experiencePro1.getjTextAreaDescriptionExpPro().setText((String) experienceProData.get("description"));
+                    experiencePro1.getClassDate1().setText((String) experienceProData.get("annee_debut").toString());
+                    experiencePro1.getClassDate2().setText((String) experienceProData.get("annee_fin").toString());
+                }
+            }
+        }
+        
+    }
+    
+    // Accesseurs ou mutateurs pour la base de donnée
+    
+    public List<Map<String, Object>> getUtilisateur(Integer id) throws SQLException {
+        if(this.connexion != null){
+            Statement req = this.connexion.createStatement();
+            ResultSet res = req.executeQuery("SELECT * FROM utilisateurs WHERE id = " + id);
+
+            if (res.isBeforeFirst()) {
+                return resultSetToList(res);
+            }
         }
         return null;
     }
+    
+    public List<Map<String, Object>> getCV(Integer id) throws SQLException {
+        if(this.connexion != null){
+            Statement req = this.connexion.createStatement();
+            ResultSet res = req.executeQuery("SELECT * FROM cv WHERE id_utilisateur = " + id);
 
+            if (res.isBeforeFirst()) {
+                return resultSetToList(res);
+            }
+            return null;
+        }
+        return null;
+    }
+    
+    public List<Map<String, Object>> getFormation(Integer id) throws SQLException {
+        List<Map<String, Object>> cv = getCV(id);
+        if(cv != null){
+            Statement req = this.connexion.createStatement();
+            ResultSet res = req.executeQuery("SELECT * FROM formation WHERE id = " + cv.get(0).get("id_formation"));
+
+            if (res.isBeforeFirst()) {
+                return resultSetToList(res);
+            }
+        }
+        return null;
+    }
+    
+    public List<Map<String, Object>> getExperiencePro(Integer id) throws SQLException {
+        List<Map<String, Object>> cv = getCV(id);
+        if(cv != null){
+            Statement req = this.connexion.createStatement();
+            ResultSet res = req.executeQuery("SELECT * FROM experience_pro WHERE id = " + cv.get(0).get("id_experience_pro"));
+
+            if (res.isBeforeFirst()) {
+                return resultSetToList(res);
+            }
+        }
+        return null;
+    }
+    
     /**
-     * Convert the ResultSet to a List of Maps, where each Map represents a row
-     * with columnNames and columValues
+     * Convertir le ResultSet en une liste de cartes, où chaque carte représente 
+     * une ligne avec columnNames et columValues
      *
-     * @param rs
+     * @param res
      * @return
      * @throws SQLException
      */
-    private List<Map<String, Object>> resultSetToList(ResultSet rs) throws SQLException {
-        ResultSetMetaData md = rs.getMetaData();
+    private List<Map<String, Object>> resultSetToList(ResultSet res) throws SQLException {
+        ResultSetMetaData md = res.getMetaData();
         int columns = md.getColumnCount();
         List<Map<String, Object>> rows = new ArrayList<Map<String, Object>>();
-        while (rs.next()) {
+        while (res.next()) {
             Map<String, Object> row = new HashMap<String, Object>(columns);
             for (int i = 1; i <= columns; ++i) {
-                row.put(md.getColumnName(i), rs.getObject(i));
+                row.put(md.getColumnName(i), res.getObject(i));
             }
             rows.add(row);
         }
@@ -414,10 +522,10 @@ public class CreationDuCV extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField jTextFieldMaitrise1;
     private javax.swing.JTextField jTextFieldTitre;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JTree jTree1;

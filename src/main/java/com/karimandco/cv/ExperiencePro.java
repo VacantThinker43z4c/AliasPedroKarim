@@ -9,9 +9,13 @@ import com.mysql.jdbc.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 /**
  *
@@ -19,6 +23,7 @@ import javax.swing.JOptionPane;
  */
 public class ExperiencePro extends javax.swing.JPanel {
     
+    private ConnexionDB connexionDb = new ConnexionDB();
     private Connection connexion;
 
     /**
@@ -26,7 +31,7 @@ public class ExperiencePro extends javax.swing.JPanel {
      */
     public ExperiencePro() {
         initComponents();
-        connexion = new ConnexionDB().getConnnexion();
+        connexion = connexionDb.getConnnexion();
     }
 
     /**
@@ -38,7 +43,6 @@ public class ExperiencePro extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField5 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextFieldNomEntpExpPro = new javax.swing.JTextField();
@@ -54,8 +58,6 @@ public class ExperiencePro extends javax.swing.JPanel {
         jButtonExpPro = new javax.swing.JButton();
         classDate1 = new com.karimandco.cv.ClassDate();
         classDate2 = new com.karimandco.cv.ClassDate();
-
-        jTextField5.setText("jTextField5");
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -160,9 +162,12 @@ public class ExperiencePro extends javax.swing.JPanel {
      * @description Cette methode crée les donnes de l'expérience professionnel dans la table `experience_pro` et ensuite retourne l'id de la dernière occurence inserer dans la table.
      * @return Integer lastKey 
      */
-    public Integer setEnvoieExperiencePro(){
-        Statement req;
+    public Integer setEnvoieExperiencePro(Object...args){
+        this.connexion = this.connexionDb.reconnect();
+        Statement req = null;
         Integer res, lastKey = null;
+        
+        Boolean update = (Boolean) args[0];
         
         String entreprise = jTextFieldNomEntpExpPro.getText();
         
@@ -183,15 +188,23 @@ public class ExperiencePro extends javax.swing.JPanel {
                     if(this.connexion != null){
                         try {
                             req = this.connexion.createStatement();
-                            res = req.executeUpdate("INSERT INTO `experience_pro` (`id`, `entreprise`, `adresse`, `description`, `annee_debut`, `annee_fin`) "
-                                    + "VALUES (NULL, '" + entreprise + "', '" + adresse + "', '" + description + "', '" + date_debut + "', '" + date_fin + "');", Statement.RETURN_GENERATED_KEYS);
                             
+                            if(update){
+                                Integer idExperiencePro = (Integer) args[1];
+                                System.out.println("Test : " + idExperiencePro);
+                                res = req.executeUpdate("UPDATE `formation` "
+                                        + "SET `entreprise` = '" + entreprise + "', `adresse` = '" + adresse + "', `description` = '" + description + "', `annee_debut` = '" + date_debut + "', `annee_fin` = '" + date_fin + "' "
+                                        + "WHERE id = " + idExperiencePro);
+                                lastKey = idExperiencePro;
+                            }else{
+                                res = req.executeUpdate("INSERT INTO `experience_pro` (`id`, `entreprise`, `adresse`, `description`, `annee_debut`, `annee_fin`) "
+                                        + "VALUES (NULL, '" + entreprise + "', '" + adresse + "', '" + description + "', '" + date_debut + "', '" + date_fin + "');", Statement.RETURN_GENERATED_KEYS);
+                                // Pour récupérer le dernière id de l'element 
+                                ResultSet rs = req.getGeneratedKeys();
+                                if (rs.next()){ lastKey =rs.getInt(1); }
+                            }
                             
-                            // Pour récupérer le dernière id de l'element 
-                            ResultSet rs = req.getGeneratedKeys();
-                            if (rs.next()){ lastKey =rs.getInt(1); }
-                            
-                            System.out.println("Dernière id : " + lastKey);
+                            System.out.println("Dernière id pour Expérience Pro : " + lastKey);
                         } catch (SQLException ex) {
                             Logger.getLogger(ExperiencePro.class.getName()).log(Level.SEVERE, null, ex);
                             this.connexion = null;                        }
@@ -209,6 +222,26 @@ public class ExperiencePro extends javax.swing.JPanel {
         return lastKey;
     }
 
+    public ClassDate getClassDate1() {
+        return classDate1;
+    }
+
+    public ClassDate getClassDate2() {
+        return classDate2;
+    }
+
+    public JTextArea getjTextAreaDescriptionExpPro() {
+        return jTextAreaDescriptionExpPro;
+    }
+
+    public JTextField getjTextFieldAdresseExpPro() {
+        return jTextFieldAdresseExpPro;
+    }
+
+    public JTextField getjTextFieldNomEntpExpPro() {
+        return jTextFieldNomEntpExpPro;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.karimandco.cv.ClassDate classDate1;
     private com.karimandco.cv.ClassDate classDate2;
@@ -223,7 +256,6 @@ public class ExperiencePro extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextAreaDescriptionExpPro;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextFieldAdresseExpPro;
     private javax.swing.JTextField jTextFieldNomEntpExpPro;
     // End of variables declaration//GEN-END:variables

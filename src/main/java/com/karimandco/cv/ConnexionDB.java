@@ -35,7 +35,9 @@ public class ConnexionDB {
     }
     
     public void initConnexion(){
-        this.connexionURI += hostname + ":" + port + "/" + database;
+        if(this.connexionURI.equals("jdbc:mysql://")){
+            this.connexionURI += hostname + ":" + port + "/" + database;
+        }
         try {
             System.out.println(this.connexionURI + " - " + username + " - " + password);
             this.connexion = (Connection)DriverManager.getConnection(this.connexionURI, username, password);
@@ -64,4 +66,17 @@ public class ConnexionDB {
         }
     }
     
+    public Connection reconnect(){
+        if(this.connexion != null){
+            try {
+                ResultSet res = this.connexion.createStatement().executeQuery("SELECT * FROM utilisateurs");
+
+            } catch (SQLException ex) {
+                this.connexion = null;
+                this.initConnexion();
+                return this.connexion = this.getConnnexion();
+            }
+        }
+        return null;
+    }
 }
