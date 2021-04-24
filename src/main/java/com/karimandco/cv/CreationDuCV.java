@@ -79,11 +79,11 @@ public class CreationDuCV extends javax.swing.JPanel {
         jProgressBar3 = new javax.swing.JProgressBar();
         jLabel7 = new javax.swing.JLabel();
         jProgressBar4 = new javax.swing.JProgressBar();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldMaitrise1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
-        jTextFieldMaitrise1 = new javax.swing.JTextField();
+        jTextFieldLevelMaitrise1 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
@@ -151,7 +151,7 @@ public class CreationDuCV extends javax.swing.JPanel {
 
         jLabel7.setText("Maitrise 4 :");
 
-        jTextField1.setText("Titre de la maitrise");
+        jTextFieldMaitrise1.setText("Titre de la maitrise");
 
         jTextField2.setText("Titre de la maitrise");
 
@@ -159,10 +159,10 @@ public class CreationDuCV extends javax.swing.JPanel {
 
         jTextField4.setText("Titre de la maitrise");
 
-        jTextFieldMaitrise1.setText("Niveau de matrise");
-        jTextFieldMaitrise1.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTextFieldLevelMaitrise1.setText("Niveau de matrise");
+        jTextFieldLevelMaitrise1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextFieldMaitrise1KeyReleased(evt);
+                jTextFieldLevelMaitrise1KeyReleased(evt);
             }
         });
 
@@ -210,11 +210,11 @@ public class CreationDuCV extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(15, 15, 15)
+                                .addComponent(jTextFieldMaitrise1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldMaitrise1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextFieldLevelMaitrise1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
@@ -257,8 +257,8 @@ public class CreationDuCV extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldMaitrise1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldMaitrise1)
+                            .addComponent(jTextFieldLevelMaitrise1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -305,13 +305,16 @@ public class CreationDuCV extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButtonValidationCVMouseClicked
 
-    private void jTextFieldMaitrise1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldMaitrise1KeyReleased
-        String value = jTextFieldMaitrise1.getText();
-        if(!value.equals("") && Integer.parseInt(value) >= 0 && Integer.parseInt(value) <= 100){
-            jProgressBar1.setValue(Integer.parseInt(value));
+    private void jTextFieldLevelMaitrise1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldLevelMaitrise1KeyReleased
+        String value = jTextFieldLevelMaitrise1.getText().equals("") ? "0" : jTextFieldLevelMaitrise1.getText();
+        
+        if(value.matches("[0-9]+")){
+            if(!value.equals("") && Integer.parseInt(value) >= 0 && Integer.parseInt(value) <= 100){
+                jProgressBar1.setValue(Integer.parseInt(value));
+            }
         }
         System.out.println(jProgressBar1.getValue());
-    }//GEN-LAST:event_jTextFieldMaitrise1KeyReleased
+    }//GEN-LAST:event_jTextFieldLevelMaitrise1KeyReleased
 
     public void createCV() {
         
@@ -344,24 +347,31 @@ public class CreationDuCV extends javax.swing.JPanel {
                         if (!description.equals("")) {
 
                             int maitrise = jProgressBar1.getValue();
+                            String nom_maitrise = jTextFieldMaitrise1.getText();
                             
-                            Integer idUtilisateur = (Integer)utilisateur.get(0).get("id");
-                            String signature = utilisateur.get(0).get("nom").toString().toUpperCase() + " " + utilisateur.get(0).get("nom").toString();
-                            
-                            req = this.connexion.createStatement();
-                            
-                            if(update){
-                                res = req.executeUpdate("UPDATE `cv` SET `titre` = '" + titre + "', `description` = '" + description + "', `maitrise` = '" + maitrise + "' WHERE id = " + cv.get(0).get("id"));
-                            }else{
-                                res = req.executeUpdate("INSERT INTO `cv` (`id`, `titre`, `description`, `signature`, `maitrise`, `id_utilisateur`, `id_formation`, `id_experience_pro`) "
-                                    + "VALUES (NULL, '" + titre + "', '" + description + "', '" + signature + "', '" + maitrise + "', '" + idUtilisateur + "', '" + idFormation + "', '" + idExperiencePro + "');");
-                            
-                            }
-                            if (res != null) { 
-                                JOptionPane.showMessageDialog(this, "Curriculum Vitae a été créé avec succès.", "Curriculum Vitae Réussi", JOptionPane.INFORMATION_MESSAGE);
-                            }else{
-                                JOptionPane.showMessageDialog(this, "Une erreur a été détecté lors de la création de votre CV veuillez réessayer.\n"
-                                        + "Si le problème persistent veuillez réessayer ultérieurement", "Curriculum Vitae non créé", JOptionPane.WARNING_MESSAGE);
+                            if(!nom_maitrise.equals("") && !nom_maitrise.equals("Titre de la maitrise")){
+                                
+                                Integer idUtilisateur = (Integer)utilisateur.get(0).get("id");
+                                String signature = utilisateur.get(0).get("nom").toString().toUpperCase() + " " + utilisateur.get(0).get("nom").toString();
+
+                                req = this.connexion.createStatement();
+
+                                if(update){
+                                    res = req.executeUpdate("UPDATE `cv` SET `titre` = '" + titre + "', `description` = '" + description + "', `nom_maitrise` = '" + nom_maitrise + "',`maitrise` = '" + maitrise + "' WHERE id = " + cv.get(0).get("id"));
+                                }else{
+                                    res = req.executeUpdate("INSERT INTO `cv` (`id`, `titre`, `description`, `signature`, `nom_maitrise`, `maitrise`, `id_utilisateur`, `id_formation`, `id_experience_pro`) "
+                                        + "VALUES (NULL, '" + titre + "', '" + description + "', '" + signature + "', '" + nom_maitrise + "', '" + maitrise + "', '" + idUtilisateur + "', '" + idFormation + "', '" + idExperiencePro + "');");
+
+                                }
+                                if (res != null) { 
+                                    JOptionPane.showMessageDialog(this, "Curriculum Vitae a été créé avec succès.", "Curriculum Vitae Réussi", JOptionPane.INFORMATION_MESSAGE);
+                                }else{
+                                    JOptionPane.showMessageDialog(this, "Une erreur a été détecté lors de la création de votre CV veuillez réessayer.\n"
+                                            + "Si le problème persistent veuillez réessayer ultérieurement", "Curriculum Vitae non créé", JOptionPane.WARNING_MESSAGE);
+                                }
+                                
+                            }else {
+                                JOptionPane.showMessageDialog(this, "Veuillez saisir le nom de la catégorie à votre maitrise.");
                             }
 
                         } else {
@@ -391,6 +401,8 @@ public class CreationDuCV extends javax.swing.JPanel {
                 jTextFieldTitre.setText((String) cv.get(0).get("titre"));
                 jTextAreaDescription.setText((String) cv.get(0).get("description"));
                 jProgressBar1.setValue(Integer.parseInt((String) cv.get(0).get("maitrise")));
+                jTextFieldLevelMaitrise1.setText((String) cv.get(0).get("maitrise"));
+                jTextFieldMaitrise1.setText((String) cv.get(0).get("nom_maitrise"));
 
                 List<Map<String, Object>> formation = getFormation(idUtilisateur);
                 if (formation.size() > 0) {
@@ -518,13 +530,13 @@ public class CreationDuCV extends javax.swing.JPanel {
     private javax.swing.JTabbedPane jTabbedPaneFormation;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextAreaDescription;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField jTextFieldLevelMaitrise1;
     private javax.swing.JTextField jTextFieldMaitrise1;
     private javax.swing.JTextField jTextFieldTitre;
     private javax.swing.JTextPane jTextPane1;

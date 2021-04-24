@@ -192,7 +192,7 @@ public class ExperiencePro extends javax.swing.JPanel {
                             if(update){
                                 Integer idExperiencePro = (Integer) args[1];
                                 System.out.println("Test : " + idExperiencePro);
-                                res = req.executeUpdate("UPDATE `formation` "
+                                res = req.executeUpdate("UPDATE `experience_pro` "
                                         + "SET `entreprise` = '" + entreprise + "', `adresse` = '" + adresse + "', `description` = '" + description + "', `annee_debut` = '" + date_debut + "', `annee_fin` = '" + date_fin + "' "
                                         + "WHERE id = " + idExperiencePro);
                                 lastKey = idExperiencePro;
