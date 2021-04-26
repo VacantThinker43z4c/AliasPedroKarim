@@ -364,7 +364,10 @@ public class CreationDuCV extends javax.swing.JPanel {
 
                                 }
                                 if (res != null) { 
-                                    JOptionPane.showMessageDialog(this, "Curriculum Vitae a été créé avec succès.", "Curriculum Vitae Réussi", JOptionPane.INFORMATION_MESSAGE);
+                                    JOptionPane.showMessageDialog(this, 
+                                            update ? "Curriculum Vitae a été mise à jour avec succès." : "Curriculum Vitae a été créé avec succès.", 
+                                            update ? "Mise à jour Curriculum Vitae" : "Création Curriculum Vitae", 
+                                            JOptionPane.INFORMATION_MESSAGE);
                                 }else{
                                     JOptionPane.showMessageDialog(this, "Une erreur a été détecté lors de la création de votre CV veuillez réessayer.\n"
                                             + "Si le problème persistent veuillez réessayer ultérieurement", "Curriculum Vitae non créé", JOptionPane.WARNING_MESSAGE);
