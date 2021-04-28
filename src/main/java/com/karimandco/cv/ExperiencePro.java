@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -55,7 +56,7 @@ public class ExperiencePro extends javax.swing.JPanel {
         jTextAreaDescriptionExpPro = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jButtonExpPro = new javax.swing.JButton();
+        jButtonValideExpPro = new javax.swing.JButton();
         classDate1 = new com.karimandco.cv.ClassDate();
         classDate2 = new com.karimandco.cv.ClassDate();
 
@@ -92,7 +93,7 @@ public class ExperiencePro extends javax.swing.JPanel {
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Fin");
 
-        jButtonExpPro.setText("Valider");
+        jButtonValideExpPro.setText("Valider");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -101,7 +102,7 @@ public class ExperiencePro extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonExpPro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonValideExpPro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextFieldNomEntpExpPro)
                     .addComponent(jTextFieldAdresseExpPro)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
@@ -153,14 +154,18 @@ public class ExperiencePro extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
-                .addComponent(jButtonExpPro)
+                .addComponent(jButtonValideExpPro)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     
     /**
-     * @description Cette methode crée les donnes de l'expérience professionnel dans la table `experience_pro` et ensuite retourne l'id de la dernière occurence inserer dans la table.
-     * @return Integer lastKey 
+     * 
+     * Cette methode crée les donnes de l'expérience professionnel dans la table `experience_pro` 
+     * et ensuite retourne l'id de la dernière occurence inserer dans la table.
+     * 
+     * @param args
+     * @return Integer
      */
     public Integer setEnvoieExperiencePro(Object...args){
         this.connexion = this.connexionDb.reconnect();
@@ -241,11 +246,15 @@ public class ExperiencePro extends javax.swing.JPanel {
     public JTextField getjTextFieldNomEntpExpPro() {
         return jTextFieldNomEntpExpPro;
     }
+
+    public JButton getjButtonValideExpPro() {
+        return jButtonValideExpPro;
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.karimandco.cv.ClassDate classDate1;
     private com.karimandco.cv.ClassDate classDate2;
-    private javax.swing.JButton jButtonExpPro;
+    private javax.swing.JButton jButtonValideExpPro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

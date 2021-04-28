@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -91,11 +92,6 @@ public class Formation extends javax.swing.JPanel {
         jLabel7.setText("Nom de la formation");
 
         jButtonValiderFormation.setText("Valider ");
-        jButtonValiderFormation.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonValiderFormationActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -163,10 +159,14 @@ public class Formation extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButtonValiderFormationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValiderFormationActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonValiderFormationActionPerformed
+    
+    /**
+     * Permet d'envoyé toute les informations d'une formation directement dans la base donnée, 
+     * et ensuite la méthode peut soit envoyé null soit le dernier clé id créer
+     * 
+     * @param args
+     * @return Integer | null
+     */
     public Integer setEnvoieFormation(Object...args) {
         this.connexion = this.connexionDb.reconnect();
         Statement req;
@@ -246,6 +246,10 @@ public class Formation extends javax.swing.JPanel {
 
     public JTextField getjTextFieldNomFormation() {
         return jTextFieldNomFormation;
+    }
+
+    public JButton getjButtonValiderFormation() {
+        return jButtonValiderFormation;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

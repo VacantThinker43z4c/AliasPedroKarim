@@ -176,9 +176,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Valider "/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonValiderFormationActionPerformed"/>
-      </Events>
     </Component>
     <Component class="com.karimandco.cv.ClassDate" name="classDate1">
     </Component>
