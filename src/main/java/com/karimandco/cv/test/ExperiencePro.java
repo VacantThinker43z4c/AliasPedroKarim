@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.karimandco.cv;
+package com.karimandco.cv.test;
 
 import com.mysql.jdbc.Connection;
 import java.sql.ResultSet;
@@ -27,6 +27,9 @@ public class ExperiencePro extends javax.swing.JPanel {
     private ConnexionDB connexionDb = new ConnexionDB();
     private Connection connexion;
 
+    private Integer idExperiencePro = null;
+    private Integer idCV = null;
+    
     /**
      * Creates new form experiencePro
      */
@@ -56,8 +59,8 @@ public class ExperiencePro extends javax.swing.JPanel {
         jTextAreaDescriptionExpPro = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        classDate1 = new com.karimandco.cv.ClassDate();
-        classDate2 = new com.karimandco.cv.ClassDate();
+        classDate1 = new com.karimandco.cv.test.ClassDate();
+        classDate2 = new com.karimandco.cv.test.ClassDate();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -166,7 +169,7 @@ public class ExperiencePro extends javax.swing.JPanel {
         Statement req = null;
         Integer res, lastKey = null;
         
-        Boolean update = (Boolean) args[0];
+        Integer idCV = (Integer) args[0];
         
         String entreprise = jTextFieldNomEntpExpPro.getText();
         
@@ -188,18 +191,20 @@ public class ExperiencePro extends javax.swing.JPanel {
                         try {
                             req = this.connexion.createStatement();
                             
-                            if(update){
-                                Integer idExperiencePro = (Integer) args[1];
+                            if(this.idExperiencePro != null){
                                 res = req.executeUpdate("UPDATE `experience_pro` "
                                         + "SET `entreprise` = '" + entreprise + "', `adresse` = '" + adresse + "', `description` = '" + description + "', `annee_debut` = '" + date_debut + "', `annee_fin` = '" + date_fin + "' "
-                                        + "WHERE id = " + idExperiencePro);
-                                lastKey = idExperiencePro;
+                                        + "WHERE id = " + this.idExperiencePro);
+                                lastKey = this.idExperiencePro;
                             }else{
-                                res = req.executeUpdate("INSERT INTO `experience_pro` (`id`, `entreprise`, `adresse`, `description`, `annee_debut`, `annee_fin`) "
-                                        + "VALUES (NULL, '" + entreprise + "', '" + adresse + "', '" + description + "', '" + date_debut + "', '" + date_fin + "');", Statement.RETURN_GENERATED_KEYS);
+                                res = req.executeUpdate("INSERT INTO `experience_pro` (`id`, `entreprise`, `adresse`, `description`, `annee_debut`, `annee_fin`, `id_cv`) "
+                                        + "VALUES (NULL, '" + entreprise + "', '" + adresse + "', '" + description + "', '" + date_debut + "', '" + date_fin + "', '" + idCV + "');", Statement.RETURN_GENERATED_KEYS);
                                 // Pour récupérer le dernière id de l'element 
                                 ResultSet rs = req.getGeneratedKeys();
-                                if (rs.next()){ lastKey =rs.getInt(1); }
+                                if (rs.next()){ 
+                                    lastKey = rs.getInt(1); 
+                                    this.idExperiencePro = lastKey;
+                                }
                             }
                             
                             System.out.println("Dernière id pour Expérience Pro : " + lastKey);
@@ -239,10 +244,26 @@ public class ExperiencePro extends javax.swing.JPanel {
     public JTextField getjTextFieldNomEntpExpPro() {
         return jTextFieldNomEntpExpPro;
     }
+
+    public Integer getIdExperiencePro() {
+        return idExperiencePro;
+    }
+
+    public void setIdExperiencePro(Integer idExperiencePro) {
+        this.idExperiencePro = idExperiencePro;
+    }
+
+    public Integer getIdCV() {
+        return idCV;
+    }
+
+    public void setIdCV(Integer idCV) {
+        this.idCV = idCV;
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.karimandco.cv.ClassDate classDate1;
-    private com.karimandco.cv.ClassDate classDate2;
+    private com.karimandco.cv.test.ClassDate classDate1;
+    private com.karimandco.cv.test.ClassDate classDate2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

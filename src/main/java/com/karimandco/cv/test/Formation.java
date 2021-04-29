@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.karimandco.cv;
+package com.karimandco.cv.test;
 
 import com.mysql.jdbc.Connection;
 import java.sql.ResultSet;
@@ -24,6 +24,9 @@ public class Formation extends javax.swing.JPanel {
 
     private ConnexionDB connexionDb = new ConnexionDB();
     private Connection connexion;
+    
+    private Integer idFormation = null;
+    private Integer idCV = null;
 
     /**
      * Creates new form formation
@@ -54,8 +57,8 @@ public class Formation extends javax.swing.JPanel {
         jTextAreaDescriptionFormation = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
         jTextFieldNomFormation = new javax.swing.JTextField();
-        classDate1 = new com.karimandco.cv.ClassDate();
-        classDate2 = new com.karimandco.cv.ClassDate();
+        classDate1 = new com.karimandco.cv.test.ClassDate();
+        classDate2 = new com.karimandco.cv.test.ClassDate();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -166,7 +169,8 @@ public class Formation extends javax.swing.JPanel {
         Statement req;
         Integer res, lastKey = null;
         
-        Boolean update = (Boolean) args[0];
+        Integer idCV = (Integer) args[0];
+        System.out.println("Id CV ici -> " + idCV);
 
         String formation = jTextFieldNomFormation.getText();
 
@@ -188,19 +192,19 @@ public class Formation extends javax.swing.JPanel {
                         try {
                             req = this.connexion.createStatement();
                             
-                            if(update){
-                                Integer idFormation = (Integer) args[1];
+                            if(this.idFormation != null){
                                 res = req.executeUpdate("UPDATE `formation` "
                                         + "SET `nom` = '" + formation + "', `lieu` = '" + lieu + "', `description` = '" + description + "', `annee_debut` = '" + date_debut + "', `annee_fin` = '" + date_fin + "' "
-                                        + "WHERE id = " + idFormation);
-                                lastKey = idFormation;
+                                        + "WHERE id = " + this.idFormation);
+                                lastKey = this.idFormation;
                             }else{
-                                res = req.executeUpdate("INSERT INTO `formation` (`id`, `nom`, `lieu`, `description`, `annee_debut`, `annee_fin`) "
-                                        + "VALUES (NULL, '" + formation + "', '" + lieu + "', '" + description + "', '" + date_debut + "', '" + date_fin + "');", Statement.RETURN_GENERATED_KEYS);
+                                res = req.executeUpdate("INSERT INTO `formation` (`id`, `nom`, `lieu`, `description`, `annee_debut`, `annee_fin`, `id_cv`) "
+                                        + "VALUES (NULL, '" + formation + "', '" + lieu + "', '" + description + "', '" + date_debut + "', '" + date_fin + "', '" + idCV + "');", Statement.RETURN_GENERATED_KEYS);
 
                                 ResultSet rs = req.getGeneratedKeys();
                                 if (rs.next()) {
                                     lastKey = rs.getInt(1);
+                                    this.idFormation = lastKey;
                                 }
                             }
 
@@ -241,10 +245,26 @@ public class Formation extends javax.swing.JPanel {
     public JTextField getjTextFieldNomFormation() {
         return jTextFieldNomFormation;
     }
+
+    public Integer getIdFormation() {
+        return idFormation;
+    }
+
+    public void setIdFormation(Integer idFormation) {
+        this.idFormation = idFormation;
+    }
+
+    public Integer getIdCV() {
+        return idCV;
+    }
+
+    public void setIdCV(Integer idCV) {
+        this.idCV = idCV;
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.karimandco.cv.ClassDate classDate1;
-    private com.karimandco.cv.ClassDate classDate2;
+    private com.karimandco.cv.test.ClassDate classDate1;
+    private com.karimandco.cv.test.ClassDate classDate2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

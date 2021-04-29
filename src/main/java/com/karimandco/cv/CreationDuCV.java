@@ -44,36 +44,6 @@ public class CreationDuCV extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(CreationDuCV.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        formation1.getjButtonValiderFormation().addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                System.out.println("Test clique");
-                jTabbedPaneFormation.addTab("Formation 2", new com.karimandco.cv.Formation());
-                
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-                // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-        });
     }
 
     /**
