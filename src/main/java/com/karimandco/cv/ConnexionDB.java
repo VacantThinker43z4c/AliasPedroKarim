@@ -24,17 +24,17 @@ public class ConnexionDB {
     private String connexionURI = "jdbc:mysql://";
     private Connection connexion;
     
-    private String hostname = "localhost";
-    private Integer port = 3306;
-    private String database = "sio2_cv";
-    private String username = "root";
-    private String password = "totololo";
-    
-//    private String hostname = "www.cnadal.fr";
+//    private String hostname = "localhost";
 //    private Integer port = 3306;
 //    private String database = "sio2_cv";
-//    private String username = "sio2_cv";
-//    private String password = "formation2020";
+//    private String username = "root";
+//    private String password = "totololo";
+    
+    private String hostname = "www.cnadal.fr";
+    private Integer port = 3306;
+    private String database = "sio2_cv";
+    private String username = "sio2_cv";
+    private String password = "formation2020";
     
     public ConnexionDB() {
         initConnexion();

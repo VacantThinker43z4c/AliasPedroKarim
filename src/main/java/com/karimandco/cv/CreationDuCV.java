@@ -6,10 +6,6 @@
 package com.karimandco.cv;
 
 import com.mysql.jdbc.Connection;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -31,6 +27,8 @@ public class CreationDuCV extends javax.swing.JPanel {
     private Connection connexion;
     
     public Integer idUtilisateur;
+    private Integer idTabFormation = 1;
+    private Integer idTabExperiencePro = 1;
 
     /**
      * Creates new form CreationDuCV
@@ -55,21 +53,13 @@ public class CreationDuCV extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
         jLabelTitrePrincipal = new javax.swing.JLabel();
         jLabelTitre = new javax.swing.JLabel();
         jTextFieldTitre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jTabbedPaneFormation = new javax.swing.JTabbedPane();
-        formation1 = new com.karimandco.cv.Formation();
         jLabel4 = new javax.swing.JLabel();
         jTabbedPaneExperiencePro = new javax.swing.JTabbedPane();
-        experiencePro1 = new com.karimandco.cv.ExperiencePro();
         jLabelDescription = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaDescription = new javax.swing.JTextArea();
@@ -93,23 +83,8 @@ public class CreationDuCV extends javax.swing.JPanel {
         jTextField7 = new javax.swing.JTextField();
         jTextField8 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane3.setViewportView(jTable1);
-
-        jScrollPane2.setViewportView(jTextPane1);
-
-        jScrollPane4.setViewportView(jTree1);
+        jButtonValideFormation = new javax.swing.JButton();
+        jButtonValideExperiencePro = new javax.swing.JButton();
 
         jLabelTitrePrincipal.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabelTitrePrincipal.setText("Création de votre CV");
@@ -121,13 +96,9 @@ public class CreationDuCV extends javax.swing.JPanel {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Vos formations");
 
-        jTabbedPaneFormation.addTab("Formation 1", formation1);
-
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Vos exprérience professionnel");
-
-        jTabbedPaneExperiencePro.addTab("Experience 1", experiencePro1);
 
         jLabelDescription.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabelDescription.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -184,6 +155,20 @@ public class CreationDuCV extends javax.swing.JPanel {
             }
         });
 
+        jButtonValideFormation.setText("validé");
+        jButtonValideFormation.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonValideFormationMouseClicked(evt);
+            }
+        });
+
+        jButtonValideExperiencePro.setText("validé");
+        jButtonValideExperiencePro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonValideExperienceProMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -200,13 +185,15 @@ public class CreationDuCV extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTabbedPaneFormation, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+                                    .addComponent(jTabbedPaneFormation, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+                                    .addComponent(jButtonValideFormation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jTabbedPaneExperiencePro, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButtonValideExperiencePro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabelDescription, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -247,7 +234,7 @@ public class CreationDuCV extends javax.swing.JPanel {
                                     .addComponent(jLabelTitrePrincipal)
                                     .addComponent(jLabelTitre)
                                     .addComponent(jTextFieldTitre, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 8, Short.MAX_VALUE)))
+                        .addGap(0, 32, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -265,16 +252,15 @@ public class CreationDuCV extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(jTextFieldTitre, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabelDescription))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabelDescription))
-                                .addGap(617, 617, 617))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(12, 12, 12)
                                 .addComponent(jLabelMaitrise)
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -306,9 +292,15 @@ public class CreationDuCV extends javax.swing.JPanel {
                                 .addGap(13, 13, 13)
                                 .addComponent(jProgressBar4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(6, 6, 6))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTabbedPaneExperiencePro, javax.swing.GroupLayout.PREFERRED_SIZE, 593, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTabbedPaneFormation, javax.swing.GroupLayout.PREFERRED_SIZE, 593, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTabbedPaneFormation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTabbedPaneExperiencePro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButtonValideExperiencePro)
+                                    .addComponent(jButtonValideFormation))
+                                .addGap(60, 60, 60)))
                         .addComponent(jButtonValidationCV, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(7, 7, 7))
         );
@@ -343,9 +335,19 @@ public class CreationDuCV extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextFieldLevelMaitrise1KeyReleased
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        com.karimandco.cv.Formation name = (com.karimandco.cv.Formation) jTabbedPaneFormation.getSelectedComponent();
-        System.out.println(name.getjTextFieldNomFormation().getText());
+//        com.karimandco.cv.Formation name = (com.karimandco.cv.Formation) jTabbedPaneFormation.getSelectedComponent();
+//        System.out.println(name.getjTextFieldNomFormation().getText());
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButtonValideFormationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonValideFormationMouseClicked
+        jTabbedPaneFormation.addTab("Formation " + idTabFormation, new Formation());
+        idTabFormation++;
+    }//GEN-LAST:event_jButtonValideFormationMouseClicked
+
+    private void jButtonValideExperienceProMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonValideExperienceProMouseClicked
+        jTabbedPaneExperiencePro.addTab("Expérience Pro " + idTabExperiencePro, new ExperiencePro());
+        idTabExperiencePro++;
+    }//GEN-LAST:event_jButtonValideExperienceProMouseClicked
 
     /**
      * Permet de créer/insérer les données du cv dans la base de donné cv.
@@ -362,72 +364,97 @@ public class CreationDuCV extends javax.swing.JPanel {
         
         Statement req;
         Integer idExperiencePro = null, idFormation = null, res = null;
-        // Ici, on récupère les id des dernières occurences insérer dans les tables formation et experience pro
-        idExperiencePro = experiencePro1.setEnvoieExperiencePro(update, (update ? (Integer) cv.get(0).get("id_experience_pro") : 0));
-        idFormation = formation1.setEnvoieFormation(update, (update ? (Integer) cv.get(0).get("id_formation") : 0)); // Il manquant une methode ici
         
         try {
             // Ici mettre l'id de l'uilisateur
             List<Map<String, Object>> utilisateur = getUtilisateur(idUtilisateur);
             
             if (utilisateur != null && utilisateur.size() > 0) {
-                if (idExperiencePro != null && idFormation != null) {
+//                if (idExperiencePro != null && idFormation != null) {
+//
+//                } else {
+//                    JOptionPane.showMessageDialog(this, "Atention ! Soit formation ou éxpérience professionnel est mal rempli ou incorrect.");
+//                }
 
-                    String titre = jTextFieldTitre.getText();
-                    if (!titre.equals("")) {
+                String titre = jTextFieldTitre.getText();
+                if (!titre.equals("")) {
 
-                        String description = jTextAreaDescription.getText();
+                    String description = jTextAreaDescription.getText();
 
-                        if (!description.equals("")) {
+                    if (!description.equals("")) {
 
-                            int maitrise = jProgressBar1.getValue();
-                            String nom_maitrise = jTextFieldMaitrise1.getText();
-                            
-                            if(!nom_maitrise.equals("") && !nom_maitrise.equals("Titre de la maitrise")){
-                                
-                                Integer idUtilisateur = (Integer)utilisateur.get(0).get("id");
-                                String signature = utilisateur.get(0).get("nom").toString().toUpperCase() + " " + utilisateur.get(0).get("nom").toString();
+                        int maitrise = jProgressBar1.getValue();
+                        String nom_maitrise = jTextFieldMaitrise1.getText();
 
-                                req = this.connexion.createStatement();
+                        if(!nom_maitrise.equals("") && !nom_maitrise.equals("Titre de la maitrise")){
 
-                                if(update){
-                                    res = req.executeUpdate("UPDATE `cv` SET `titre` = '" + titre + "', `description` = '" + description + "', `nom_maitrise` = '" + nom_maitrise + "',`maitrise` = '" + maitrise + "' WHERE id = " + cv.get(0).get("id"));
-                                }else{
-                                    res = req.executeUpdate("INSERT INTO `cv` (`id`, `titre`, `description`, `signature`, `nom_maitrise`, `maitrise`, `id_utilisateur`, `id_formation`, `id_experience_pro`) "
-                                        + "VALUES (NULL, '" + titre + "', '" + description + "', '" + signature + "', '" + nom_maitrise + "', '" + maitrise + "', '" + idUtilisateur + "', '" + idFormation + "', '" + idExperiencePro + "');");
+                            Integer idUtilisateur = (Integer)utilisateur.get(0).get("id");
+                            String signature = utilisateur.get(0).get("nom").toString().toUpperCase() + " " + utilisateur.get(0).get("nom").toString();
+                            Integer idCV = null;
 
+                            req = this.connexion.createStatement();
+
+                            if(update){
+                                res = req.executeUpdate("UPDATE `cv` SET `titre` = '" + titre + "', `description` = '" + description + "', `nom_maitrise` = '" + nom_maitrise + "',`maitrise` = '" + maitrise + "' WHERE id = " + cv.get(0).get("id"));
+                                idCV = (Integer) cv.get(0).get("id");
+                            }else{
+                                res = req.executeUpdate("INSERT INTO `cv` (`id`, `titre`, `description`, `signature`, `nom_maitrise`, `maitrise`, `id_utilisateur`) "
+                                    + "VALUES (NULL, '" + titre + "', '" + description + "', '" + signature + "', '" + nom_maitrise + "', '" + maitrise + "', '" + idUtilisateur + "');", Statement.RETURN_GENERATED_KEYS);
+
+                                ResultSet rs = req.getGeneratedKeys();
+                                if (rs.next()) {
+                                    // Ici, on récupère les id des dernières occurences insérer dans les tables formation et experience pro
+                                    // idExperiencePro = new ExperiencePro().setEnvoieExperiencePro(rs.getInt(1));
+                                    // idFormation = new Formation().setEnvoieFormation(rs.getInt(1)); // Il manquant une methode ici
+                                    idCV = rs.getInt(1);
                                 }
-                                if (res != null) { 
-                                    JOptionPane.showMessageDialog(this, 
-                                            update ? "Curriculum Vitae a été mise à jour avec succès." : "Curriculum Vitae a été créé avec succès.", 
-                                            update ? "Mise à jour Curriculum Vitae" : "Création Curriculum Vitae", 
-                                            JOptionPane.INFORMATION_MESSAGE);
-                                }else{
-                                    JOptionPane.showMessageDialog(this, "Une erreur a été détecté lors de la création de votre CV veuillez réessayer.\n"
-                                            + "Si le problème persistent veuillez réessayer ultérieurement", "Curriculum Vitae non créé", JOptionPane.WARNING_MESSAGE);
-                                }
-                                
-                            }else {
-                                JOptionPane.showMessageDialog(this, "Veuillez saisir le nom de la catégorie à votre maitrise.");
                             }
 
-                        } else {
-                            JOptionPane.showMessageDialog(this, "Veuillez saisir une description à votre Curriculum Vitae.");
+                            this.sauvegardeToutForamtion(idCV);
+                            this.sauvegardeToutExperiencePro(idCV);
+
+                            if (res != null) { 
+                                JOptionPane.showMessageDialog(this, 
+                                        update ? "Curriculum Vitae a été mise à jour avec succès." : "Curriculum Vitae a été créé avec succès.", 
+                                        update ? "Mise à jour Curriculum Vitae" : "Création Curriculum Vitae", 
+                                        JOptionPane.INFORMATION_MESSAGE);
+                            }else{
+                                JOptionPane.showMessageDialog(this, "Une erreur a été détecté lors de la création de votre CV veuillez réessayer.\n"
+                                        + "Si le problème persistent veuillez réessayer ultérieurement", "Curriculum Vitae non créé", JOptionPane.WARNING_MESSAGE);
+                            }
+
+                        }else {
+                            JOptionPane.showMessageDialog(this, "Veuillez saisir le nom de la catégorie à votre maitrise.");
                         }
 
                     } else {
-                        JOptionPane.showMessageDialog(this, "Il faut impérativement un titre à votre Curriculum Vitae.");
+                        JOptionPane.showMessageDialog(this, "Veuillez saisir une description à votre Curriculum Vitae.");
                     }
 
                 } else {
-                    JOptionPane.showMessageDialog(this, "Atention ! Soit formation ou éxpérience professionnel est mal rempli ou incorrect.");
+                    JOptionPane.showMessageDialog(this, "Il faut impérativement un titre à votre Curriculum Vitae.");
                 }
 
             } else {
-                JOptionPane.showMessageDialog(this, "Veuillez saisir une description à votre Curriculum Vitae.");
+                JOptionPane.showMessageDialog(this, "Vous n'êtes pas un utilisateur valide.");
             }
         } catch (SQLException ex) {
             Logger.getLogger(CreationDuCV.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void sauvegardeToutForamtion(Integer idCV){
+        for (int i = 0; i < jTabbedPaneFormation.getTabCount(); i++){
+            Formation panelFormation = (Formation) jTabbedPaneFormation.getComponentAt(i);
+            panelFormation.setEnvoieFormation(idCV);
+        }
+    }
+    
+    public void sauvegardeToutExperiencePro(Integer ...args){
+        Integer idCV = args[0];
+        for (int i = 0; i < jTabbedPaneExperiencePro.getTabCount(); i++){
+            ExperiencePro panelExperiencePro = (ExperiencePro) jTabbedPaneExperiencePro.getComponentAt(i);
+            panelExperiencePro.setEnvoieExperiencePro(idCV);
         }
     }
 
@@ -436,7 +463,8 @@ public class CreationDuCV extends javax.swing.JPanel {
      * @throws SQLException 
      */
     public void chargerCV() throws SQLException{
-        List<Map<String, Object>> cv = getCV(idUtilisateur);
+        List<Map<String, Object>> cv = getCV(idUtilisateur), formation = getFormation(idUtilisateur), experiencePro = getExperiencePro(idUtilisateur);
+        
         if(cv != null){
             if (cv.size() > 0) {
                 jTextFieldTitre.setText((String) cv.get(0).get("titre"));
@@ -445,29 +473,60 @@ public class CreationDuCV extends javax.swing.JPanel {
                 jTextFieldLevelMaitrise1.setText((String) cv.get(0).get("maitrise"));
                 jTextFieldMaitrise1.setText((String) cv.get(0).get("nom_maitrise"));
 
-                List<Map<String, Object>> formation = getFormation(idUtilisateur);
-                if (formation.size() > 0) {
-                    Map<String, Object> formationData = formation.get(0);
-                    formation1.getjTextFieldNomFormation().setText((String) formationData.get("nom"));
-                    formation1.getjTextFieldAdresseFormation().setText((String) formationData.get("lieu"));
-                    formation1.getjTextAreaDescriptionFormation().setText((String) formationData.get("description"));
-                    formation1.getClassDate1().setText((String) formationData.get("annee_debut").toString());
-                    formation1.getClassDate2().setText((String) formationData.get("annee_fin").toString());
+                if (formation != null && formation.size() > 0) {
+                    
+                    for(int i = 0; i < formation.size(); i++){
+                        Map<String, Object> formationData;
+                        formationData = formation.get(i);
+                        
+                        Formation formation1 = new Formation();
+                        
+                        formation1.setIdFormation((Integer) formationData.get("id"));
+                        formation1.setIdCV((Integer) formationData.get("id_cv"));
+                        formation1.getjTextFieldNomFormation().setText((String) formationData.get("nom"));
+                        formation1.getjTextFieldAdresseFormation().setText((String) formationData.get("lieu"));
+                        formation1.getjTextAreaDescriptionFormation().setText((String) formationData.get("description"));
+                        formation1.getClassDate1().setText((String) formationData.get("annee_debut").toString());
+                        formation1.getClassDate2().setText((String) formationData.get("annee_fin").toString());
+                        
+                        jTabbedPaneFormation.addTab("Formation " + idTabFormation, formation1);
+                        idTabFormation++;
+                    }
                 }
-
-                List<Map<String, Object>> experiencePro = getExperiencePro(idUtilisateur);
-                if (experiencePro.size() > 0) {
-                    Map<String, Object> experienceProData = experiencePro.get(0);
-                    experiencePro1.getjTextFieldNomEntpExpPro().setText((String) experienceProData.get("entreprise"));
-                    experiencePro1.getjTextFieldAdresseExpPro().setText((String) experienceProData.get("adresse"));
-                    experiencePro1.getjTextAreaDescriptionExpPro().setText((String) experienceProData.get("description"));
-                    experiencePro1.getClassDate1().setText((String) experienceProData.get("annee_debut").toString());
-                    experiencePro1.getClassDate2().setText((String) experienceProData.get("annee_fin").toString());
+                
+                if (experiencePro != null && experiencePro.size() > 0) {
+                    for(int j = 0; j < experiencePro.size(); j++){
+                        Map<String, Object> experienceProData;
+                        experienceProData = experiencePro.get(j);
+                        
+                        ExperiencePro experiencePro1 = new ExperiencePro();
+                        
+                        experiencePro1.setIdExperiencePro((Integer) experienceProData.get("id"));
+                        experiencePro1.setIdCV((Integer) experienceProData.get("id_cv"));
+                        experiencePro1.getjTextFieldNomEntpExpPro().setText((String) experienceProData.get("entreprise"));
+                        experiencePro1.getjTextFieldAdresseExpPro().setText((String) experienceProData.get("adresse"));
+                        experiencePro1.getjTextAreaDescriptionExpPro().setText((String) experienceProData.get("description"));
+                        experiencePro1.getClassDate1().setText((String) experienceProData.get("annee_debut").toString());
+                        experiencePro1.getClassDate2().setText((String) experienceProData.get("annee_fin").toString());
+                        
+                        jTabbedPaneExperiencePro.addTab("Expérience Pro " + idTabExperiencePro, experiencePro1);
+                        idTabExperiencePro++;
+                    }
                 }
                 
                 jButtonValidationCV.setText("Mettre à jour le CV");
                 jLabelTitrePrincipal.setText("Mise à jour de votre cv");
             }
+        }
+        
+        if(formation == null || formation.size() == 0){
+            jTabbedPaneFormation.addTab("Formation " + idTabFormation, new Formation());
+            idTabFormation++;
+        }
+        
+        if(experiencePro == null || experiencePro.size() == 0){
+            jTabbedPaneExperiencePro.addTab("Expérience Pro " + idTabExperiencePro, new ExperiencePro());
+            idTabExperiencePro++;
         }
         
     }
@@ -521,7 +580,7 @@ public class CreationDuCV extends javax.swing.JPanel {
         List<Map<String, Object>> cv = getCV(id);
         if(cv != null){
             Statement req = this.connexion.createStatement();
-            ResultSet res = req.executeQuery("SELECT * FROM formation WHERE id = " + cv.get(0).get("id_formation"));
+            ResultSet res = req.executeQuery("SELECT * FROM formation WHERE id_cv = " + cv.get(0).get("id"));
 
             if (res.isBeforeFirst()) {
                 return resultSetToList(res);
@@ -540,7 +599,7 @@ public class CreationDuCV extends javax.swing.JPanel {
         List<Map<String, Object>> cv = getCV(id);
         if(cv != null){
             Statement req = this.connexion.createStatement();
-            ResultSet res = req.executeQuery("SELECT * FROM experience_pro WHERE id = " + cv.get(0).get("id_experience_pro"));
+            ResultSet res = req.executeQuery("SELECT * FROM experience_pro WHERE id_cv = " + cv.get(0).get("id"));
 
             if (res.isBeforeFirst()) {
                 return resultSetToList(res);
@@ -572,10 +631,10 @@ public class CreationDuCV extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.karimandco.cv.ExperiencePro experiencePro1;
-    private com.karimandco.cv.Formation formation1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonValidationCV;
+    private javax.swing.JButton jButtonValideExperiencePro;
+    private javax.swing.JButton jButtonValideFormation;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -592,12 +651,8 @@ public class CreationDuCV extends javax.swing.JPanel {
     private javax.swing.JProgressBar jProgressBar3;
     private javax.swing.JProgressBar jProgressBar4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPaneExperiencePro;
     private javax.swing.JTabbedPane jTabbedPaneFormation;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextAreaDescription;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -608,7 +663,5 @@ public class CreationDuCV extends javax.swing.JPanel {
     private javax.swing.JTextField jTextFieldLevelMaitrise1;
     private javax.swing.JTextField jTextFieldMaitrise1;
     private javax.swing.JTextField jTextFieldTitre;
-    private javax.swing.JTextPane jTextPane1;
-    private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
 }
