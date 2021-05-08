@@ -25,8 +25,7 @@ public class Formation extends javax.swing.JPanel {
     private ConnexionDB connexionDb = new ConnexionDB();
     private Connection connexion;
 
-    private Integer idFormation = null;
-    private Integer idCV = null;
+    private Integer idFormation = null, idCV = null, idTab = null;
     
     /**
      * Creates new form formation
@@ -59,7 +58,7 @@ public class Formation extends javax.swing.JPanel {
         jTextFieldNomFormation = new javax.swing.JTextField();
         classDate1 = new com.karimandco.cv.ClassDate();
         classDate2 = new com.karimandco.cv.ClassDate();
-        jButtonSupprimeExperiencePro = new javax.swing.JButton();
+        jButtonSupprimeFormation = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -94,7 +93,7 @@ public class Formation extends javax.swing.JPanel {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Nom de la formation");
 
-        jButtonSupprimeExperiencePro.setText("x");
+        jButtonSupprimeFormation.setText("x");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -134,7 +133,7 @@ public class Formation extends javax.swing.JPanel {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonSupprimeExperiencePro)
+                .addComponent(jButtonSupprimeFormation)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -168,7 +167,7 @@ public class Formation extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonSupprimeExperiencePro)
+                .addComponent(jButtonSupprimeFormation)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -227,16 +226,17 @@ public class Formation extends javax.swing.JPanel {
                         } catch (SQLException ex) {
                             Logger.getLogger(ExperiencePro.class.getName()).log(Level.SEVERE, null, ex);
                             this.connexion = null;
+                            lastKey = null;
                         }
                     }
                 } else {
-                    JOptionPane.showMessageDialog(this, "L'un de vos dates de période de formation n'est pas valide.");
+                    JOptionPane.showMessageDialog(this, "L'un de vos dates de période de formation n'est pas valide.", "Erreur Formation " + idTab, JOptionPane.ERROR_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Veuillez saisir un lieu valide.");
+                JOptionPane.showMessageDialog(this, "Veuillez saisir un lieu valide.", "Erreur Formation " + idTab, JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Veuillez saisir un nom de formation.");
+            JOptionPane.showMessageDialog(this, "Veuillez saisir un nom de formation.", "Erreur Formation " + idTab, JOptionPane.ERROR_MESSAGE);
         }
         return lastKey;
     }
@@ -276,11 +276,27 @@ public class Formation extends javax.swing.JPanel {
     public void setIdCV(Integer idCV) {
         this.idCV = idCV;
     }
+
+    public Integer getIdTab() {
+        return idTab;
+    }
+
+    public void setIdTab(Integer idTab) {
+        this.idTab = idTab;
+    }
+
+    public JButton getjButtonSupprimeFormation() {
+        return jButtonSupprimeFormation;
+    }
+
+    public void setjButtonSupprimeFormation(JButton jButtonSupprimeFormation) {
+        this.jButtonSupprimeFormation = jButtonSupprimeFormation;
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.karimandco.cv.ClassDate classDate1;
     private com.karimandco.cv.ClassDate classDate2;
-    private javax.swing.JButton jButtonSupprimeExperiencePro;
+    private javax.swing.JButton jButtonSupprimeFormation;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

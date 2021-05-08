@@ -9,8 +9,6 @@ import com.mysql.jdbc.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -27,8 +25,7 @@ public class ExperiencePro extends javax.swing.JPanel {
     private ConnexionDB connexionDb = new ConnexionDB();
     private Connection connexion;
 
-    private Integer idExperiencePro = null;
-    private Integer idCV = null;
+    private Integer idExperiencePro = null, idCV = null, idTab = null;
     
     /**
      * Creates new form experiencePro
@@ -216,16 +213,18 @@ public class ExperiencePro extends javax.swing.JPanel {
                             System.out.println("Dernière id pour Expérience Pro : " + lastKey);
                         } catch (SQLException ex) {
                             Logger.getLogger(ExperiencePro.class.getName()).log(Level.SEVERE, null, ex);
-                            this.connexion = null;                        }
+                            this.connexion = null;
+                            lastKey = null;
+                        }
                     }
                 }else{
-                    JOptionPane.showMessageDialog(this, "L'un de vos dates de période d'expérience pro n'est pas valide.");
+                    JOptionPane.showMessageDialog(this, "L'un de vos dates de période d'expérience pro n'est pas valide.", "Erreur Expérience Pro " + idTab, JOptionPane.ERROR_MESSAGE);
                 }
             }else{
-                JOptionPane.showMessageDialog(this, "Veuillez saisir une adresse valide.");
+                JOptionPane.showMessageDialog(this, "Veuillez saisir une adresse valide.", "Erreur Expérience Pro " + idTab, JOptionPane.ERROR_MESSAGE);
             }
         }else{
-            JOptionPane.showMessageDialog(this, "Veuillez saisir un nom de l'entreprise.");
+            JOptionPane.showMessageDialog(this, "Veuillez saisir un nom de l'entreprise.", "Erreur Expérience Pro " + idTab, JOptionPane.ERROR_MESSAGE);
         }
         
         return lastKey;
@@ -265,6 +264,22 @@ public class ExperiencePro extends javax.swing.JPanel {
 
     public void setIdCV(Integer idCV) {
         this.idCV = idCV;
+    }
+
+    public Integer getIdTab() {
+        return idTab;
+    }
+
+    public void setIdTab(Integer idTab) {
+        this.idTab = idTab;
+    }
+
+    public JButton getjButtonSupprimeExperiencePro() {
+        return jButtonSupprimeExperiencePro;
+    }
+
+    public void setjButtonSupprimeExperiencePro(JButton jButtonSupprimeExperiencePro) {
+        this.jButtonSupprimeExperiencePro = jButtonSupprimeExperiencePro;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

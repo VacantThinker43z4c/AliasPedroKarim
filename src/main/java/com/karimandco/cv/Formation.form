@@ -57,7 +57,7 @@
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="jButtonSupprimeExperiencePro" min="-2" max="-2" attributes="0"/>
+              <Component id="jButtonSupprimeFormation" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -96,7 +96,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane2" min="-2" pref="100" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jButtonSupprimeExperiencePro" min="-2" max="-2" attributes="0"/>
+              <Component id="jButtonSupprimeFormation" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -189,7 +189,7 @@
     </Component>
     <Component class="com.karimandco.cv.ClassDate" name="classDate2">
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonSupprimeExperiencePro">
+    <Component class="javax.swing.JButton" name="jButtonSupprimeFormation">
       <Properties>
         <Property name="text" type="java.lang.String" value="x"/>
       </Properties>
