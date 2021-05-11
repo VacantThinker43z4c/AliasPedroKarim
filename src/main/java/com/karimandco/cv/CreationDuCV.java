@@ -25,9 +25,10 @@ import javax.swing.JOptionPane;
  * @author Sarah
  */
 public class CreationDuCV extends javax.swing.JPanel {
+
     private ConnexionDB connexionDb = new ConnexionDB();
     private Connection connexion;
-    
+
     public Integer idUtilisateur;
     private Integer idTabFormation = 1;
     private Integer idTabExperiencePro = 1;
@@ -39,7 +40,7 @@ public class CreationDuCV extends javax.swing.JPanel {
     public CreationDuCV() {
         initComponents();
         connexion = connexionDb.getConnnexion();
-        idUtilisateur = 1;
+        idUtilisateur = 16;
         try {
             chargerCV();
         } catch (SQLException ex) {
@@ -182,7 +183,7 @@ public class CreationDuCV extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(187, 187, 187)
                 .addComponent(jButtonValidationCV, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 156, Short.MAX_VALUE))
+                .addContainerGap(156, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -309,8 +310,8 @@ public class CreationDuCV extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * 
-     * @param evt 
+     *
+     * @param evt
      */
     private void jButtonValidationCVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonValidationCVMouseClicked
         int reply = JOptionPane.showConfirmDialog(null, "Etes-vous sûr de vouloir enregistrer votre Curriculum Vitae.", "Comfimez l'engistrer", JOptionPane.YES_NO_OPTION);
@@ -322,27 +323,28 @@ public class CreationDuCV extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_jButtonValidationCVMouseClicked
-    
+
     /**
-     * Permet de capturer les évenements touche relaché du champs de saisie Maitrise 1 et rajouter la valeur correspondante dans la progresse bar.
-     * 
-     * @param evt 
+     * Permet de capturer les évenements touche relaché du champs de saisie
+     * Maitrise 1 et rajouter la valeur correspondante dans la progresse bar.
+     *
+     * @param evt
      */
     private void jTextFieldLevelMaitrise1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldLevelMaitrise1KeyReleased
         String value = jTextFieldLevelMaitrise1.getText().equals("") ? "0" : jTextFieldLevelMaitrise1.getText();
-        
-        if(value.matches("[0-9]+")){
-            if(!value.equals("") && Integer.parseInt(value) >= 0 && Integer.parseInt(value) <= 100){
+
+        if (value.matches("[0-9]+")) {
+            if (!value.equals("") && Integer.parseInt(value) >= 0 && Integer.parseInt(value) <= 100) {
                 jProgressBar1.setValue(Integer.parseInt(value));
             }
         }
         System.out.println(jProgressBar1.getValue());
     }//GEN-LAST:event_jTextFieldLevelMaitrise1KeyReleased
-    
+
     /**
      * Méthode permettant de rajouter des formations.
-     * 
-     * @param evt 
+     *
+     * @param evt
      */
     private void jButtonValideFormationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonValideFormationMouseClicked
         jTabbedPaneFormation.addTab("Formation " + idTabFormation, new Formation());
@@ -350,8 +352,8 @@ public class CreationDuCV extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonValideFormationMouseClicked
     /**
      * Méthode permettant de rajouter des expériences pro.
-     * 
-     * @param evt 
+     *
+     * @param evt
      */
     private void jButtonValideExperienceProMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonValideExperienceProMouseClicked
         jTabbedPaneExperiencePro.addTab("Expérience Pro " + idTabExperiencePro, new ExperiencePro());
@@ -360,8 +362,8 @@ public class CreationDuCV extends javax.swing.JPanel {
 
     /**
      * Methode d'événement pour gérer la suppression de cv.
-     * 
-     * @param evt 
+     *
+     * @param evt
      */
     private void jButtonSupprimeCVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSupprimeCVMouseClicked
         int reply = JOptionPane.showConfirmDialog(null, "Etes-vous sûr de vouloir supprimer ce Curriculum Vitae.", "Comfimez la suppression !", JOptionPane.YES_NO_OPTION);
@@ -370,27 +372,26 @@ public class CreationDuCV extends javax.swing.JPanel {
 
             // Ici, il va falloir exécuter la suppression du cv
             // et puis quand ça sera fait on peut supprimé toutes les formations et les expériences pro du CV
-            
             try {
-                if(this.idCV != null){
-                    
+                if (this.idCV != null) {
+
                     boolean okExperiencePro = true;
                     boolean okFormation = true;
-                    for (int i = 0; i < jTabbedPaneExperiencePro.getTabCount(); i++){
+                    for (int i = 0; i < jTabbedPaneExperiencePro.getTabCount(); i++) {
                         ExperiencePro panelExperiencePro = (ExperiencePro) jTabbedPaneExperiencePro.getComponentAt(i);
                         okExperiencePro = this.supprimerExperiencePro(panelExperiencePro.getIdExperiencePro());
                     }
-                    for (int i = 0; i < jTabbedPaneFormation.getTabCount(); i++){
+                    for (int i = 0; i < jTabbedPaneFormation.getTabCount(); i++) {
                         Formation panelFormation = (Formation) jTabbedPaneFormation.getComponentAt(i);
                         okFormation = this.supprimerFormation(panelFormation.getIdFormation());
                     }
 
-                    if(okExperiencePro && okFormation){
-                        if(this.supprimerCV(idCV)){
+                    if (okExperiencePro && okFormation) {
+                        if (this.supprimerCV(idCV)) {
                             this.idCV = null;
                             this.chargerCV();
                             JOptionPane.showMessageDialog(this, "Curriculum Vitae a été supprimé avec succès.", "Curriculum Vitae supprimé", JOptionPane.INFORMATION_MESSAGE);
-                        }else{
+                        } else {
                             JOptionPane.showMessageDialog(CreationDuCV.this, "Erreur ! Curriculum Vitae non supprimé");
                         }
                     }
@@ -407,22 +408,25 @@ public class CreationDuCV extends javax.swing.JPanel {
      * Permet de créer/insérer les données du cv dans la base de donné cv.
      */
     public void createCV() {
-        
+
         boolean update = false;
-        
+
         List<Map<String, Object>> cv = null;
         try {
             cv = getCV(idUtilisateur);
-            if (cv != null && cv.size() > 0) { update = true; }
-        } catch (SQLException ex) { }
-        
+            if (cv != null && cv.size() > 0) {
+                update = true;
+            }
+        } catch (SQLException ex) {
+        }
+
         Statement req;
         Integer res = null;
-        
+
         try {
             // Ici mettre l'id de l'uilisateur
             List<Map<String, Object>> utilisateur = getUtilisateur(idUtilisateur);
-            
+
             if (utilisateur != null && utilisateur.size() > 0) {
                 String titre = jTextFieldTitre.getText();
                 if (!titre.equals("")) {
@@ -434,20 +438,20 @@ public class CreationDuCV extends javax.swing.JPanel {
                         int maitrise = jProgressBar1.getValue();
                         String nom_maitrise = jTextFieldMaitrise1.getText();
 
-                        if(!nom_maitrise.equals("") && !nom_maitrise.equals("Titre de la maitrise")){
+                        if (!nom_maitrise.equals("") && !nom_maitrise.equals("Titre de la maitrise")) {
 
-                            Integer idUtilisateur = (Integer)utilisateur.get(0).get("id");
+                            Integer idUtilisateur = (Integer) utilisateur.get(0).get("id");
                             String signature = utilisateur.get(0).get("nom").toString().toUpperCase() + " " + utilisateur.get(0).get("nom").toString();
                             Integer idCV = null;
 
                             req = this.connexion.createStatement();
 
-                            if(update){
+                            if (update) {
                                 res = req.executeUpdate("UPDATE `cv` SET `titre` = '" + titre + "', `description` = '" + description + "', `nom_maitrise` = '" + nom_maitrise + "',`maitrise` = '" + maitrise + "' WHERE id = " + cv.get(0).get("id"));
                                 idCV = (Integer) cv.get(0).get("id");
-                            }else{
+                            } else {
                                 res = req.executeUpdate("INSERT INTO `cv` (`id`, `titre`, `description`, `signature`, `nom_maitrise`, `maitrise`, `id_utilisateur`) "
-                                    + "VALUES (NULL, '" + titre + "', '" + description + "', '" + signature + "', '" + nom_maitrise + "', '" + maitrise + "', '" + idUtilisateur + "');", Statement.RETURN_GENERATED_KEYS);
+                                        + "VALUES (NULL, '" + titre + "', '" + description + "', '" + signature + "', '" + nom_maitrise + "', '" + maitrise + "', '" + idUtilisateur + "');", Statement.RETURN_GENERATED_KEYS);
 
                                 ResultSet rs = req.getGeneratedKeys();
                                 if (rs.next()) {
@@ -455,19 +459,19 @@ public class CreationDuCV extends javax.swing.JPanel {
                                     // idExperiencePro = new ExperiencePro().setEnvoieExperiencePro(rs.getInt(1));
                                     // idFormation = new Formation().setEnvoieFormation(rs.getInt(1)); // Il manquant une methode ici
                                     idCV = rs.getInt(1);
-                                    
+
                                     // Je récupère l'id du cv lors de ça création et je le stocke dans une variable privé de la class
                                     this.idCV = idCV;
                                 }
                             }
 
                             if (this.sauvegardeToutForamtion(idCV) && this.sauvegardeToutExperiencePro(idCV)) {
-                                if (res != null) { 
-                                    JOptionPane.showMessageDialog(this, 
-                                            update ? "Curriculum Vitae a été mise à jour avec succès." : "Curriculum Vitae a été créé avec succès.", 
-                                            update ? "Mise à jour Curriculum Vitae" : "Création Curriculum Vitae", 
+                                if (res != null) {
+                                    JOptionPane.showMessageDialog(this,
+                                            update ? "Curriculum Vitae a été mise à jour avec succès." : "Curriculum Vitae a été créé avec succès.",
+                                            update ? "Mise à jour Curriculum Vitae" : "Création Curriculum Vitae",
                                             JOptionPane.INFORMATION_MESSAGE);
-                                }else{
+                                } else {
                                     JOptionPane.showMessageDialog(this, "Une erreur a été détecté lors de la création de votre CV veuillez réessayer.\n"
                                             + "Si le problème persistent veuillez réessayer ultérieurement", "Curriculum Vitae non créé", JOptionPane.WARNING_MESSAGE);
                                 }
@@ -475,7 +479,7 @@ public class CreationDuCV extends javax.swing.JPanel {
                                 JOptionPane.showMessageDialog(this, "Une erreur s'est produite lors de l'enregistrement de vos formations ou de vos expérience professionnel.", "Error..", JOptionPane.ERROR_MESSAGE);
                             }
 
-                        }else {
+                        } else {
                             JOptionPane.showMessageDialog(this, "Veuillez saisir le nom de la catégorie à votre maitrise.");
                         }
 
@@ -494,52 +498,62 @@ public class CreationDuCV extends javax.swing.JPanel {
             Logger.getLogger(CreationDuCV.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     /**
-     * Elle permet d'appeler la méthode qui permet d'enregistrer les informations de la formation de chaque panel qui est contenu dans "jTabbedPaneFormation".
-     * Elle renvoie "true" ou "false" si il y a eu une erreur ou pas.
-     * 
+     * Elle permet d'appeler la méthode qui permet d'enregistrer les
+     * informations de la formation de chaque panel qui est contenu dans
+     * "jTabbedPaneFormation". Elle renvoie "true" ou "false" si il y a eu une
+     * erreur ou pas.
+     *
      * @param args
      * @return boolean
      */
-    public boolean sauvegardeToutForamtion(Integer ...args){
+    public boolean sauvegardeToutForamtion(Integer... args) {
         Integer idCV = args[0];
         Boolean erreur = true;
-        for (int i = 0; i < jTabbedPaneFormation.getTabCount(); i++){
+        for (int i = 0; i < jTabbedPaneFormation.getTabCount(); i++) {
             Formation panelFormation = (Formation) jTabbedPaneFormation.getComponentAt(i);
             erreur = panelFormation.setEnvoieFormation(idCV) == null ? false : true;
-            if(erreur){ this.onSupprimeFormation(panelFormation); }
-        }
-        return erreur;
-    }
-    
-    /**
-     * Elle permet d'appeler la méthode qui permet d'enregistrer les informations de l'expérience professionnelle de chaque panel qui est contenu dans "jTabbedPaneExperiencePro".
-     * Elle renvoie "true" ou "false" si il y a eu une erreur ou pas.
-     * 
-     * @param args
-     * @return boolean
-     */
-    public boolean sauvegardeToutExperiencePro(Integer ...args){
-        Integer idCV = args[0];
-        Boolean erreur = true;
-        for (int i = 0; i < jTabbedPaneExperiencePro.getTabCount(); i++){
-            ExperiencePro panelExperiencePro = (ExperiencePro) jTabbedPaneExperiencePro.getComponentAt(i);
-            erreur = panelExperiencePro.setEnvoieExperiencePro(idCV) == null ? false : true;
-            if(erreur){ this.onSupprimeExperiencePro(panelExperiencePro); }
+            if (erreur) {
+                this.onSupprimeFormation(panelFormation);
+            }
         }
         return erreur;
     }
 
     /**
-     * Permet d'auto charger un cv avec tous les formations et toutes les expériences professionnelles, si il en existe un dans la base de donnée.
-     * Cette méthode possède aussi des conditions qui permettent d'initialiser les panels si aucun CV n'a été créé.
-     * 
-     * @throws SQLException 
+     * Elle permet d'appeler la méthode qui permet d'enregistrer les
+     * informations de l'expérience professionnelle de chaque panel qui est
+     * contenu dans "jTabbedPaneExperiencePro". Elle renvoie "true" ou "false"
+     * si il y a eu une erreur ou pas.
+     *
+     * @param args
+     * @return boolean
      */
-    public void chargerCV() throws SQLException{
+    public boolean sauvegardeToutExperiencePro(Integer... args) {
+        Integer idCV = args[0];
+        Boolean erreur = true;
+        for (int i = 0; i < jTabbedPaneExperiencePro.getTabCount(); i++) {
+            ExperiencePro panelExperiencePro = (ExperiencePro) jTabbedPaneExperiencePro.getComponentAt(i);
+            erreur = panelExperiencePro.setEnvoieExperiencePro(idCV) == null ? false : true;
+            if (erreur) {
+                this.onSupprimeExperiencePro(panelExperiencePro);
+            }
+        }
+        return erreur;
+    }
+
+    /**
+     * Permet d'auto charger un cv avec tous les formations et toutes les
+     * expériences professionnelles, si il en existe un dans la base de donnée.
+     * Cette méthode possède aussi des conditions qui permettent d'initialiser
+     * les panels si aucun CV n'a été créé.
+     *
+     * @throws SQLException
+     */
+    public void chargerCV() throws SQLException {
         List<Map<String, Object>> cv = getCV(idUtilisateur), formation = getFormation(idUtilisateur), experiencePro = getExperiencePro(idUtilisateur);
-        
+
         if (cv != null && cv.size() > 0) {
             jTextFieldTitre.setText((String) cv.get(0).get("titre"));
             jTextAreaDescription.setText((String) cv.get(0).get("description"));
@@ -554,7 +568,7 @@ public class CreationDuCV extends javax.swing.JPanel {
             jTabbedPaneExperiencePro.removeAll();
             if (formation != null && formation.size() > 0) {
 
-                for(int i = 0; i < formation.size(); i++){
+                for (int i = 0; i < formation.size(); i++) {
                     Map<String, Object> formationData;
                     formationData = formation.get(i);
 
@@ -577,7 +591,7 @@ public class CreationDuCV extends javax.swing.JPanel {
             }
 
             if (experiencePro != null && experiencePro.size() > 0) {
-                for(int j = 0; j < experiencePro.size(); j++){
+                for (int j = 0; j < experiencePro.size(); j++) {
                     Map<String, Object> experienceProData;
                     experienceProData = experiencePro.get(j);
 
@@ -601,38 +615,37 @@ public class CreationDuCV extends javax.swing.JPanel {
 
             jButtonValidationCV.setText("Mettre à jour le CV");
             jLabelTitrePrincipal.setText("Mise à jour de votre cv");
-        }else if(cv == null || cv.size() == 0){
+        } else if (cv == null || cv.size() == 0) {
             jTabbedPaneFormation.removeAll();
             jTabbedPaneExperiencePro.removeAll();
-            
+
             jTextFieldTitre.setText("");
             jTextAreaDescription.setText("");
             jProgressBar1.setValue(0);
             jTextFieldLevelMaitrise1.setText("Niveau de matrise");
             jTextFieldMaitrise1.setText("Titre de la maitrise");
         }
-        
-        
+
         // ces conditions permettent d'initialiser les panels si aucun CV n'a été créé
-        if(formation == null || formation.size() == 0){
+        if (formation == null || formation.size() == 0) {
             jTabbedPaneFormation.addTab("Formation " + idTabFormation, new Formation());
             idTabFormation++;
         }
-        
-        if(experiencePro == null || experiencePro.size() == 0){
+
+        if (experiencePro == null || experiencePro.size() == 0) {
             jTabbedPaneExperiencePro.addTab("Expérience Pro " + idTabExperiencePro, new ExperiencePro());
             idTabExperiencePro++;
         }
-        
+
     }
-    
+
     /**
-     * Cette méthode permet d'ajouter des événements cliques pour la suppression d'une formation 
-     * et donc permet aussi la suppression des formations.
-     * 
-     * @param formation 
+     * Cette méthode permet d'ajouter des événements cliques pour la suppression
+     * d'une formation et donc permet aussi la suppression des formations.
+     *
+     * @param formation
      */
-    public void onSupprimeFormation(Formation formation){
+    public void onSupprimeFormation(Formation formation) {
         formation.getjButtonSupprimeFormation().addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -640,14 +653,13 @@ public class CreationDuCV extends javax.swing.JPanel {
                 int reply = JOptionPane.showConfirmDialog(null, "Etes-vous sûr de vouloir supprimer la formation n°" + formation.getIdTab() + ".", "Comfimez la suppression !", JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.YES_OPTION) {
                     try {
-                        
+
                         // JUSTE APRES ON RAJOUTE LE CODE SUPPRESSION DES INFORMATIONS DE LA FORMATION
                         // Pour récupèrer l'id de formation c'est -> formation.getIdFormation();
                         // Et pour supprimer le panel de la jTabbedPaneFormation c'est -> jTabbedPaneFormation.remove(formation);
-                        
-                        if(supprimerFormation(formation.getIdFormation())){
+                        if (supprimerFormation(formation.getIdFormation())) {
                             jTabbedPaneFormation.remove(formation);
-                        }else{
+                        } else {
                             JOptionPane.showMessageDialog(CreationDuCV.this, "Bravo ! les pancakes xDD");
                         }
                     } catch (SQLException ex) {
@@ -656,30 +668,35 @@ public class CreationDuCV extends javax.swing.JPanel {
                 } else {
                     // Message si NON
                 }
-                
+
             }
 
             @Override
-            public void mousePressed(MouseEvent e) { }
+            public void mousePressed(MouseEvent e) {
+            }
 
             @Override
-            public void mouseReleased(MouseEvent e) { }
+            public void mouseReleased(MouseEvent e) {
+            }
 
             @Override
-            public void mouseEntered(MouseEvent e) { }
+            public void mouseEntered(MouseEvent e) {
+            }
 
             @Override
-            public void mouseExited(MouseEvent e) { }
+            public void mouseExited(MouseEvent e) {
+            }
         });
     }
-    
+
     /**
-     * Cette méthode permet d'ajouter des événements cliques pour la suppression d'une expérience professionnelle 
-     * et donc permet aussi la suppression des expériences professionnelles.
-     * 
-     * @param experiencePro 
+     * Cette méthode permet d'ajouter des événements cliques pour la suppression
+     * d'une expérience professionnelle et donc permet aussi la suppression des
+     * expériences professionnelles.
+     *
+     * @param experiencePro
      */
-    public void onSupprimeExperiencePro(ExperiencePro experiencePro){
+    public void onSupprimeExperiencePro(ExperiencePro experiencePro) {
         experiencePro.getjButtonSupprimeExperiencePro().addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -687,84 +704,145 @@ public class CreationDuCV extends javax.swing.JPanel {
                 int reply = JOptionPane.showConfirmDialog(null, "Etes-vous sûr de vouloir supprimer l'expérience professionnelle n°" + experiencePro.getIdTab() + ".", "Comfimez la suppression !", JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.YES_OPTION) {
                     try {
-                        
+
                         // JUSTE APRES ON RAJOUTE LE CODE SUPPRESSION DES INFORMATIONS DE LA FORMATION
                         // Pour récupèrer l'id de Exp. Pro c'est -> experiencePro.getIdExperiencePro();
                         // Et pour supprimer le panel de la jTabbedPaneExperiencePro c'est -> jTabbedPaneExperiencePro.remove(experiencePro);
-                        
-                        if(supprimerExperiencePro(experiencePro.getIdExperiencePro())){
+                        if (supprimerExperiencePro(experiencePro.getIdExperiencePro())) {
                             jTabbedPaneExperiencePro.remove(experiencePro);
-                        }else{
+                        } else {
                             JOptionPane.showMessageDialog(CreationDuCV.this, "Bravo ! les pancakes xDD");
                         }
                     } catch (SQLException ex) {
                         Logger.getLogger(CreationDuCV.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    
+
                 } else {
                     // Message si NON
                 }
-                
+
             }
 
             @Override
-            public void mousePressed(MouseEvent e) { }
+            public void mousePressed(MouseEvent e) {
+            }
 
             @Override
-            public void mouseReleased(MouseEvent e) { }
+            public void mouseReleased(MouseEvent e) {
+            }
 
             @Override
-            public void mouseEntered(MouseEvent e) { }
+            public void mouseEntered(MouseEvent e) {
+            }
 
             @Override
-            public void mouseExited(MouseEvent e) { }
+            public void mouseExited(MouseEvent e) {
+            }
         });
     }
-    
-    public boolean supprimerFormation(Integer idFormation) throws SQLException{
+
+    /**
+     * Grâce à l'identifiant de la formation cette méthode est capable de supprimer une formation de la base de donnée.
+     * 
+     * @param idFormation
+     * @return
+     * @throws SQLException 
+     */
+    public boolean supprimerFormation(Integer idFormation) throws SQLException {
         Statement req;
         Integer res;
-        if(idFormation != null){
+        if (idFormation != null) {
             req = this.connexion.createStatement();
             res = req.executeUpdate("DELETE FROM `formation` WHERE id = " + idFormation);
             return res != null ? true : false;
         }
         return false;
     }
-    
-    public boolean supprimerExperiencePro(Integer idExperiencePro) throws SQLException{
+
+    /**
+     * Grâce à l'identifiant de l'expérience professionnelle cette méthode est capable de supprimer une expérience professionnelle de la base de donnée.
+     * 
+     * @param idExperiencePro
+     * @return
+     * @throws SQLException 
+     */
+    public boolean supprimerExperiencePro(Integer idExperiencePro) throws SQLException {
         Statement req;
         Integer res;
-        if(idExperiencePro != null){
+        if (idExperiencePro != null) {
             req = this.connexion.createStatement();
             res = req.executeUpdate("DELETE FROM `experience_pro` WHERE id = " + idExperiencePro);
             return res != null ? true : false;
         }
         return false;
     }
-    
-    public boolean supprimerCV(Integer idCV) throws SQLException{
+
+    /**
+     * Grâce à l'identifiant d'un CV avec cette méthode on peut supprimer un CV de la base de donnée.
+     * 
+     * @param idCV
+     * @return
+     * @throws SQLException 
+     */
+    public boolean supprimerCV(Integer idCV) throws SQLException {
         Statement req;
         Integer res;
-        if(idCV != null){
+        if (idCV != null) {
             req = this.connexion.createStatement();
             res = req.executeUpdate("DELETE FROM `cv` WHERE id = " + idCV);
             return res != null ? true : false;
         }
         return false;
     }
-    
-    // Accesseurs ou mutateurs pour la base de donnée
-    
+
     /**
-     * Permet de récuperer toute les informations d'un utilisateur de puis la base de donnée grace à l'id de l'utilisateur
+     * Cette méthode permet de supprimer tout ce qui concerne le CV donc les formations et les expériences pro, 
+     * mais à ne pas utiliser dans cette classe parce qu'elle n'est pas fonctionnelle pour pouvoir 
+     * utiliser cette fonctionnalité utiliser la class "Helpers"
      * 
+     * @param idUtilisateur
+     * @return
+     * @throws SQLException
+     */
+    public Boolean supprimeToutCV(Integer idUtilisateur) throws SQLException {
+        Boolean ok = true;
+        if (this.connexion != null) {
+            List<Map<String, Object>> cv = getCV(idUtilisateur);
+            for (int i = 0; i < cv.size(); i++) {
+                List<Map<String, Object>> experiencePro = this.getExperiencePro((Integer) cv.get(i).get("id"));
+                if(experiencePro != null){
+                    for (int j = 0; j < experiencePro.size(); j++) {
+                        ok = this.supprimerExperiencePro((Integer) experiencePro.get(j).get("id"));
+                    }
+                }
+                
+                List<Map<String, Object>> formation = this.getFormation((Integer) cv.get(i).get("id"));
+                if(formation != null){
+                    for (int k = 0; k < formation.size(); k++) {
+                        ok = this.supprimerFormation((Integer) formation.get(k).get("id"));
+                    }
+                }
+                if (cv != null && ok) {
+                    ok = this.supprimerCV((Integer) cv.get(i).get("id"));
+                }
+            }
+
+            return ok;
+        }
+        return false;
+    }
+
+    // Accesseurs ou mutateurs pour la base de donnée
+    /**
+     * Permet de récuperer toute les informations d'un utilisateur de puis la
+     * base de donnée grace à l'id de l'utilisateur
+     *
      * @param id
-     * @return 
-     * @throws SQLException 
+     * @return
+     * @throws SQLException
      */
     public List<Map<String, Object>> getUtilisateur(Integer id) throws SQLException {
-        if(this.connexion != null){
+        if (this.connexion != null) {
             Statement req = this.connexion.createStatement();
             ResultSet res = req.executeQuery("SELECT * FROM utilisateurs WHERE id = " + id);
 
@@ -774,16 +852,17 @@ public class CreationDuCV extends javax.swing.JPanel {
         }
         return null;
     }
-    
+
     /**
-     * Permet de récuperer toute les informations d'un cv de puis la base de donnée grace à l'id de l'utilisateur
-     * 
+     * Permet de récuperer toute les informations d'un cv de puis la base de
+     * donnée grace à l'id de l'utilisateur
+     *
      * @param id
-     * @return 
-     * @throws SQLException 
+     * @return
+     * @throws SQLException
      */
     public List<Map<String, Object>> getCV(Integer id) throws SQLException {
-        if(this.connexion != null){
+        if (this.connexion != null) {
             Statement req = this.connexion.createStatement();
             ResultSet res = req.executeQuery("SELECT * FROM cv WHERE id_utilisateur = " + id);
 
@@ -794,17 +873,18 @@ public class CreationDuCV extends javax.swing.JPanel {
         }
         return null;
     }
-    
+
     /**
-     * Permet de récuperer toute les informations d'une formation de puis la base de donnée grace à l'id de l'utilisateur
-     * 
+     * Permet de récuperer toute les informations d'une formation de puis la
+     * base de donnée grace à l'id de l'utilisateur
+     *
      * @param id
-     * @return 
-     * @throws SQLException 
+     * @return
+     * @throws SQLException
      */
     public List<Map<String, Object>> getFormation(Integer id) throws SQLException {
         List<Map<String, Object>> cv = getCV(id);
-        if(cv != null){
+        if (cv != null) {
             Statement req = this.connexion.createStatement();
             ResultSet res = req.executeQuery("SELECT * FROM formation WHERE id_cv = " + cv.get(0).get("id"));
 
@@ -814,17 +894,18 @@ public class CreationDuCV extends javax.swing.JPanel {
         }
         return null;
     }
-    
+
     /**
-     * Permet de récuperer toute les informations d'une Expérience pro de puis la base de donnée grace à l'id de l'utilisateur
-     * 
+     * Permet de récuperer toute les informations d'une Expérience pro de puis
+     * la base de donnée grace à l'id de l'utilisateur
+     *
      * @param id
-     * @return 
-     * @throws SQLException 
+     * @return
+     * @throws SQLException
      */
     public List<Map<String, Object>> getExperiencePro(Integer id) throws SQLException {
         List<Map<String, Object>> cv = getCV(id);
-        if(cv != null){
+        if (cv != null) {
             Statement req = this.connexion.createStatement();
             ResultSet res = req.executeQuery("SELECT * FROM experience_pro WHERE id_cv = " + cv.get(0).get("id"));
 
@@ -834,13 +915,13 @@ public class CreationDuCV extends javax.swing.JPanel {
         }
         return null;
     }
-    
+
     /**
-     * Convertir le ResultSet en une liste de cartes, où chaque carte représente 
+     * Convertir le ResultSet en une liste de cartes, où chaque carte représente
      * une ligne avec columnNames et columValues
      *
      * @param res
-     * @return 
+     * @return
      * @throws SQLException
      */
     private List<Map<String, Object>> resultSetToList(ResultSet res) throws SQLException {
