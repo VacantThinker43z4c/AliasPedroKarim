@@ -141,7 +141,7 @@
               <Component id="jLabelTitre" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jTextFieldTitre" min="-2" pref="41" max="-2" attributes="0"/>
-              <EmptySpace type="separate" pref="68" max="32767" attributes="0"/>
+              <EmptySpace type="separate" pref="36" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -195,7 +195,6 @@
                       <Component id="jTabbedPaneFormation" min="-2" pref="593" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jButtonValidationCV" min="-2" pref="52" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
           </Group>
