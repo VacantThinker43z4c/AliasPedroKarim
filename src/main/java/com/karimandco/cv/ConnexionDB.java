@@ -6,15 +6,10 @@
 package com.karimandco.cv;
 
 import com.mysql.jdbc.Connection;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,6 +24,12 @@ public class ConnexionDB {
     private String connexionURI = "jdbc:mysql://";
     private Connection connexion;
     
+//    private String hostname = "localhost";
+//    private Integer port = 3306;
+//    private String database = "sio2_cv";
+//    private String username = "root";
+//    private String password = "totololo";
+    
     private String hostname = "www.cnadal.fr";
     private Integer port = 3306;
     private String database = "sio2_cv";
@@ -40,7 +41,9 @@ public class ConnexionDB {
     }
     
     public void initConnexion(){
-        this.connexionURI += hostname + ":" + port + "/" + database;
+        if(this.connexionURI.equals("jdbc:mysql://")){
+            this.connexionURI += hostname + ":" + port + "/" + database;
+        }
         try {
             System.out.println(this.connexionURI + " - " + username + " - " + password);
             this.connexion = (Connection)DriverManager.getConnection(this.connexionURI, username, password);
@@ -69,4 +72,18 @@ public class ConnexionDB {
         }
     }
     
+    public Connection reconnect(){
+        if(this.connexion != null){
+            try {
+                ResultSet res = this.connexion.createStatement().executeQuery("SELECT * FROM utilisateurs");
+
+            } catch (SQLException ex) {
+                this.connexion = null;
+                this.initConnexion();
+            }
+            
+            return this.connexion = this.getConnnexion();
+        }
+        return null;
+    }
 }
