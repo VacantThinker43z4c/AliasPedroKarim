@@ -12,9 +12,15 @@
             <version>5.1.48</version>
         </dependency>
         <dependency>
+<<<<<<< HEAD
             <groupId>com.weblookandfeel</groupId>
             <artifactId>weblaf-ui</artifactId>
             <version>1.2.9</version>
+=======
+            <groupId>com.karimandco.admin</groupId>
+            <artifactId>AdministrationProject</artifactId>
+            <version>1.0-SNAPSHOT</version>
+>>>>>>> 71b0d58a0eeb536b2f465c136972f363c33cb101
         </dependency>
     </dependencies>
     <properties>
