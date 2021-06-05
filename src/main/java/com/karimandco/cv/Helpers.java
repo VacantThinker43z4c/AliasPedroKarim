@@ -138,7 +138,15 @@ public class Helpers {
         }
         return false;
     }
-
+    /**
+     * Cette méthode permet de supprimer tout ce qui concerne le CV donc les formations et les expériences pro, 
+     * mais à ne pas utiliser dans cette classe parce qu'elle n'est pas fonctionnelle pour pouvoir 
+     * utiliser cette fonctionnalité utiliser la class "Helpers"
+     * 
+     * @param idUtilisateur
+     * @return
+     * @throws SQLException
+     */
     public Boolean supprimeToutCV(Integer idUtilisateur) throws SQLException {
         Boolean ok = true;
         if (this.connexion != null) {

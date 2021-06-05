@@ -566,6 +566,7 @@ public class CreationDuCV extends javax.swing.JPanel {
 
             jTabbedPaneFormation.removeAll();
             jTabbedPaneExperiencePro.removeAll();
+            
             if (formation != null && formation.size() > 0) {
 
                 for (int i = 0; i < formation.size(); i++) {
@@ -754,6 +755,7 @@ public class CreationDuCV extends javax.swing.JPanel {
         if (idFormation != null) {
             req = this.connexion.createStatement();
             res = req.executeUpdate("DELETE FROM `formation` WHERE id = " + idFormation);
+            // Ternaire java à voir sur internet
             return res != null ? true : false;
         }
         return false;
@@ -791,43 +793,6 @@ public class CreationDuCV extends javax.swing.JPanel {
             req = this.connexion.createStatement();
             res = req.executeUpdate("DELETE FROM `cv` WHERE id = " + idCV);
             return res != null ? true : false;
-        }
-        return false;
-    }
-
-    /**
-     * Cette méthode permet de supprimer tout ce qui concerne le CV donc les formations et les expériences pro, 
-     * mais à ne pas utiliser dans cette classe parce qu'elle n'est pas fonctionnelle pour pouvoir 
-     * utiliser cette fonctionnalité utiliser la class "Helpers"
-     * 
-     * @param idUtilisateur
-     * @return
-     * @throws SQLException
-     */
-    public Boolean supprimeToutCV(Integer idUtilisateur) throws SQLException {
-        Boolean ok = true;
-        if (this.connexion != null) {
-            List<Map<String, Object>> cv = getCV(idUtilisateur);
-            for (int i = 0; i < cv.size(); i++) {
-                List<Map<String, Object>> experiencePro = this.getExperiencePro((Integer) cv.get(i).get("id"));
-                if(experiencePro != null){
-                    for (int j = 0; j < experiencePro.size(); j++) {
-                        ok = this.supprimerExperiencePro((Integer) experiencePro.get(j).get("id"));
-                    }
-                }
-                
-                List<Map<String, Object>> formation = this.getFormation((Integer) cv.get(i).get("id"));
-                if(formation != null){
-                    for (int k = 0; k < formation.size(); k++) {
-                        ok = this.supprimerFormation((Integer) formation.get(k).get("id"));
-                    }
-                }
-                if (cv != null && ok) {
-                    ok = this.supprimerCV((Integer) cv.get(i).get("id"));
-                }
-            }
-
-            return ok;
         }
         return false;
     }
