@@ -23,7 +23,8 @@ Le composant est capable de :
 _Pour ce qui concerne les dépendance voir le fichier `pom.xml`_
 
 #### Documentation
-_La JavaDoc est disponible dans le dossier `javadoc`_
+_La JavaDoc est disponible dans le dossier `docs` mais aussi [javadoc](https://aliaspedrokarim.github.io/KarimAndCo_Composant4/)_
+_Une documentation utilisateur est aussi disponible [ici](https://docs.google.com/document/d/1v6MzYAcXDMMQzYLZLa2klrXSc6LA4_zX15RLvXv4bb8/edit)_
 
 #### Fonction importante
 Convertir le ResultSet en une liste de cartes, où chaque carte représenteune ligne avec columnNames et columValues
