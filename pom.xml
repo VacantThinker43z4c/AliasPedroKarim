@@ -2,8 +2,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.karimandco</groupId>
-    <artifactId>Developpement_de_composants04</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>karimandco_composants04</artifactId>
+    <version>1.1.0</version>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
@@ -22,4 +22,6 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
+    <name>Developpement de composants04</name>
+    <description>Dans le cadre de création d’un logiciel de gestion de curriculum vitae, ce projet où est le composant numéro 4 de ce projet. On pourrait dire que ce composant est l’un des composants principal du projet puisque ce composant a pour but de pouvoir gérer, créer, mettre à jour et surtout supprimer le curriculum vitae, avec tous ses contenus, donc ça concerne des formations et les expériences professionnelles.</description>
 </project>

@@ -1,4 +1,9 @@
 <img src="https://res.cloudinary.com/teepublic/image/private/s--3irQSqys--/t_Preview/b_rgb:191919,c_limit,f_jpg,h_630,q_90,w_630/v1511111763/production/designs/2076522_0.jpg" width="100"></img>
+<p align="center">
+
+![https://github.com/AliasPedroKarim/KarimAndCo_Composant4/releases](https://img.shields.io/badge/stable-1.1.0-success)  ![https://github.com/AliasPedroKarim/KarimAndCo_Composant4/releases](https://img.shields.io/github/downloads/aliaspedrokarim/KarimAndCo_Composant4/total) ![https://github.com/AliasPedroKarim/KarimAndCo_Composant4/graphs/contributors](https://img.shields.io/github/contributors/aliaspedrokarim/KarimAndCo_Composant4) [![HitCount](http://hits.dwyl.io/AliasPedroKarim/AliasPedroKarim/KarimAndCo_Composant4.svg)](http://hits.dwyl.io/AliasPedroKarim/AliasPedroKarim/KarimAndCo_Composant4)
+
+</p>
 
 ### Project Karim and Co - Composant 4
 ---
@@ -22,8 +27,14 @@ Le composant est capable de :
 #### Dépendance
 _Pour ce qui concerne les dépendance voir le fichier `pom.xml`_
 
+<p align="center">
+
+[![Generic badge](https://img.shields.io/badge/weblaf-v1.2.9-success)](https://github.com/mgarin/weblaf) [![Generic badge](https://img.shields.io/badge/mysql--connector--j-v5.1.48-success)](https://github.com/mysql/mysql-connector-j)
+
+</p>
+
 #### Documentation
-_La JavaDoc est disponible dans le dossier `docs` mais aussi [javadoc](https://aliaspedrokarim.github.io/KarimAndCo_Composant4/)_  
+_La JavaDoc est disponible dans le dossier `docs` mais aussi [javadoc](https://aliaspedrokarim.github.io/KarimAndCo_Composant4/)_
 _Une documentation utilisateur est aussi disponible [ici](https://docs.google.com/document/d/1v6MzYAcXDMMQzYLZLa2klrXSc6LA4_zX15RLvXv4bb8/edit)_
 
 #### Fonction importante
@@ -73,3 +84,5 @@ List<Map<String, Object>> cv = getCV(id)cv.get(0).get("id");
 
 #### Crédit
 Lycée jean lurçat
+
+[![forthebadge made-with-java]( https://forthebadge.com/images/badges/made-with-java.svg )](https://www.python.org/)
