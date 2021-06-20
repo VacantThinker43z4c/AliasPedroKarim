@@ -22,9 +22,6 @@ import javax.swing.JTextField;
  */
 public class Formation extends javax.swing.JPanel {
 
-    private ConnexionDB connexionDb = new ConnexionDB();
-    private Connection connexion;
-
     private Integer idFormation = null, idCV = null, idTab = null;
     
     /**
@@ -32,7 +29,6 @@ public class Formation extends javax.swing.JPanel {
      */
     public Formation() {
         initComponents();
-        connexion = connexionDb.getConnnexion();
     }
 
     /**
@@ -180,8 +176,6 @@ public class Formation extends javax.swing.JPanel {
      * @return Integer | null
      */
     public Integer setEnvoieFormation(Object...args) {
-        this.connexion = this.connexionDb.reconnect();
-        Statement req;
         Integer res, lastKey = null;
         
         Integer idCV = (Integer) args[0];
@@ -202,30 +196,24 @@ public class Formation extends javax.swing.JPanel {
 
                     String description = jTextAreaDescriptionFormation.getText();
 
-                    if (this.connexion != null) {
+                    if (DaoSIO.getInstance() != null) {
                         try {
-                            req = this.connexion.createStatement();
-                            
                             if(this.idFormation != null){
-                                res = req.executeUpdate("UPDATE `formation` "
+                                res = DaoSIO.getInstance().requeteAction("UPDATE `formation` "
                                         + "SET `nom` = '" + formation + "', `lieu` = '" + lieu + "', `description` = '" + description + "', `annee_debut` = '" + date_debut + "', `annee_fin` = '" + date_fin + "' "
                                         + "WHERE id = " + this.idFormation);
                                 lastKey = this.idFormation;
                             }else{
-                                res = req.executeUpdate("INSERT INTO `formation` (`id`, `nom`, `lieu`, `description`, `annee_debut`, `annee_fin`, `id_cv`) "
-                                        + "VALUES (NULL, '" + formation + "', '" + lieu + "', '" + description + "', '" + date_debut + "', '" + date_fin + "', '" + idCV + "');", Statement.RETURN_GENERATED_KEYS);
+                                res = DaoSIO.getInstance().requeteAction("INSERT INTO `formation` (`id`, `nom`, `lieu`, `description`, `annee_debut`, `annee_fin`, `id_cv`) "
+                                        + "VALUES (NULL, '" + formation + "', '" + lieu + "', '" + description + "', '" + date_debut + "', '" + date_fin + "', '" + idCV + "');");
 
-                                ResultSet rs = req.getGeneratedKeys();
-                                if (rs.next()) {
-                                    lastKey = rs.getInt(1);
-                                    this.idFormation = lastKey;
-                                }
+                                lastKey = DaoSIO.getInstance().getLastID("formation", "id");
+                                this.idFormation = lastKey;
                             }
 
                             System.out.println("Dernière id pour Formation : " + lastKey);
                         } catch (SQLException ex) {
                             Logger.getLogger(ExperiencePro.class.getName()).log(Level.SEVERE, null, ex);
-                            this.connexion = null;
                             lastKey = null;
                         }
                     }

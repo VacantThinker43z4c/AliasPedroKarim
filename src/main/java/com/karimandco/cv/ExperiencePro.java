@@ -22,8 +22,6 @@ import javax.swing.JTextField;
  */
 public class ExperiencePro extends javax.swing.JPanel {
     
-    private ConnexionDB connexionDb = new ConnexionDB();
-    private Connection connexion;
 
     private Integer idExperiencePro = null, idCV = null, idTab = null;
     
@@ -32,7 +30,6 @@ public class ExperiencePro extends javax.swing.JPanel {
      */
     public ExperiencePro() {
         initComponents();
-        connexion = connexionDb.getConnnexion();
     }
 
     /**
@@ -168,8 +165,6 @@ public class ExperiencePro extends javax.swing.JPanel {
      * @return Integer
      */
     public Integer setEnvoieExperiencePro(Object...args){
-        this.connexion = this.connexionDb.reconnect();
-        Statement req = null;
         Integer res, lastKey = null;
         
         Integer idCV = (Integer) args[0];
@@ -190,30 +185,24 @@ public class ExperiencePro extends javax.swing.JPanel {
                     
                     String description = jTextAreaDescriptionExpPro.getText();
                     
-                    if(this.connexion != null){
+                    if(DaoSIO.getInstance() != null){
                         try {
-                            req = this.connexion.createStatement();
-                            
                             if(this.idExperiencePro != null){
-                                res = req.executeUpdate("UPDATE `experience_pro` "
+                                res = DaoSIO.getInstance().requeteAction("UPDATE `experience_pro` "
                                         + "SET `entreprise` = '" + entreprise + "', `adresse` = '" + adresse + "', `description` = '" + description + "', `annee_debut` = '" + date_debut + "', `annee_fin` = '" + date_fin + "' "
                                         + "WHERE id = " + this.idExperiencePro);
                                 lastKey = this.idExperiencePro;
                             }else{
-                                res = req.executeUpdate("INSERT INTO `experience_pro` (`id`, `entreprise`, `adresse`, `description`, `annee_debut`, `annee_fin`, `id_cv`) "
-                                        + "VALUES (NULL, '" + entreprise + "', '" + adresse + "', '" + description + "', '" + date_debut + "', '" + date_fin + "', '" + idCV + "');", Statement.RETURN_GENERATED_KEYS);
+                                res = DaoSIO.getInstance().requeteAction("INSERT INTO `experience_pro` (`id`, `entreprise`, `adresse`, `description`, `annee_debut`, `annee_fin`, `id_cv`) "
+                                        + "VALUES (NULL, '" + entreprise + "', '" + adresse + "', '" + description + "', '" + date_debut + "', '" + date_fin + "', '" + idCV + "');");
                                 // Pour récupérer le dernière id de l'element 
-                                ResultSet rs = req.getGeneratedKeys();
-                                if (rs.next()){ 
-                                    lastKey = rs.getInt(1); 
-                                    this.idExperiencePro = lastKey;
-                                }
+                                lastKey = DaoSIO.getInstance().getLastID("experience_pro", "id"); 
+                                this.idExperiencePro = lastKey;
                             }
                             
                             System.out.println("Dernière id pour Expérience Pro : " + lastKey);
                         } catch (SQLException ex) {
                             Logger.getLogger(ExperiencePro.class.getName()).log(Level.SEVERE, null, ex);
-                            this.connexion = null;
                             lastKey = null;
                         }
                     }

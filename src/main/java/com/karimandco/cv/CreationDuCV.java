@@ -40,7 +40,7 @@ public class CreationDuCV extends javax.swing.JPanel {
     public CreationDuCV() {
         initComponents();
         connexion = connexionDb.getConnnexion();
-        idUtilisateur = 16;
+        idUtilisateur = 107;
         try {
             chargerCV();
         } catch (SQLException ex) {
@@ -347,7 +347,9 @@ public class CreationDuCV extends javax.swing.JPanel {
      * @param evt
      */
     private void jButtonValideFormationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonValideFormationMouseClicked
-        jTabbedPaneFormation.addTab("Formation " + idTabFormation, new Formation());
+        Formation formation = new Formation();
+        jTabbedPaneFormation.addTab("Formation " + idTabFormation, formation);
+        this.onSupprimeFormation(formation);
         idTabFormation++;
     }//GEN-LAST:event_jButtonValideFormationMouseClicked
     /**
@@ -356,7 +358,9 @@ public class CreationDuCV extends javax.swing.JPanel {
      * @param evt
      */
     private void jButtonValideExperienceProMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonValideExperienceProMouseClicked
-        jTabbedPaneExperiencePro.addTab("Expérience Pro " + idTabExperiencePro, new ExperiencePro());
+        ExperiencePro experiencePro = new ExperiencePro();
+        jTabbedPaneExperiencePro.addTab("Expérience Pro " + idTabExperiencePro, experiencePro);
+        this.onSupprimeExperiencePro(experiencePro);
         idTabExperiencePro++;
     }//GEN-LAST:event_jButtonValideExperienceProMouseClicked
 
@@ -447,22 +451,20 @@ public class CreationDuCV extends javax.swing.JPanel {
                             req = this.connexion.createStatement();
 
                             if (update) {
-                                res = req.executeUpdate("UPDATE `cv` SET `titre` = '" + titre + "', `description` = '" + description + "', `nom_maitrise` = '" + nom_maitrise + "',`maitrise` = '" + maitrise + "' WHERE id = " + cv.get(0).get("id"));
+                                res = DaoSIO
+                                        .getInstance()
+                                        .requeteAction("UPDATE `cv` SET `titre` = '" + titre + "', `description` = '" + description + "', `nom_maitrise` = '" + nom_maitrise + "',`maitrise` = '" + maitrise + "' WHERE id = " + cv.get(0).get("id"));
+                                
                                 idCV = (Integer) cv.get(0).get("id");
                             } else {
-                                res = req.executeUpdate("INSERT INTO `cv` (`id`, `titre`, `description`, `signature`, `nom_maitrise`, `maitrise`, `id_utilisateur`) "
-                                        + "VALUES (NULL, '" + titre + "', '" + description + "', '" + signature + "', '" + nom_maitrise + "', '" + maitrise + "', '" + idUtilisateur + "');", Statement.RETURN_GENERATED_KEYS);
+                                    res = DaoSIO.getInstance().requeteAction("INSERT INTO `cv` (`id`, `titre`, `description`, `signature`, `nom_maitrise`, `maitrise`, `id_utilisateur`) "
+                                        + "VALUES (NULL, '" + titre + "', '" + description + "', '" + signature + "', '" + nom_maitrise + "', '" + maitrise + "', '" + idUtilisateur + "');");
 
-                                ResultSet rs = req.getGeneratedKeys();
-                                if (rs.next()) {
-                                    // Ici, on récupère les id des dernières occurences insérer dans les tables formation et experience pro
-                                    // idExperiencePro = new ExperiencePro().setEnvoieExperiencePro(rs.getInt(1));
-                                    // idFormation = new Formation().setEnvoieFormation(rs.getInt(1)); // Il manquant une methode ici
-                                    idCV = rs.getInt(1);
+                                    // Ici, on récupère le id du dernière occurences insérer dans la table cv
+                                    idCV =  DaoSIO.getInstance().getLastID("cv", "id");
 
                                     // Je récupère l'id du cv lors de ça création et je le stocke dans une variable privé de la class
                                     this.idCV = idCV;
-                                }
                             }
 
                             if (this.sauvegardeToutForamtion(idCV) && this.sauvegardeToutExperiencePro(idCV)) {
@@ -661,6 +663,7 @@ public class CreationDuCV extends javax.swing.JPanel {
                         if (supprimerFormation(formation.getIdFormation())) {
                             jTabbedPaneFormation.remove(formation);
                         } else {
+                            jTabbedPaneFormation.remove(formation);
                             JOptionPane.showMessageDialog(CreationDuCV.this, "Bravo ! les pancakes xDD");
                         }
                     } catch (SQLException ex) {
@@ -712,6 +715,7 @@ public class CreationDuCV extends javax.swing.JPanel {
                         if (supprimerExperiencePro(experiencePro.getIdExperiencePro())) {
                             jTabbedPaneExperiencePro.remove(experiencePro);
                         } else {
+                            jTabbedPaneExperiencePro.remove(experiencePro);
                             JOptionPane.showMessageDialog(CreationDuCV.this, "Bravo ! les pancakes xDD");
                         }
                     } catch (SQLException ex) {
@@ -750,11 +754,9 @@ public class CreationDuCV extends javax.swing.JPanel {
      * @throws SQLException 
      */
     public boolean supprimerFormation(Integer idFormation) throws SQLException {
-        Statement req;
         Integer res;
         if (idFormation != null) {
-            req = this.connexion.createStatement();
-            res = req.executeUpdate("DELETE FROM `formation` WHERE id = " + idFormation);
+            res = DaoSIO.getInstance().requeteAction("DELETE FROM `formation` WHERE id = " + idFormation);
             // Ternaire java à voir sur internet
             return res != null ? true : false;
         }
@@ -769,11 +771,9 @@ public class CreationDuCV extends javax.swing.JPanel {
      * @throws SQLException 
      */
     public boolean supprimerExperiencePro(Integer idExperiencePro) throws SQLException {
-        Statement req;
         Integer res;
         if (idExperiencePro != null) {
-            req = this.connexion.createStatement();
-            res = req.executeUpdate("DELETE FROM `experience_pro` WHERE id = " + idExperiencePro);
+            res = DaoSIO.getInstance().requeteAction("DELETE FROM `experience_pro` WHERE id = " + idExperiencePro);
             return res != null ? true : false;
         }
         return false;
@@ -787,11 +787,9 @@ public class CreationDuCV extends javax.swing.JPanel {
      * @throws SQLException 
      */
     public boolean supprimerCV(Integer idCV) throws SQLException {
-        Statement req;
         Integer res;
         if (idCV != null) {
-            req = this.connexion.createStatement();
-            res = req.executeUpdate("DELETE FROM `cv` WHERE id = " + idCV);
+            res = DaoSIO.getInstance().requeteAction("DELETE FROM `cv` WHERE id = " + idCV);
             return res != null ? true : false;
         }
         return false;
@@ -808,8 +806,7 @@ public class CreationDuCV extends javax.swing.JPanel {
      */
     public List<Map<String, Object>> getUtilisateur(Integer id) throws SQLException {
         if (this.connexion != null) {
-            Statement req = this.connexion.createStatement();
-            ResultSet res = req.executeQuery("SELECT * FROM utilisateurs WHERE id = " + id);
+            ResultSet res = DaoSIO.getInstance().requeteSelection("SELECT * FROM utilisateurs WHERE id = " + id);
 
             if (res.isBeforeFirst()) {
                 return resultSetToList(res);
@@ -828,8 +825,7 @@ public class CreationDuCV extends javax.swing.JPanel {
      */
     public List<Map<String, Object>> getCV(Integer id) throws SQLException {
         if (this.connexion != null) {
-            Statement req = this.connexion.createStatement();
-            ResultSet res = req.executeQuery("SELECT * FROM cv WHERE id_utilisateur = " + id);
+            ResultSet res = DaoSIO.getInstance().requeteSelection("SELECT * FROM cv WHERE id_utilisateur = " + id);
 
             if (res.isBeforeFirst()) {
                 return resultSetToList(res);
@@ -850,8 +846,7 @@ public class CreationDuCV extends javax.swing.JPanel {
     public List<Map<String, Object>> getFormation(Integer id) throws SQLException {
         List<Map<String, Object>> cv = getCV(id);
         if (cv != null) {
-            Statement req = this.connexion.createStatement();
-            ResultSet res = req.executeQuery("SELECT * FROM formation WHERE id_cv = " + cv.get(0).get("id"));
+            ResultSet res = DaoSIO.getInstance().requeteSelection("SELECT * FROM formation WHERE id_cv = " + cv.get(0).get("id"));
 
             if (res.isBeforeFirst()) {
                 return resultSetToList(res);
@@ -871,8 +866,7 @@ public class CreationDuCV extends javax.swing.JPanel {
     public List<Map<String, Object>> getExperiencePro(Integer id) throws SQLException {
         List<Map<String, Object>> cv = getCV(id);
         if (cv != null) {
-            Statement req = this.connexion.createStatement();
-            ResultSet res = req.executeQuery("SELECT * FROM experience_pro WHERE id_cv = " + cv.get(0).get("id"));
+            ResultSet res = DaoSIO.getInstance().requeteSelection("SELECT * FROM experience_pro WHERE id_cv = " + cv.get(0).get("id"));
 
             if (res.isBeforeFirst()) {
                 return resultSetToList(res);
