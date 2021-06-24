@@ -25,10 +25,7 @@ import javax.swing.JOptionPane;
  * @author Sarah
  */
 public class CreationDuCV extends javax.swing.JPanel {
-
-    private ConnexionDB connexionDb = new ConnexionDB();
-    private Connection connexion;
-
+    
     public Integer idUtilisateur;
     private Integer idTabFormation = 1;
     private Integer idTabExperiencePro = 1;
@@ -39,7 +36,6 @@ public class CreationDuCV extends javax.swing.JPanel {
      */
     public CreationDuCV() {
         initComponents();
-        connexion = connexionDb.getConnnexion();
         idUtilisateur = 107;
         try {
             chargerCV();
@@ -70,26 +66,19 @@ public class CreationDuCV extends javax.swing.JPanel {
         jButtonValidationCV = new javax.swing.JButton();
         jLabelMaitrise = new javax.swing.JLabel();
         jProgressBar1 = new javax.swing.JProgressBar();
-        jProgressBar2 = new javax.swing.JProgressBar();
         jLabel2 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jProgressBar3 = new javax.swing.JProgressBar();
-        jLabel7 = new javax.swing.JLabel();
-        jProgressBar4 = new javax.swing.JProgressBar();
         jTextFieldMaitrise1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
         jTextFieldLevelMaitrise1 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
         jButtonValideFormation = new javax.swing.JButton();
         jButtonValideExperiencePro = new javax.swing.JButton();
         jButtonSupprimeCV = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jTextFieldMaitrise2 = new javax.swing.JTextField();
+        jTextFieldLevelMaitrise2 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jProgressBar2 = new javax.swing.JProgressBar();
+        jLabel6 = new javax.swing.JLabel();
 
         jLabelTitrePrincipal.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabelTitrePrincipal.setText("Création de votre CV");
@@ -126,32 +115,14 @@ public class CreationDuCV extends javax.swing.JPanel {
 
         jLabel2.setText("Maitrise 1  :");
 
-        jLabel5.setText("Maitrise 2 :");
-
-        jLabel6.setText("Maitrise 3 :");
-
-        jLabel7.setText("Maitrise 4 :");
-
         jTextFieldMaitrise1.setText("Titre de la maitrise");
 
-        jTextField2.setText("Titre de la maitrise");
-
-        jTextField3.setText("Titre de la maitrise");
-
-        jTextField4.setText("Titre de la maitrise");
-
-        jTextFieldLevelMaitrise1.setText("Niveau");
+        jTextFieldLevelMaitrise1.setText("Niveau (%)");
         jTextFieldLevelMaitrise1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextFieldLevelMaitrise1KeyReleased(evt);
             }
         });
-
-        jTextField6.setText("Niveau de maitrise");
-
-        jTextField7.setText("Niveau de maitrise");
-
-        jTextField8.setText("Niveau de maitrise");
 
         jButtonValideFormation.setText("validé");
         jButtonValideFormation.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -176,6 +147,19 @@ public class CreationDuCV extends javax.swing.JPanel {
 
         jLabel1.setText("%");
 
+        jTextFieldMaitrise2.setText("Titre de la maitrise");
+
+        jTextFieldLevelMaitrise2.setText("Niveau (%)");
+        jTextFieldLevelMaitrise2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldLevelMaitrise2KeyReleased(evt);
+            }
+        });
+
+        jLabel5.setText("%");
+
+        jLabel6.setText("Maitrise 1  :");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -183,7 +167,7 @@ public class CreationDuCV extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(187, 187, 187)
                 .addComponent(jButtonValidationCV, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(160, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -195,54 +179,47 @@ public class CreationDuCV extends javax.swing.JPanel {
                     .addComponent(jTabbedPaneExperiencePro, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonValideExperiencePro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelDescription, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jProgressBar2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField7))
-                    .addComponent(jProgressBar3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField8))
-                    .addComponent(jProgressBar4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelMaitrise, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(15, 15, 15)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelMaitrise, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextFieldMaitrise1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextFieldMaitrise1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)
+                                .addComponent(jTextFieldLevelMaitrise1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldLevelMaitrise1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(232, 232, 232)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabelTitrePrincipal)
                     .addComponent(jLabelTitre)
                     .addComponent(jTextFieldTitre, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 194, Short.MAX_VALUE)
                 .addComponent(jButtonSupprimeCV))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jProgressBar2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextFieldMaitrise2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(jTextFieldLevelMaitrise2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,7 +232,7 @@ public class CreationDuCV extends javax.swing.JPanel {
                 .addComponent(jLabelTitre)
                 .addGap(18, 18, 18)
                 .addComponent(jTextFieldTitre, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel3)
@@ -264,39 +241,17 @@ public class CreationDuCV extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabelMaitrise)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jTextFieldMaitrise1)
-                            .addComponent(jTextFieldLevelMaitrise1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldLevelMaitrise1)
                             .addComponent(jLabel8)
-                            .addComponent(jLabel1))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(12, 12, 12)
-                        .addComponent(jProgressBar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(13, 13, 13)
-                        .addComponent(jProgressBar4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6))
+                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTabbedPaneFormation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -304,8 +259,16 @@ public class CreationDuCV extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButtonValideExperiencePro)
-                            .addComponent(jButtonValideFormation))
-                        .addGap(60, 60, 60)))
+                            .addComponent(jButtonValideFormation))))
+                .addGap(0, 0, 0)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jTextFieldMaitrise2)
+                    .addComponent(jTextFieldLevelMaitrise2)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jButtonValidationCV, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(7, 7, 7))
         );
@@ -318,7 +281,6 @@ public class CreationDuCV extends javax.swing.JPanel {
     private void jButtonValidationCVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonValidationCVMouseClicked
         int reply = JOptionPane.showConfirmDialog(null, "Etes-vous sûr de vouloir enregistrer votre Curriculum Vitae.", "Comfimez l'engistrer", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
-            this.connexion = this.connexionDb.reconnect();
             createCV();
         } else {
             // Message si NON
@@ -410,6 +372,10 @@ public class CreationDuCV extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButtonSupprimeCVMouseClicked
 
+    private void jTextFieldLevelMaitrise2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldLevelMaitrise2KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldLevelMaitrise2KeyReleased
+
     /**
      * Permet de créer/insérer les données du cv dans la base de donné cv.
      */
@@ -426,7 +392,6 @@ public class CreationDuCV extends javax.swing.JPanel {
         } catch (SQLException ex) {
         }
 
-        Statement req;
         Integer res = null;
 
         try {
@@ -450,8 +415,6 @@ public class CreationDuCV extends javax.swing.JPanel {
                             String signature = utilisateur.get(0).get("nom").toString().toUpperCase() + " " + utilisateur.get(0).get("nom").toString();
                             Integer idCV = null;
 
-                            req = this.connexion.createStatement();
-
                             if (update) {
                                 res = DaoSIO
                                         .getInstance()
@@ -459,8 +422,10 @@ public class CreationDuCV extends javax.swing.JPanel {
                                 
                                 idCV = (Integer) cv.get(0).get("id");
                             } else {
-                                    res = DaoSIO.getInstance().requeteAction("INSERT INTO `cv` (`id`, `titre`, `description`, `signature`, `nom_maitrise`, `maitrise`, `id_utilisateur`) "
-                                        + "VALUES (NULL, '" + titre + "', '" + description + "', '" + signature + "', '" + nom_maitrise + "', '" + maitrise + "', '" + idUtilisateur + "');");
+                                    res = DaoSIO
+                                            .getInstance()
+                                            .requeteAction("INSERT INTO `cv` (`id`, `titre`, `description`, `signature`, `nom_maitrise`, `maitrise`, `id_utilisateur`) "
+                                                + "VALUES (NULL, '" + titre + "', '" + description + "', '" + signature + "', '" + nom_maitrise + "', '" + maitrise + "', '" + idUtilisateur + "');");
 
                                     // Ici, on récupère le id du dernière occurences insérer dans la table cv
                                     idCV =  DaoSIO.getInstance().getLastID("cv", "id");
@@ -654,7 +619,6 @@ public class CreationDuCV extends javax.swing.JPanel {
         formation.getjButtonSupprimeFormation().addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                connexion = connexionDb.reconnect();
                 int reply = JOptionPane.showConfirmDialog(null, "Etes-vous sûr de vouloir supprimer la formation n°" + formation.getIdTab() + ".", "Comfimez la suppression !", JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.YES_OPTION) {
                     try {
@@ -666,7 +630,6 @@ public class CreationDuCV extends javax.swing.JPanel {
                             jTabbedPaneFormation.remove(formation);
                         } else {
                             jTabbedPaneFormation.remove(formation);
-                            JOptionPane.showMessageDialog(CreationDuCV.this, "Bravo ! les pancakes xDD");
                         }
                     } catch (SQLException ex) {
                         Logger.getLogger(CreationDuCV.class.getName()).log(Level.SEVERE, null, ex);
@@ -706,7 +669,6 @@ public class CreationDuCV extends javax.swing.JPanel {
         experiencePro.getjButtonSupprimeExperiencePro().addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                connexion = connexionDb.reconnect();
                 int reply = JOptionPane.showConfirmDialog(null, "Etes-vous sûr de vouloir supprimer l'expérience professionnelle n°" + experiencePro.getIdTab() + ".", "Comfimez la suppression !", JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.YES_OPTION) {
                     try {
@@ -718,7 +680,6 @@ public class CreationDuCV extends javax.swing.JPanel {
                             jTabbedPaneExperiencePro.remove(experiencePro);
                         } else {
                             jTabbedPaneExperiencePro.remove(experiencePro);
-                            JOptionPane.showMessageDialog(CreationDuCV.this, "Bravo ! les pancakes xDD");
                         }
                     } catch (SQLException ex) {
                         Logger.getLogger(CreationDuCV.class.getName()).log(Level.SEVERE, null, ex);
@@ -807,7 +768,7 @@ public class CreationDuCV extends javax.swing.JPanel {
      * @throws SQLException
      */
     public List<Map<String, Object>> getUtilisateur(Integer id) throws SQLException {
-        if (this.connexion != null) {
+        if (DaoSIO.getInstance() != null) {
             ResultSet res = DaoSIO.getInstance().requeteSelection("SELECT * FROM utilisateurs WHERE id = " + id);
 
             if (res.isBeforeFirst()) {
@@ -826,7 +787,7 @@ public class CreationDuCV extends javax.swing.JPanel {
      * @throws SQLException
      */
     public List<Map<String, Object>> getCV(Integer id) throws SQLException {
-        if (this.connexion != null) {
+        if (DaoSIO.getInstance() != null) {
             ResultSet res = DaoSIO.getInstance().requeteSelection("SELECT * FROM cv WHERE id_utilisateur = " + id);
 
             if (res.isBeforeFirst()) {
@@ -910,7 +871,6 @@ public class CreationDuCV extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabelDescription;
     private javax.swing.JLabel jLabelMaitrise;
@@ -918,20 +878,14 @@ public class CreationDuCV extends javax.swing.JPanel {
     private javax.swing.JLabel jLabelTitrePrincipal;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JProgressBar jProgressBar2;
-    private javax.swing.JProgressBar jProgressBar3;
-    private javax.swing.JProgressBar jProgressBar4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPaneExperiencePro;
     private javax.swing.JTabbedPane jTabbedPaneFormation;
     private javax.swing.JTextArea jTextAreaDescription;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextFieldLevelMaitrise1;
+    private javax.swing.JTextField jTextFieldLevelMaitrise2;
     private javax.swing.JTextField jTextFieldMaitrise1;
+    private javax.swing.JTextField jTextFieldMaitrise2;
     private javax.swing.JTextField jTextFieldTitre;
     // End of variables declaration//GEN-END:variables
 }

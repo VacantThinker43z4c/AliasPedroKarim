@@ -81,7 +81,7 @@ public class DaoSIO {
     public Boolean connexionActive() {
         Boolean connexionActive = true;
         try {
-            if (this.connexion.isClosed()) {
+            if (this.connexion != null && this.connexion.isClosed()) {
                 connexionActive = false;
             }
         } catch (SQLException ex) {
@@ -96,7 +96,6 @@ public class DaoSIO {
      * @return
      */
     public ResultSet requeteSelection(String sql) {
-
         try {
             Statement requete = new DaoSIO().connexion.createStatement();
             return requete.executeQuery(sql);
