@@ -96,12 +96,14 @@ public class DaoSIO {
      * @return
      */
     public ResultSet requeteSelection(String sql) {
-        try {
-            Statement requete = new DaoSIO().connexion.createStatement();
-            return requete.executeQuery(sql);
+        if(sql != null && sql.equals("")){
+            try {
+                Statement requete = new DaoSIO().connexion.createStatement();
+                return requete.executeQuery(sql);
 
-        } catch (SQLException ex) {
-            Logger.getLogger(DaoSIO.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(DaoSIO.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return null;
     }
@@ -127,8 +129,8 @@ public class DaoSIO {
      *
      * @param table
      * @param args
-     * @param predicat
      * @return
+     * @throws java.sql.SQLException
      */
     public Integer getLastID(String table, String ...args) throws SQLException{
         

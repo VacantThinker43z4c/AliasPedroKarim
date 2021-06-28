@@ -185,7 +185,7 @@ public class ExperiencePro extends javax.swing.JPanel {
                     
                     String description = jTextAreaDescriptionExpPro.getText();
                     
-                    if(DaoSIO.getInstance() != null){
+                    if(DaoSIO.getInstance().connexionActive()){
                         try {
                             if(this.idExperiencePro != null){
                                 res = DaoSIO.getInstance().requeteAction("UPDATE `experience_pro` "

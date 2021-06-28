@@ -196,7 +196,7 @@ public class Formation extends javax.swing.JPanel {
 
                     String description = jTextAreaDescriptionFormation.getText();
 
-                    if (DaoSIO.getInstance() != null) {
+                    if (DaoSIO.getInstance().connexionActive()) {
                         try {
                             if(this.idFormation != null){
                                 res = DaoSIO.getInstance().requeteAction("UPDATE `formation` "
