@@ -96,7 +96,7 @@ public class DaoSIO {
      * @return
      */
     public ResultSet requeteSelection(String sql) {
-        if(sql != null && sql.equals("")){
+        if(sql != null && !sql.equals("")){
             try {
                 Statement requete = new DaoSIO().connexion.createStatement();
                 return requete.executeQuery(sql);

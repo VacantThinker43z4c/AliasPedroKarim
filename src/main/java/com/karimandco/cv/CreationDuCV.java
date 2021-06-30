@@ -36,7 +36,7 @@ public class CreationDuCV extends javax.swing.JPanel {
      */
     public CreationDuCV() {
         initComponents();
-        idUtilisateur = 107;
+        idUtilisateur = 141;
         try {
             chargerCV();
         } catch (SQLException ex) {
@@ -772,7 +772,7 @@ public class CreationDuCV extends javax.swing.JPanel {
         if (DaoSIO.getInstance().connexionActive()) {
             ResultSet res = DaoSIO.getInstance().requeteSelection("SELECT * FROM utilisateurs WHERE id = " + id);
 
-            if (res.isBeforeFirst()) {
+            if (res != null && res.isBeforeFirst()) {
                 return resultSetToList(res);
             }
         }
