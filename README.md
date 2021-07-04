@@ -43,12 +43,16 @@ _Une documentation utilisateur est aussi disponible [ici](https://docs.google.co
 + Le code source est téléchargeable avec ce lien [GitHub](https://github.com/AliasPedroKarim/KarimAndCo_Composant4/archive/master.zip) _(Lien de la branche master)_
 + Comme c'est un fichier zip, veuillez le dé-compilé.
 + Sur l'IDE Netbeans ou autre, créer un nouveau projet Maven
-+ Une fois créer, ouvrer aussi le projet composant dans Netbeans
++ Une fois créer, ouvrer aussi le projet composant sous Netbeans
 + Quand le projet composant est charger, vous devrez avoir ce rendu là :
+
 ![](https://i.imgur.com/WbhR3id.png)
+
 + Maintenant, vous pouvez tous simplement copier le package `com.karimandco.cv` dans votre `Source packages`
 + Ensuite, en ce qui concerne les dépendances, si votre projet est un projet Maven, vous devriez certainement avoir un fichier `pom.xml` dans la racine de votre projet :
+
 ![](https://i.imgur.com/lGaBvGk.png)
+
 	+ Copier ou rajouté ceci à l'intérieur, juste après `<packaging>jar</packaging>` :
 	
 ```xml
@@ -69,6 +73,7 @@ _Une documentation utilisateur est aussi disponible [ici](https://docs.google.co
 ###### _Remarque : La dépendance `com.weblookandfeel` n'est pas requis pour utiliser le composant. Seul le fichier `Main.java` utilise les fonctions de `com.weblookandfeel`, donc vous pouvez le supprimé_
 
 + Enregistrant, vous ne devriez plus avoir d'erreur :
+
 ![](https://i.imgur.com/llvhEa0.png)
 
 + Et pour ce qui veulent utilisé le composant sur un projet Java Vanilla vous pouvait télécharger les dépendances avec ces liens :
