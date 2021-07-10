@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -34,59 +34,62 @@
                   </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jLabel3" pref="373" max="32767" attributes="0"/>
-                          <Component id="jTabbedPaneFormation" alignment="0" pref="373" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jTabbedPaneExperiencePro" pref="0" max="32767" attributes="0"/>
-                          <Component id="jLabel4" min="-2" pref="366" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jProgressBar1" alignment="0" min="-2" pref="334" max="-2" attributes="0"/>
-                              <Component id="jLabelDescription" alignment="0" max="32767" attributes="0"/>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jLabel3" pref="373" max="32767" attributes="0"/>
+                                  <Component id="jTabbedPaneFormation" alignment="0" pref="373" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jTabbedPaneExperiencePro" pref="0" max="32767" attributes="0"/>
+                                  <Component id="jLabel4" min="-2" pref="366" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jLabelMaitrise" max="32767" attributes="0"/>
+                                      <Component id="jProgressBar1" alignment="0" min="-2" pref="334" max="-2" attributes="0"/>
+                                      <Component id="jLabelDescription" alignment="0" max="32767" attributes="0"/>
                                       <Group type="102" alignment="1" attributes="0">
-                                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="jTextFieldMaitrise1" min="-2" pref="113" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                                          <Component id="jTextFieldLevelMaitrise1" min="-2" pref="76" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabel1" min="-2" pref="44" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="jLabelMaitrise" max="32767" attributes="0"/>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="jTextFieldMaitrise1" min="-2" pref="113" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="jSpinnerLevelMaitrise1" min="-2" pref="70" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jLabel1" min="-2" pref="44" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
                                           </Group>
+                                      </Group>
+                                  </Group>
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="jProgressBar2" alignment="0" min="-2" pref="334" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="jTextFieldMaitrise2" min="-2" pref="113" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="jSpinnerLevelMaitrise2" min="-2" pref="70" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jLabel5" min="-2" pref="44" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
                           </Group>
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jProgressBar2" alignment="0" min="-2" pref="334" max="-2" attributes="0"/>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jTextFieldMaitrise2" min="-2" pref="113" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                                  <Component id="jTextFieldLevelMaitrise2" min="-2" pref="76" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jLabel5" min="-2" pref="44" max="-2" attributes="0"/>
-                              </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jButtonValideFormation" min="-2" pref="373" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jButtonValideExperiencePro" min="-2" pref="366" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButtonValideFormation" min="-2" pref="373" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButtonValideExperiencePro" min="-2" pref="366" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -117,13 +120,13 @@
                       <Component id="jScrollPane1" min="-2" pref="284" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jLabelMaitrise" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextFieldMaitrise1" alignment="3" max="32767" attributes="0"/>
-                          <Component id="jTextFieldLevelMaitrise1" alignment="3" max="32767" attributes="0"/>
                           <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel1" max="32767" attributes="0"/>
+                          <Component id="jSpinnerLevelMaitrise1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jProgressBar1" min="-2" pref="15" max="-2" attributes="0"/>
@@ -131,8 +134,8 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextFieldMaitrise2" alignment="3" max="32767" attributes="0"/>
-                          <Component id="jTextFieldLevelMaitrise2" alignment="3" max="32767" attributes="0"/>
                           <Component id="jLabel5" alignment="3" max="32767" attributes="0"/>
+                          <Component id="jSpinnerLevelMaitrise2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jProgressBar2" min="-2" pref="15" max="-2" attributes="0"/>
@@ -250,14 +253,6 @@
         <Property name="text" type="java.lang.String" value="Titre de la maitrise"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldLevelMaitrise1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Niveau (%)"/>
-      </Properties>
-      <Events>
-        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldLevelMaitrise1KeyReleased"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
     </Component>
     <Component class="javax.swing.JButton" name="jButtonValideFormation">
@@ -294,14 +289,6 @@
         <Property name="text" type="java.lang.String" value="Titre de la maitrise"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldLevelMaitrise2">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Niveau (%)"/>
-      </Properties>
-      <Events>
-        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldLevelMaitrise2KeyReleased"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
         <Property name="text" type="java.lang.String" value="%"/>
@@ -313,6 +300,30 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Maitrise 2  :"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="jSpinnerLevelMaitrise1">
+      <Properties>
+        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+          <SpinnerModel initial="0" maximum="100" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerLevelMaitrise1StateChanged"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jSpinnerLevelMaitrise1FocusLost"/>
+        <EventHandler event="inputMethodTextChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="jSpinnerLevelMaitrise1InputMethodTextChanged"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="jSpinnerLevelMaitrise2">
+      <Properties>
+        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+          <SpinnerModel initial="0" maximum="100" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerLevelMaitrise2StateChanged"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jSpinnerLevelMaitrise2FocusLost"/>
+        <EventHandler event="inputMethodTextChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="jSpinnerLevelMaitrise2InputMethodTextChanged"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

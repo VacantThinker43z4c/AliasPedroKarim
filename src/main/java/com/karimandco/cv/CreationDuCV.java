@@ -68,17 +68,17 @@ public class CreationDuCV extends javax.swing.JPanel {
         jProgressBar1 = new javax.swing.JProgressBar();
         jLabel2 = new javax.swing.JLabel();
         jTextFieldMaitrise1 = new javax.swing.JTextField();
-        jTextFieldLevelMaitrise1 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jButtonValideFormation = new javax.swing.JButton();
         jButtonValideExperiencePro = new javax.swing.JButton();
         jButtonSupprimeCV = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jTextFieldMaitrise2 = new javax.swing.JTextField();
-        jTextFieldLevelMaitrise2 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jProgressBar2 = new javax.swing.JProgressBar();
         jLabel6 = new javax.swing.JLabel();
+        jSpinnerLevelMaitrise1 = new javax.swing.JSpinner();
+        jSpinnerLevelMaitrise2 = new javax.swing.JSpinner();
 
         jLabelTitrePrincipal.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabelTitrePrincipal.setText("Création de votre CV");
@@ -117,13 +117,6 @@ public class CreationDuCV extends javax.swing.JPanel {
 
         jTextFieldMaitrise1.setText("Titre de la maitrise");
 
-        jTextFieldLevelMaitrise1.setText("Niveau (%)");
-        jTextFieldLevelMaitrise1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextFieldLevelMaitrise1KeyReleased(evt);
-            }
-        });
-
         jButtonValideFormation.setText("validé");
         jButtonValideFormation.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -149,16 +142,47 @@ public class CreationDuCV extends javax.swing.JPanel {
 
         jTextFieldMaitrise2.setText("Titre de la maitrise");
 
-        jTextFieldLevelMaitrise2.setText("Niveau (%)");
-        jTextFieldLevelMaitrise2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextFieldLevelMaitrise2KeyReleased(evt);
-            }
-        });
-
         jLabel5.setText("%");
 
         jLabel6.setText("Maitrise 2  :");
+
+        jSpinnerLevelMaitrise1.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 1));
+        jSpinnerLevelMaitrise1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSpinnerLevelMaitrise1StateChanged(evt);
+            }
+        });
+        jSpinnerLevelMaitrise1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jSpinnerLevelMaitrise1FocusLost(evt);
+            }
+        });
+        jSpinnerLevelMaitrise1.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                jSpinnerLevelMaitrise1InputMethodTextChanged(evt);
+            }
+        });
+
+        jSpinnerLevelMaitrise2.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 1));
+        jSpinnerLevelMaitrise2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSpinnerLevelMaitrise2StateChanged(evt);
+            }
+        });
+        jSpinnerLevelMaitrise2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jSpinnerLevelMaitrise2FocusLost(evt);
+            }
+        });
+        jSpinnerLevelMaitrise2.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                jSpinnerLevelMaitrise2InputMethodTextChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -179,48 +203,49 @@ public class CreationDuCV extends javax.swing.JPanel {
                         .addComponent(jButtonValidationCV, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
-                            .addComponent(jTabbedPaneFormation, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTabbedPaneExperiencePro, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jProgressBar1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabelDescription, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(0, 0, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+                                    .addComponent(jTabbedPaneFormation, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTabbedPaneExperiencePro, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabelMaitrise, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jProgressBar1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabelDescription, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel2)
+                                            .addGap(0, 0, Short.MAX_VALUE)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabelMaitrise, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(jLabel2)
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(jTextFieldMaitrise1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(jSpinnerLevelMaitrise1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jLabel8)
+                                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jProgressBar2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel6)
                                             .addGap(18, 18, 18)
-                                            .addComponent(jTextFieldMaitrise1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(12, 12, 12)
-                                            .addComponent(jTextFieldLevelMaitrise1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jTextFieldMaitrise2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jSpinnerLevelMaitrise2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel8)
-                                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jProgressBar2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jTextFieldMaitrise2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(12, 12, 12)
-                                    .addComponent(jTextFieldLevelMaitrise2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButtonValideFormation, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonValideExperiencePro, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButtonValideFormation, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonValideExperiencePro, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -245,21 +270,21 @@ public class CreationDuCV extends javax.swing.JPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabelMaitrise)
-                        .addGap(18, 18, 18)
+                        .addGap(17, 17, 17)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jTextFieldMaitrise1)
-                            .addComponent(jTextFieldLevelMaitrise1)
                             .addComponent(jLabel8)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jSpinnerLevelMaitrise1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(jTextFieldMaitrise2)
-                            .addComponent(jTextFieldLevelMaitrise2)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jSpinnerLevelMaitrise2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jTabbedPaneFormation, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -286,23 +311,6 @@ public class CreationDuCV extends javax.swing.JPanel {
             // Message si NON
         }
     }//GEN-LAST:event_jButtonValidationCVMouseClicked
-
-    /**
-     * Permet de capturer les évenements touche relaché du champs de saisie
-     * Maitrise 1 et rajouter la valeur correspondante dans la progresse bar.
-     *
-     * @param evt
-     */
-    private void jTextFieldLevelMaitrise1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldLevelMaitrise1KeyReleased
-        String value = jTextFieldLevelMaitrise1.getText().equals("") ? "0" : jTextFieldLevelMaitrise1.getText();
-
-        if (value.matches("[0-9]+")) {
-            if (!value.equals("") && Integer.parseInt(value) >= 0 && Integer.parseInt(value) <= 100) {
-                jProgressBar1.setValue(Integer.parseInt(value));
-            }
-        }
-        System.out.println(jProgressBar1.getValue());
-    }//GEN-LAST:event_jTextFieldLevelMaitrise1KeyReleased
 
     /**
      * Méthode permettant de rajouter des formations.
@@ -373,10 +381,47 @@ public class CreationDuCV extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButtonSupprimeCVMouseClicked
 
-    private void jTextFieldLevelMaitrise2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldLevelMaitrise2KeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldLevelMaitrise2KeyReleased
+    private void jSpinnerLevelMaitrise1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerLevelMaitrise1StateChanged
+        handleMaitrise();
+    }//GEN-LAST:event_jSpinnerLevelMaitrise1StateChanged
 
+    private void jSpinnerLevelMaitrise1InputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jSpinnerLevelMaitrise1InputMethodTextChanged
+        handleMaitrise();
+    }//GEN-LAST:event_jSpinnerLevelMaitrise1InputMethodTextChanged
+
+    private void jSpinnerLevelMaitrise1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jSpinnerLevelMaitrise1FocusLost
+        handleMaitrise();
+    }//GEN-LAST:event_jSpinnerLevelMaitrise1FocusLost
+
+    private void jSpinnerLevelMaitrise2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerLevelMaitrise2StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jSpinnerLevelMaitrise2StateChanged
+
+    private void jSpinnerLevelMaitrise2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jSpinnerLevelMaitrise2FocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jSpinnerLevelMaitrise2FocusLost
+
+    private void jSpinnerLevelMaitrise2InputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jSpinnerLevelMaitrise2InputMethodTextChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jSpinnerLevelMaitrise2InputMethodTextChanged
+
+    /**
+     * Permet de capturer les évenements touche relaché du champs de saisie
+     * Maitrise 1 et rajouter la valeur correspondante dans la progresse bar.
+     *
+     * @param evt
+     */
+    private void handleMaitrise(){
+        String value = jSpinnerLevelMaitrise1.getValue().equals("") ? "0" : jSpinnerLevelMaitrise1.getValue().toString();
+
+        if (value.matches("[0-9]+")) {
+            if (!value.equals("") && Integer.parseInt(value) >= 0 && Integer.parseInt(value) <= 100) {
+                jProgressBar1.setValue(Integer.parseInt(value));
+            }
+        }
+        System.out.println(jProgressBar1.getValue());
+    }
+    
     /**
      * Permet de créer/insérer les données du cv dans la base de donné cv.
      */
@@ -528,7 +573,7 @@ public class CreationDuCV extends javax.swing.JPanel {
             jTextFieldTitre.setText((String) cv.get(0).get("titre"));
             jTextAreaDescription.setText((String) cv.get(0).get("description"));
             jProgressBar1.setValue(Integer.parseInt((String) cv.get(0).get("maitrise")));
-            jTextFieldLevelMaitrise1.setText((String) cv.get(0).get("maitrise"));
+            jSpinnerLevelMaitrise1.setValue(Integer.parseInt((String) cv.get(0).get("maitrise")));
             jTextFieldMaitrise1.setText((String) cv.get(0).get("nom_maitrise"));
 
             // Je récupère l'id du cv et je le stocke dans une variable privé de la class
@@ -593,7 +638,6 @@ public class CreationDuCV extends javax.swing.JPanel {
             jTextFieldTitre.setText("");
             jTextAreaDescription.setText("");
             jProgressBar1.setValue(0);
-            jTextFieldLevelMaitrise1.setText("Niveau (%)");
             jTextFieldMaitrise1.setText("Titre de la maitrise");
         }
 
@@ -880,11 +924,11 @@ public class CreationDuCV extends javax.swing.JPanel {
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JProgressBar jProgressBar2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSpinner jSpinnerLevelMaitrise1;
+    private javax.swing.JSpinner jSpinnerLevelMaitrise2;
     private javax.swing.JTabbedPane jTabbedPaneExperiencePro;
     private javax.swing.JTabbedPane jTabbedPaneFormation;
     private javax.swing.JTextArea jTextAreaDescription;
-    private javax.swing.JTextField jTextFieldLevelMaitrise1;
-    private javax.swing.JTextField jTextFieldLevelMaitrise2;
     private javax.swing.JTextField jTextFieldMaitrise1;
     private javax.swing.JTextField jTextFieldMaitrise2;
     private javax.swing.JTextField jTextFieldTitre;

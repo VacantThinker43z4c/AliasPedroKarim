@@ -40,11 +40,18 @@ _Une documentation utilisateur est aussi disponible [ici](https://docs.google.co
 
 #### Comment utiliser ce composant dans votre projet !
 
-+ Le code source est téléchargeable avec ce lien [GitHub](https://github.com/AliasPedroKarim/KarimAndCo_Composant4/archive/master.zip) _(Lien de la branche master)_
-+ Comme c'est un fichier zip, veuillez le dé-compilé.
-+ Sur l'IDE Netbeans ou autre, créer un nouveau projet Maven
-+ Une fois créer, ouvrer aussi le projet composant sous Netbeans
-+ Quand le projet composant est charger, vous devrez avoir ce rendu là :    
++ Récupérer le code : 
+	+ <u>__1er Méthode :__</u> Le code source est téléchargeable avec ce lien [GitHub](https://github.com/AliasPedroKarim/KarimAndCo_Composant4/archive/master.zip) _(Lien de la branche master)_
+		+ Comme c'est un fichier zip, veuillez le dé-compilé.
+		+ Sur l'IDE Netbeans ou autre, créer un nouveau projet Maven
+		+ Une fois créer, ouvrer aussi le projet composant sous Netbeans
+	
+	+ <u>__2ième Méthode :__</u> Sous Netbeans, un onglet `Team` est disponible et on peut clone les projets GitHub grâce au lien `.git` disponible en ⬆ de la page `https://github.com/AliasPedroKarim/KarimAndCo_Composant4.git` :  
+	
+	  ![](https://i.imgur.com/aoDpRMu.png)
+	       ![](https://i.imgur.com/wiwWBJ8.png)
+
++ Quand les projets (votre projet et le composant) est chargé, vous devriez avoir ce rendu là :    
 
 ![](https://i.imgur.com/WbhR3id.png)
 
@@ -79,7 +86,8 @@ _Une documentation utilisateur est aussi disponible [ici](https://docs.google.co
 + Et pour ce qui veulent utilisé le composant sur un projet Java Vanilla vous pouvait télécharger les dépendances avec ces liens :
 	+ [mysql-connector-j v5.1.48](https://dev.mysql.com/downloads/connector/j/5.1.html#targetText=Connector/J%205.1.48&targetText=MySQL%20Connector/J%20is%20the,versions%20starting%20with%20MySQL%205.5.)
 	+ [weblaf v1.2.9](https://mvnrepository.com/artifact/com.weblookandfeel/weblaf-ui/1.2.9)
-
++ ⚠ ! Vous pouvez visualiser, l'interface du composant en démarrant le composant sur le fichier `Main.java` ou `JFramePrincipalCV.java` mais les autres fichiers sont justes des composants réutilisables (JPanel et/ou JTextefield) que vous pouvez utilisé dans votre projet.
+###### Ajouter dans la liste des composants NetBeans : `Click droit sur fichier class JPanel` ➜ `Tools` ➜ `Add To Palette...` ➜ `Choisir la catégorie palette pour l'ajouter` (Vous pouvez créer les catégories palettes)
 + Done.
 
 #### Fonction importante
