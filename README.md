@@ -60,7 +60,7 @@ _Une documentation utilisateur est aussi disponible [ici](https://docs.google.co
 
 ![](https://i.imgur.com/lGaBvGk.png)
 
-	+ Copier ou rajouté ceci à l'intérieur, juste après `<packaging>jar</packaging>` :
++ Copier ou rajouté ceci à l'intérieur, juste après `<packaging>jar</packaging>` :
 	
 ```xml
 <dependencies>
@@ -86,8 +86,10 @@ _Une documentation utilisateur est aussi disponible [ici](https://docs.google.co
 + Et pour ce qui veulent utilisé le composant sur un projet Java Vanilla vous pouvait télécharger les dépendances avec ces liens :
 	+ [mysql-connector-j v5.1.48](https://dev.mysql.com/downloads/connector/j/5.1.html#targetText=Connector/J%205.1.48&targetText=MySQL%20Connector/J%20is%20the,versions%20starting%20with%20MySQL%205.5.)
 	+ [weblaf v1.2.9](https://mvnrepository.com/artifact/com.weblookandfeel/weblaf-ui/1.2.9)
-+ ⚠ ! Vous pouvez visualiser, l'interface du composant en démarrant le composant sur le fichier `Main.java` ou `JFramePrincipalCV.java` mais les autres fichiers sont justes des composants réutilisables (JPanel et/ou JTextefield) que vous pouvez utilisé dans votre projet.
++ ⚠ Vous pouvez visualiser, l'interface du composant en démarrant le composant sur le fichier `Main.java` ou `JFramePrincipalCV.java` mais les autres fichiers sont justes des composants réutilisables (JPanel et/ou JTextefield) que vous pouvez utilisé dans votre projet.
+
 ###### Ajouter dans la liste des composants NetBeans : `Click droit sur fichier class JPanel` ➜ `Tools` ➜ `Add To Palette...` ➜ `Choisir la catégorie palette pour l'ajouter` (Vous pouvez créer les catégories palettes)
+
 + Done.
 
 #### Fonction importante
