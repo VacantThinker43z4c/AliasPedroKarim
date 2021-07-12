@@ -17,7 +17,9 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="232" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabelEtatUtilisateur" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="185" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="2" attributes="0">
                   <Component id="jLabelTitrePrincipal" alignment="2" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabelTitre" alignment="2" min="-2" max="-2" attributes="0"/>
@@ -103,6 +105,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabelTitrePrincipal" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonSupprimeCV" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelEtatUtilisateur" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Component id="jLabelTitre" min="-2" max="-2" attributes="0"/>
@@ -324,6 +327,11 @@
         <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jSpinnerLevelMaitrise2FocusLost"/>
         <EventHandler event="inputMethodTextChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="jSpinnerLevelMaitrise2InputMethodTextChanged"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelEtatUtilisateur">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Etat :"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

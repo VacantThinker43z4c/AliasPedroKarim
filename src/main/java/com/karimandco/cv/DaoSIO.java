@@ -98,9 +98,10 @@ public class DaoSIO {
     public ResultSet requeteSelection(String sql) {
         if(sql != null && !sql.equals("")){
             try {
-                Statement requete = new DaoSIO().connexion.createStatement();
-                return requete.executeQuery(sql);
-
+                if(DaoSIO.getInstance().connexion != null){
+                    Statement requete =  DaoSIO.getInstance().connexion.createStatement();
+                    return requete.executeQuery(sql);
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(DaoSIO.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -116,8 +117,10 @@ public class DaoSIO {
      */
     public Integer requeteAction(String sql) {
         try {
-            Statement requete = new DaoSIO().connexion.createStatement();
-            return requete.executeUpdate(sql);
+            if(DaoSIO.getInstance().connexion != null){
+                Statement requete = DaoSIO.getInstance().connexion.createStatement();
+                return requete.executeUpdate(sql);
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(DaoSIO.class.getName()).log(Level.SEVERE, null, ex);

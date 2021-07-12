@@ -5,13 +5,11 @@
  */
 package com.karimandco.cv;
 
-import com.mysql.jdbc.Connection;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,9 +32,41 @@ public class CreationDuCV extends javax.swing.JPanel {
     /**
      * Creates new form CreationDuCV
      */
-    public CreationDuCV() {
+    public CreationDuCV(Integer idCV, Integer idUtilisateur) {
         initComponents();
-        idUtilisateur = 141;
+        this.idUtilisateur = idUtilisateur;
+        this.idCV = idCV;
+        
+        try {
+            chargerCV();
+        } catch (SQLException ex) {
+            Logger.getLogger(CreationDuCV.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public CreationDuCV() {
+        this(null, 1);
+    }
+
+    public Integer getIdUtilisateur() {
+        return idUtilisateur;
+    }
+
+    public void setIdUtilisateur(Integer idUtilisateur) {
+        this.idUtilisateur = idUtilisateur;
+        try {
+            chargerCV();
+        } catch (SQLException ex) {
+            Logger.getLogger(CreationDuCV.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public Integer getIdCV() {
+        return idCV;
+    }
+
+    public void setIdCV(Integer idCV) {
+        this.idCV = idCV;
         try {
             chargerCV();
         } catch (SQLException ex) {
@@ -79,6 +109,7 @@ public class CreationDuCV extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jSpinnerLevelMaitrise1 = new javax.swing.JSpinner();
         jSpinnerLevelMaitrise2 = new javax.swing.JSpinner();
+        jLabelEtatUtilisateur = new javax.swing.JLabel();
 
         jLabelTitrePrincipal.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabelTitrePrincipal.setText("Création de votre CV");
@@ -184,12 +215,16 @@ public class CreationDuCV extends javax.swing.JPanel {
             }
         });
 
+        jLabelEtatUtilisateur.setText("Etat :");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(232, 232, 232)
+                .addContainerGap()
+                .addComponent(jLabelEtatUtilisateur)
+                .addGap(185, 185, 185)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabelTitrePrincipal)
                     .addComponent(jLabelTitre)
@@ -254,7 +289,8 @@ public class CreationDuCV extends javax.swing.JPanel {
                 .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelTitrePrincipal)
-                    .addComponent(jButtonSupprimeCV))
+                    .addComponent(jButtonSupprimeCV)
+                    .addComponent(jLabelEtatUtilisateur))
                 .addGap(29, 29, 29)
                 .addComponent(jLabelTitre)
                 .addGap(18, 18, 18)
@@ -431,7 +467,7 @@ public class CreationDuCV extends javax.swing.JPanel {
 
         List<Map<String, Object>> cv = null;
         try {
-            cv = getCV(idUtilisateur);
+            cv = getCV(this.idCV, this.idUtilisateur);
             if (cv != null && cv.size() > 0) {
                 update = true;
             }
@@ -567,89 +603,97 @@ public class CreationDuCV extends javax.swing.JPanel {
      * @throws SQLException
      */
     public void chargerCV() throws SQLException {
-        List<Map<String, Object>> cv = getCV(idUtilisateur), formation = getFormation(idUtilisateur), experiencePro = getExperiencePro(idUtilisateur);
+        List<Map<String, Object>> utilisateur = getUtilisateur(idUtilisateur), cv = getCV(this.idCV, this.idUtilisateur), formation = getFormation(idUtilisateur), experiencePro = getExperiencePro(idUtilisateur);
 
-        if (cv != null && cv.size() > 0) {
-            jTextFieldTitre.setText((String) cv.get(0).get("titre"));
-            jTextAreaDescription.setText((String) cv.get(0).get("description"));
-            jProgressBar1.setValue(Integer.parseInt((String) cv.get(0).get("maitrise")));
-            jSpinnerLevelMaitrise1.setValue(Integer.parseInt((String) cv.get(0).get("maitrise")));
-            jTextFieldMaitrise1.setText((String) cv.get(0).get("nom_maitrise"));
+        if(utilisateur != null){
+                    
+            if (cv != null && cv.size() > 0) {
+                jTextFieldTitre.setText((String) cv.get(0).get("titre"));
+                jTextAreaDescription.setText((String) cv.get(0).get("description"));
+                jProgressBar1.setValue(Integer.parseInt((String) cv.get(0).get("maitrise")));
+                jSpinnerLevelMaitrise1.setValue(Integer.parseInt((String) cv.get(0).get("maitrise")));
+                jTextFieldMaitrise1.setText((String) cv.get(0).get("nom_maitrise"));
 
-            // Je récupère l'id du cv et je le stocke dans une variable privé de la class
-            this.idCV = (Integer) cv.get(0).get("id");
+                // Je récupère l'id du cv et je le stocke dans une variable privé de la class
+                this.idCV = (Integer) cv.get(0).get("id");
 
-            jTabbedPaneFormation.removeAll();
-            jTabbedPaneExperiencePro.removeAll();
-            
-            if (formation != null && formation.size() > 0) {
+                jTabbedPaneFormation.removeAll();
+                jTabbedPaneExperiencePro.removeAll();
 
-                for (int i = 0; i < formation.size(); i++) {
-                    Map<String, Object> formationData;
-                    formationData = formation.get(i);
+                if (formation != null && formation.size() > 0) {
 
-                    Formation formation1 = new Formation();
+                    for (int i = 0; i < formation.size(); i++) {
+                        Map<String, Object> formationData;
+                        formationData = formation.get(i);
 
-                    formation1.setIdFormation((Integer) formationData.get("id"));
-                    formation1.setIdCV((Integer) formationData.get("id_cv"));
-                    formation1.setIdTab(idTabFormation);
-                    formation1.getjTextFieldNomFormation().setText((String) formationData.get("nom"));
-                    formation1.getjTextFieldAdresseFormation().setText((String) formationData.get("lieu"));
-                    formation1.getjTextAreaDescriptionFormation().setText((String) formationData.get("description"));
-                    formation1.getClassDate1().setText((String) formationData.get("annee_debut").toString());
-                    formation1.getClassDate2().setText((String) formationData.get("annee_fin").toString());
+                        Formation formation1 = new Formation();
 
-                    this.onSupprimeFormation(formation1);
+                        formation1.setIdFormation((Integer) formationData.get("id"));
+                        formation1.setIdCV((Integer) formationData.get("id_cv"));
+                        formation1.setIdTab(idTabFormation);
+                        formation1.getjTextFieldNomFormation().setText((String) formationData.get("nom"));
+                        formation1.getjTextFieldAdresseFormation().setText((String) formationData.get("lieu"));
+                        formation1.getjTextAreaDescriptionFormation().setText((String) formationData.get("description"));
+                        formation1.getClassDate1().setText((String) formationData.get("annee_debut").toString());
+                        formation1.getClassDate2().setText((String) formationData.get("annee_fin").toString());
 
-                    jTabbedPaneFormation.addTab("Formation " + idTabFormation, formation1);
-                    idTabFormation++;
+                        this.onSupprimeFormation(formation1);
+
+                        jTabbedPaneFormation.addTab("Formation " + idTabFormation, formation1);
+                        idTabFormation++;
+                    }
                 }
+
+                if (experiencePro != null && experiencePro.size() > 0) {
+                    for (int j = 0; j < experiencePro.size(); j++) {
+                        Map<String, Object> experienceProData;
+                        experienceProData = experiencePro.get(j);
+
+                        ExperiencePro experiencePro1 = new ExperiencePro();
+
+                        experiencePro1.setIdExperiencePro((Integer) experienceProData.get("id"));
+                        experiencePro1.setIdCV((Integer) experienceProData.get("id_cv"));
+                        experiencePro1.setIdTab(idTabExperiencePro);
+                        experiencePro1.getjTextFieldNomEntpExpPro().setText((String) experienceProData.get("entreprise"));
+                        experiencePro1.getjTextFieldAdresseExpPro().setText((String) experienceProData.get("adresse"));
+                        experiencePro1.getjTextAreaDescriptionExpPro().setText((String) experienceProData.get("description"));
+                        experiencePro1.getClassDate1().setText((String) experienceProData.get("annee_debut").toString());
+                        experiencePro1.getClassDate2().setText((String) experienceProData.get("annee_fin").toString());
+
+                        this.onSupprimeExperiencePro(experiencePro1);
+
+                        jTabbedPaneExperiencePro.addTab("Expérience Pro " + idTabExperiencePro, experiencePro1);
+                        idTabExperiencePro++;
+                    }
+                }
+
+                jButtonValidationCV.setText("Mettre à jour le CV");
+                jLabelTitrePrincipal.setText("Mise à jour de votre cv");
+            } else if (cv == null || cv.size() == 0) {
+                jTabbedPaneFormation.removeAll();
+                jTabbedPaneExperiencePro.removeAll();
+
+                jTextFieldTitre.setText("");
+                jTextAreaDescription.setText("");
+                jProgressBar1.setValue(0);
+                jTextFieldMaitrise1.setText("Titre de la maitrise");
             }
 
-            if (experiencePro != null && experiencePro.size() > 0) {
-                for (int j = 0; j < experiencePro.size(); j++) {
-                    Map<String, Object> experienceProData;
-                    experienceProData = experiencePro.get(j);
-
-                    ExperiencePro experiencePro1 = new ExperiencePro();
-
-                    experiencePro1.setIdExperiencePro((Integer) experienceProData.get("id"));
-                    experiencePro1.setIdCV((Integer) experienceProData.get("id_cv"));
-                    experiencePro1.setIdTab(idTabExperiencePro);
-                    experiencePro1.getjTextFieldNomEntpExpPro().setText((String) experienceProData.get("entreprise"));
-                    experiencePro1.getjTextFieldAdresseExpPro().setText((String) experienceProData.get("adresse"));
-                    experiencePro1.getjTextAreaDescriptionExpPro().setText((String) experienceProData.get("description"));
-                    experiencePro1.getClassDate1().setText((String) experienceProData.get("annee_debut").toString());
-                    experiencePro1.getClassDate2().setText((String) experienceProData.get("annee_fin").toString());
-
-                    this.onSupprimeExperiencePro(experiencePro1);
-
-                    jTabbedPaneExperiencePro.addTab("Expérience Pro " + idTabExperiencePro, experiencePro1);
-                    idTabExperiencePro++;
-                }
+            // ces conditions permettent d'initialiser les panels si aucun CV n'a été créé
+            if (formation == null || formation.size() == 0) {
+                jTabbedPaneFormation.addTab("Formation " + idTabFormation, new Formation());
+                idTabFormation++;
             }
 
-            jButtonValidationCV.setText("Mettre à jour le CV");
-            jLabelTitrePrincipal.setText("Mise à jour de votre cv");
-        } else if (cv == null || cv.size() == 0) {
-            jTabbedPaneFormation.removeAll();
-            jTabbedPaneExperiencePro.removeAll();
-
-            jTextFieldTitre.setText("");
-            jTextAreaDescription.setText("");
-            jProgressBar1.setValue(0);
-            jTextFieldMaitrise1.setText("Titre de la maitrise");
-        }
-
-        // ces conditions permettent d'initialiser les panels si aucun CV n'a été créé
-        if (formation == null || formation.size() == 0) {
-            jTabbedPaneFormation.addTab("Formation " + idTabFormation, new Formation());
-            idTabFormation++;
-        }
-
-        if (experiencePro == null || experiencePro.size() == 0) {
-            jTabbedPaneExperiencePro.addTab("Expérience Pro " + idTabExperiencePro, new ExperiencePro());
-            idTabExperiencePro++;
+            if (experiencePro == null || experiencePro.size() == 0) {
+                jTabbedPaneExperiencePro.addTab("Expérience Pro " + idTabExperiencePro, new ExperiencePro());
+                idTabExperiencePro++;
+            }
+            jLabelEtatUtilisateur.setText("Etat : " + utilisateur.get(0).get("identifiant"));
+        }else{
+            jLabelEtatUtilisateur.setText("Etat : Utilisateur invalide");
+//            JOptionPane.showMessageDialog(this, "Votre utilisateur n'est pas valide !");
+//            this.setVisible(false);
         }
 
     }
@@ -831,9 +875,9 @@ public class CreationDuCV extends javax.swing.JPanel {
      * @return
      * @throws SQLException
      */
-    public List<Map<String, Object>> getCV(Integer id) throws SQLException {
+    public List<Map<String, Object>> getCV(Integer id, Integer id_utilisateur) throws SQLException {
         if (id != null && DaoSIO.getInstance().connexionActive()) {
-            ResultSet res = DaoSIO.getInstance().requeteSelection("SELECT * FROM cv WHERE id_utilisateur = " + id);
+            ResultSet res = DaoSIO.getInstance().requeteSelection("SELECT * FROM cv WHERE id = " + id + " AND id_utilisateur = " + id_utilisateur);
 
             if (res != null && res.isBeforeFirst()) {
                 return resultSetToList(res);
@@ -852,7 +896,7 @@ public class CreationDuCV extends javax.swing.JPanel {
      * @throws SQLException
      */
     public List<Map<String, Object>> getFormation(Integer id) throws SQLException {
-        List<Map<String, Object>> cv = getCV(id);
+        List<Map<String, Object>> cv = getCV(this.idCV, id);
         if (cv != null) {
             ResultSet res = DaoSIO.getInstance().requeteSelection("SELECT * FROM formation WHERE id_cv = " + cv.get(0).get("id"));
 
@@ -872,7 +916,7 @@ public class CreationDuCV extends javax.swing.JPanel {
      * @throws SQLException
      */
     public List<Map<String, Object>> getExperiencePro(Integer id) throws SQLException {
-        List<Map<String, Object>> cv = getCV(id);
+        List<Map<String, Object>> cv = getCV(this.idCV, id);
         if (cv != null) {
             ResultSet res = DaoSIO.getInstance().requeteSelection("SELECT * FROM experience_pro WHERE id_cv = " + cv.get(0).get("id"));
 
@@ -918,6 +962,7 @@ public class CreationDuCV extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabelDescription;
+    private javax.swing.JLabel jLabelEtatUtilisateur;
     private javax.swing.JLabel jLabelMaitrise;
     private javax.swing.JLabel jLabelTitre;
     private javax.swing.JLabel jLabelTitrePrincipal;

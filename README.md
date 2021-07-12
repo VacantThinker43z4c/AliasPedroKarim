@@ -1,4 +1,5 @@
 
+
 <img src="https://res.cloudinary.com/teepublic/image/private/s--3irQSqys--/t_Preview/b_rgb:191919,c_limit,f_jpg,h_630,q_90,w_630/v1511111763/production/designs/2076522_0.jpg" width="100"></img>
 <p align="center">
 
@@ -39,6 +40,8 @@ _La JavaDoc est disponible dans le dossier `docs` mais aussi [javadoc](https://a
 _Une documentation utilisateur est aussi disponible [ici](https://docs.google.com/document/d/1v6MzYAcXDMMQzYLZLa2klrXSc6LA4_zX15RLvXv4bb8/edit)_
 
 #### Comment utiliser ce composant dans votre projet !
+
+##### ➜ Installation et/ou récuperation
 
 + Récupérer le code : 
 	+ <u>__1er Méthode :__</u> Le code source est téléchargeable avec ce lien [GitHub](https://github.com/AliasPedroKarim/KarimAndCo_Composant4/archive/master.zip) _(Lien de la branche master)_
@@ -91,9 +94,27 @@ _Une documentation utilisateur est aussi disponible [ici](https://docs.google.co
 ###### Ajouter dans la liste des composants NetBeans : `Click droit sur fichier class JPanel` ➜ `Tools` ➜ `Add To Palette...` ➜ `Choisir la catégorie palette pour l'ajouter` (Vous pouvez créer les catégories palettes)
 
 + Done.
+##### ➜ Utilisation et/ou Instanciation
+Pour pouvoir utiliser le composant (JPanel) `CreationDuCV.java` :
++ Par l'instanciation du panel :
+	+ Il faut savoir que `CreationDuCV.java` peut s’instancier de 2 manières différentes
+```java 
+CreationDuCV creationDuCV = new CreationDuCV();
+// ou
+CreationDuCV creationDuCV = new CreationDuCV(<id_du_cv>, <id_de_l'utisateur>);
+```
++ Mais on peut aussi utiliser des setters :
+	+ En utilisant les setters le cv va ce recharger tous seul, mais bien sur, il faut l'instancier avant. un setter `setIdUtilisateur()` et `setIdCV()` sont disponibles.
+```java
+CreationDuCV creationDuCV = new CreationDuCV();
+creationDuCV.setIdUtilisateur(<id_de_l'utisateur>);
+creationDuCV.setIdCV(<id_du_cv>);
+```
 
-#### Fonction importante
-Convertir le ResultSet en une liste de cartes, où chaque carte représente une ligne avec columnNames et columValues
+#### Fonctionnalité importante
+##### ➜ Méthode resultSetToList
+Permet de convertir le ResultSet en une liste de cartes, où chaque carte représente une ligne avec columnNames et columValues
+<u>Définition :</u>
 ```java
 private List<Map<String, Object>> resultSetToList(ResultSet res) throws SQLException {
     ResultSetMetaData md = res.getMetaData();
@@ -109,15 +130,15 @@ private List<Map<String, Object>> resultSetToList(ResultSet res) throws SQLExcep
     return rows;
 }
 ```
-utilisation : 
+<u>utilisation : </u>
 ```java
 Statement req = this.connexion.createStatement();
 ResultSet res = req.executeQuery("SQL REQUEST");
 resultSetToList(res).get("Le numéro de la donnée").get("L'un des champs de la donnée");
 ```
 ---
-Plusieurs fonctions Get sont à votre disposition.
-Exemple : 
+##### ➜ Plusieurs fonctions Get sont à votre disposition.
+<u>Exemple : </u>
 ```java
 public List<Map<String, Object>> getUtilisateur(Integer id) throws SQLException {
 	//...
@@ -130,11 +151,20 @@ public List<Map<String, Object>> getCV(Integer id) throws SQLException {
 //Et autre ....
 ```
 
-Utilisation : 
+<u>Utilisation : </u>
 ```java
 List<Map<String, Object>> utilisateur = getUtilisateur(idUtilisateur).utilisateur.size();
 
 List<Map<String, Object>> cv = getCV(id)cv.get(0).get("id");
+```
+---
+##### ➜ Class DaoSIO (Singleton)
+Permet avec `DaoSIO.getIntance().connexion` obtenir une instance de connexion valide. Mais il y a 2 méthodes qui permet d'exécuté des requêtes SQL en toute simplicité, que ce soit les requêtes de selections ou d'acti
+
+<u>Utilisation : </u>
+```java
+DaoSIO.getIntance().requeteSelection("SELECT * FROM ...");
+DaoSIO.getInstance().requeteAction("DELETE FROM ...");
 ```
 
 #### Crédit

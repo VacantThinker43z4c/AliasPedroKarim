@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.karimandco</groupId>
     <artifactId>karimandco_composants04</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
@@ -17,6 +17,10 @@
             <version>1.2.9</version>
         </dependency>
     </dependencies>
+    <scm>
+        <url>https://github.com/AliasPedroKarim/KarimAndCo_Composant4</url>
+        <connection>git@github.com:AliasPedroKarim/KarimAndCo_Composant4.git</connection>
+    </scm>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>8</maven.compiler.source>
