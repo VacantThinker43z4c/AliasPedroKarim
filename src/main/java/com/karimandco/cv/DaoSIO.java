@@ -81,7 +81,7 @@ public class DaoSIO {
     public Boolean connexionActive() {
         Boolean connexionActive = true;
         try {
-            if (this.connexion != null && this.connexion.isClosed()) {
+            if (this.connexion != null && !this.connexion.isValid(0)) {
                 connexionActive = false;
             }
         } catch (SQLException ex) {

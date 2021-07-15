@@ -159,7 +159,7 @@ List<Map<String, Object>> cv = getCV(id)cv.get(0).get("id");
 ```
 ---
 ##### ➜ Class DaoSIO (Singleton)
-Permet avec `DaoSIO.getIntance().connexion` obtenir une instance de connexion valide. Mais il y a 2 méthodes qui permet d'exécuté des requêtes SQL en toute simplicité, que ce soit les requêtes de selections ou d'acti
+Permet avec `DaoSIO.getIntance().connexion` obtenir une instance de connexion valide. Mais il y a 2 méthodes qui permet d'exécuté des requêtes SQL en toute simplicité, que ce soit les requêtes de sélections ou d'actions.
 
 <u>Utilisation : </u>
 ```java

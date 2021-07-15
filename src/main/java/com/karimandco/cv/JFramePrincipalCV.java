@@ -16,7 +16,8 @@ public class JFramePrincipalCV extends javax.swing.JFrame {
      */
     public JFramePrincipalCV() {
         initComponents();
-        // creationDuCV.setIdUtilisateur(64);
+        creationDuCV.setIdUtilisateur(64);
+        creationDuCV.setIdCV(14);
     }
 
     /**
@@ -42,9 +43,7 @@ public class JFramePrincipalCV extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(creationDuCV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(creationDuCV, javax.swing.GroupLayout.DEFAULT_SIZE, 812, Short.MAX_VALUE)
         );
 
         pack();
