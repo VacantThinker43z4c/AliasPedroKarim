@@ -604,8 +604,11 @@ public class CreationDuCV extends javax.swing.JPanel {
      */
     public void chargerCV() throws SQLException {
         List<Map<String, Object>> utilisateur = getUtilisateur(idUtilisateur), cv = getCV(this.idCV, this.idUtilisateur), formation = getFormation(idUtilisateur), experiencePro = getExperiencePro(idUtilisateur);
-
+        idTabExperiencePro = 1;
+        idTabFormation = 1;
+        
         if(utilisateur != null){
+                    
             if (cv != null && cv.size() > 0) {
                 jTextFieldTitre.setText((String) cv.get(0).get("titre"));
                 jTextAreaDescription.setText((String) cv.get(0).get("description"));
