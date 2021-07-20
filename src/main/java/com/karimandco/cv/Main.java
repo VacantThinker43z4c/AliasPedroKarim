@@ -14,13 +14,10 @@ import javax.swing.SwingUtilities;
  */
 public class Main {
     public static void main(String[] args) {
-        
-        SwingUtilities.invokeLater ( new Runnable ()
-        {
-            public void run ()
-            {
+        SwingUtilities.invokeLater ( new Runnable(){
+            public void run() {
                 // Installation de l'interaface WebLaF
-                WebLookAndFeel.install ();
+                WebLookAndFeel.install();
                 
                 JFramePrincipalCV gui = new JFramePrincipalCV();
                 gui.setTitle("Création Curriculum Vitae - Graphique User Interface");

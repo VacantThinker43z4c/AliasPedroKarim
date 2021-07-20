@@ -29,11 +29,11 @@ public class DaoSIO {
      * Membres static (de classe)
      *
      */
-    private static String NOM_SERVEUR = "www.cnadal.fr";
+    private static String NOM_SERVEUR = "localhost";
     private static String PORT = "3306";
-    private static String NOM_BDD = "sio2_cv";
-    private static String NOM_UTILISATEUR = "sio2_cv";
-    private static String MOT_DE_PASSE = "formation2020";
+    private static String NOM_BDD = "sio2_cv_1";
+    private static String NOM_UTILISATEUR = "root";
+    private static String MOT_DE_PASSE = "totololo";
 
     private static String chaineConnexion;
 

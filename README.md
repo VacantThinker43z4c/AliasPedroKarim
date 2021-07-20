@@ -167,6 +167,19 @@ DaoSIO.getIntance().requeteSelection("SELECT * FROM ...");
 DaoSIO.getInstance().requeteAction("DELETE FROM ...");
 ```
 
+#### Plus d'info, utilisation d'une base donnée personnelle
+Compétence minimal :
+- Savoir utiliser **PhpMyAdmin**
+
+##### ➜ Utiliser une base de donnée local
+Vous trouverais dans le dossier `.util/`, le fichier SQL `sio2_cv_1.sql` la base de donnée. Vous pouvez l'importé sur votre base de donnée local, si vous utilisé **PhpMyAdmin** c'est encore mieux.
+![](https://i.imgur.com/hqKH3RP.png)
+
+Pour pour configurer la connexion à la base donnée dans le programme, ouvrer le fichier `src\main\java\com\karimandco\cv\DaoSIO.java`, et il vous suffira tous simplement de remplacer les configurations actuelle par les vôtres (Host, Nom base de donnée, mot de passe, ...)
+![](https://i.imgur.com/wPoAUMS.png)
+
+**NB :** Par défaut, le fichier base donnée contient un utilisateur, `admin`
+
 #### Crédit
 Lycée jean lurçat
 
