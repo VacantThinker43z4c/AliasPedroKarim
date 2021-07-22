@@ -3,8 +3,41 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.karimandco</groupId>
     <artifactId>karimandco_composants04</artifactId>
-    <version>1.1.1</version>
+    <version>1.2.0</version>
     <packaging>jar</packaging>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <mainClass>com.karimandco.cv.Main</mainClass>
+    </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>${mainClass}</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <appendAssemblyId>false</appendAssemblyId>
+                </configuration>
+            </plugin> 
+        </plugins>
+    </build>
     <dependencies>
         <dependency>
             <groupId>mysql</groupId>
@@ -21,11 +54,6 @@
         <url>https://github.com/AliasPedroKarim/KarimAndCo_Composant4</url>
         <connection>git@github.com:AliasPedroKarim/KarimAndCo_Composant4.git</connection>
     </scm>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
     <name>Developpement de composants04</name>
     <description>Dans le cadre de création d’un logiciel de gestion de curriculum vitae, ce projet où est le composant numéro 4 de ce projet. On pourrait dire que ce composant est l’un des composants principal du projet puisque ce composant a pour but de pouvoir gérer, créer, mettre à jour et surtout supprimer le curriculum vitae, avec tous ses contenus, donc ça concerne des formations et les expériences professionnelles.</description>
 </project>
